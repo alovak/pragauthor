@@ -1,5 +1,10 @@
 Indie::Application.routes.draw do
+  get "wellcome/index"
+
+  root :to => "wellcome#index"
+
   devise_for :users
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
