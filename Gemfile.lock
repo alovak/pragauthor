@@ -143,6 +143,11 @@ GEM
       rspec (>= 2.0.0)
     rubyzip (0.9.4)
     sass (3.1.2)
+    sass-rails (3.1.0.rc.2)
+      actionpack (~> 3.1.0.rc1)
+      railties (~> 3.1.0.rc1)
+      sass (>= 3.1.2)
+      sprockets (>= 2.0.0.beta.9)
     selenium-webdriver (0.2.1)
       childprocess (>= 0.1.7)
       ffi (>= 1.0.7)
@@ -186,7 +191,7 @@ DEPENDENCIES
   rb-fsevent
   rspec-rails
   rspec2-rails-views-matchers
-  sass
+  sass-rails (~> 3.1.0.rc)
   sqlite3
   uglifier
   unicorn

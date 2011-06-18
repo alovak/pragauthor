@@ -1,12 +1,9 @@
 source 'http://rubygems.org'
 
-# gem 'rails', '3.0.5'
-
-# Bundle edge Rails instead:
 gem 'rails', '3.1.0.rc4' 
 
 gem 'haml'
-gem 'sass'  
+gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'  
 gem 'uglifier'  
   
