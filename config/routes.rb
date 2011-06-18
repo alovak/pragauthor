@@ -1,7 +1,7 @@
 Indie::Application.routes.draw do
-  get "wellcome/index"
+  get "welcome/index"
 
-  root :to => "wellcome#index"
+  root :to => "welcome#index"
 
   devise_for :users
 

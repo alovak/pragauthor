@@ -44,7 +44,6 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'growl'
-  gem 'rb-fsevent'
 end
 
 group :test do
