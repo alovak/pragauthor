@@ -15,6 +15,8 @@ gem 'sqlite3'
 # Use unicorn as the web server
 gem 'unicorn'
 
+gem 'devise'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
@@ -35,10 +37,16 @@ group :development, :test do
   gem 'cucumber-rails'
   gem 'cucumber-websteps'
   gem 'rspec2-rails-views-matchers'
+  gem 'factory_girl_rails'
 
   gem 'guard'
+  gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'growl'
   gem 'rb-fsevent'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
