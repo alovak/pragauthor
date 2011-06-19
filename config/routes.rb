@@ -1,9 +1,10 @@
 Indie::Application.routes.draw do
-  get "welcome/index"
+  devise_for :users
 
   root :to => "welcome#index"
 
-  devise_for :users
+  match 'home' => 'home#index', :as => :user_root
+
 
 
   # The priority is based upon order of creation:

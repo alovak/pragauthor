@@ -44,6 +44,8 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'growl'
+
+  gem 'email_spec'
 end
 
 group :test do

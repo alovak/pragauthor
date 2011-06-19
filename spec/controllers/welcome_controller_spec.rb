@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WellcomeController do
+describe WelcomeController do
 
   describe "GET 'index'" do
     it "should be successful" do

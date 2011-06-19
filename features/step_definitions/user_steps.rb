@@ -1,8 +1,11 @@
 Given /^I am a user named "([^"]*)" with an email "([^"]*)" and password "([^"]*)"$/ do |name, email, password|
-  User.new(:name => name,
+
+  user = User.new(:name => name,
             :email => email,
             :password => password,
-            :password_confirmation => password).save!
+            :password_confirmation => password)
+  user.save!
+  user.confirm!
 end
 
 When /^I sign in as "([^"]*)" and password "([^"]*)"$/ do |email, password|
