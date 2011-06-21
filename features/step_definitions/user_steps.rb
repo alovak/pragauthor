@@ -23,3 +23,9 @@ end
 Then /^I should be signed in$/ do
   Then %{I should see "Signed in successfully."}
 end
+
+Then /^I should be signed out$/ do
+  And %{I should see "Sign up"}
+  And %{I should see "Sign in"}
+  And %{I should not see "Sign out"}
+end
