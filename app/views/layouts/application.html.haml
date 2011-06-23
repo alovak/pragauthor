@@ -8,5 +8,10 @@
   %body
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
-    = link_to('Sign out', destroy_user_session_path)
+    - if user_signed_in?
+      = link_to('Sign out', destroy_user_session_path)
+      = link_to('Edit profile', edit_user_registration_path)
+      %p
+        User:
+        = current_user.name
     = yield

@@ -11,6 +11,9 @@ module NavigationHelpers
     when /^the index\s?page$/
       '/'
 
+    when /the home page/
+      '/home'
+
     when /the sign up page/
       '/users/sign_up'
 
