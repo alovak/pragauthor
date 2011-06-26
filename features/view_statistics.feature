@@ -15,23 +15,10 @@ Feature:
   # Questions:
   # do we need to split Amzon sales to UK/DE Kindle stores
   # or just leave as Amazon?
-  Scenario: upload amazon file and review statistics
-    Given Inez is a registered user
-    When I sign in
-    Then I should see "Upload file"
-    When I upload "kdp-report-04-2011.xls"
-    Then I should see "You file was uploaded and processed"
-    When I look statistics for the "Tempest"
-    Then I should see "190" units were sold total
-    And I should see "190" units were sold in "May"
-    And I should see "190" units were sold by "Amazon" in "May"
-    
-    When I look statistics for the "Desert Heat"
-    Then I should see "13" units were sold total
-    And I should see "13" units were sold in "May"
-    And I should see "13" units were sold by "Amazon" in "May"
 
-    When I look statistics for the "The Entertainer (Working Stiffs)"
-    Then I should see "5" units were sold total
-    And I should see "5" units were sold in "May"
-    And I should see "5" units were sold by "Amazon" in "May"
+  Background:
+    Given I sign in as "Inez"
+
+  Scenario: upload amazon file and view statistics
+  Scenario: upload Barnes & Noble file and view statistics
+  Scenario: upload Smashwords file and view statistics
