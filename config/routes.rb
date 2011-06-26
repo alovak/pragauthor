@@ -5,6 +5,8 @@ Indie::Application.routes.draw do
 
   match 'home' => 'home#index', :as => :user_root
 
+  resources :uploads, :only => [:create]
+
 
 
   # The priority is based upon order of creation:

@@ -50,6 +50,8 @@ group :development, :test do
   gem 'growl'
 
   gem 'email_spec'
+
+  gem 'ruby-debug19'
 end
 
 group :test do
