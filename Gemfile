@@ -17,6 +17,8 @@ gem 'unicorn'
 
 gem 'devise'
 
+gem 'carrierwave'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
