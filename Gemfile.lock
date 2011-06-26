@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/plataformatec/simple_form.git
+  revision: d529379c72b87ebcd2e1bd7182b47305982eec55
+  specs:
+    simple_form (1.4.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -216,6 +224,7 @@ DEPENDENCIES
   rspec-rails
   rspec2-rails-views-matchers
   sass-rails (~> 3.1.0.rc)
+  simple_form!
   sqlite3
   uglifier
   unicorn

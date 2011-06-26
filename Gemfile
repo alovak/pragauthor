@@ -19,6 +19,8 @@ gem 'devise'
 
 gem 'carrierwave'
 
+gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
