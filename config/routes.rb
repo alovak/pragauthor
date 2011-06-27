@@ -1,9 +1,11 @@
 Indie::Application.routes.draw do
+  get "uploads/create"
+
   devise_for :users
 
   root :to => "welcome#index"
 
-  match 'home' => 'home#index', :as => :user_root
+  match 'home' => 'home#index', :as => :home
 
   resources :uploads, :only => [:create]
 
