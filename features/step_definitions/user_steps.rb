@@ -1,6 +1,6 @@
 Given /^I sign in as "([^"]*)"$/ do |name|
   email = "#{name.downcase}@test.com"
-  password = ::SecureRandom.hex(10)
+  password = "test123pass"
 
   steps %Q{
     Given I am a user named "#{name}" with an email "#{email}" and password "#{password}"
