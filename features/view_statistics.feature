@@ -19,6 +19,7 @@ Feature:
   Background:
     Given I sign in as "Inez"
 
+  Scenario: show welcome message and instructions how to use application
   Scenario: upload amazon file and view statistics
   Scenario: upload Barnes & Noble file and view statistics
   Scenario: upload Smashwords file and view statistics

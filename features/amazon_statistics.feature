@@ -18,3 +18,5 @@ Feature:
     And I should see "90" units were sold in "May"
     And I should see "100" units were sold by "Amazon" in "April"
     And I should see "90" units were sold by "Amazon" in "May"
+
+  Scenario: upload file with two books
