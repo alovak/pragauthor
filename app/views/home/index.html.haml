@@ -4,3 +4,12 @@ Upload report:
 = simple_form_for Upload.new do |f|
   = f.input :report
   = f.button :submit
+
+- if @books.blank?
+  .introduction You didn't upload any report yet
+- else
+  .books
+    - @books.each do |book|
+      .book
+        .title
+          = book.title

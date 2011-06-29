@@ -12,6 +12,7 @@ Spork.prefork do
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
+    
     # == Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -28,5 +29,21 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     config.use_transactional_fixtures = true
+
+    config.include Devise::TestHelpers, :type => :controller
   end
+end
+
+Spork.each_run do
+# FactoryGirl.definition_file_paths = [
+          # File.join(Rails.root, 'spec', 'factories')
+  # ]
+  # FactoryGirl.find_definitions
+
+
+
+  require 'factory_girl'
+  # Reload FactoryGirl’s Factories
+  Factory.factories.clear
+  Dir[Rails.root.join("spec/factories/**/*.rb")].each{|f| load f}
 end
