@@ -37,12 +37,12 @@ gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'spork'
+  gem 'spork', '~>0.9.0rc'
   gem 'capybara', '~>1.0.0'
   gem 'cucumber-rails'
   gem 'cucumber-websteps'
   gem 'rspec2-rails-views-matchers'
-  gem 'factory_girl_rails'
+  gem 'factory_girl'
 
   gem 'guard'
   gem 'guard-bundler'
