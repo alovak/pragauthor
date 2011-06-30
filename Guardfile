@@ -31,7 +31,7 @@ guard('rspec', :version => 2,
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 end
 
-guard('cucumber', :cli => '--no-profile --color --format pretty --strict --drb',
+guard('cucumber', :cli => '--no-profile --debug --color --format pretty --strict --drb',
       :all_on_start   => false,
       :all_after_pass => false,
       :keep_failed    => false ) do
