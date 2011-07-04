@@ -21,6 +21,8 @@ gem 'carrierwave'
 
 gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
 
+gem 'spreadsheet'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
@@ -48,6 +50,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rspec'
+  gem 'rb-fsevent'
   gem 'growl'
 
   gem 'email_spec'

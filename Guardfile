@@ -11,7 +11,7 @@
 # end
 
 guard('rspec', :version => 2,
-      :cli => '--drb --format documentation',
+      :cli => '--drb --debug --format documentation',
       :all_on_start   => false,
       :all_after_pass => false,
       :keep_failed    => false ) do
