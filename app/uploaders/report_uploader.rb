@@ -16,6 +16,12 @@ class ReportUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  process :import
+
+  def import
+    parser = Indie::Parser::BarnesNoble.new(current_path)
+    parser.process
+  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
@@ -36,7 +42,7 @@ class ReportUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-  #   %w(jpg jpeg gif png)
+    # %w(jpg jpeg gif png)
   # end
 
   # Override the filename of the uploaded files:

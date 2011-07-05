@@ -16,5 +16,3 @@ Feature:
     And I should see "11" units were sold by "Barnes&Noble"
     And I should see "8" units were sold by "Barnes&Noble" in "May"
     And I should see "3" units were sold by "Barnes&Noble" in "June"
-
-  Scenario: upload file with two books
