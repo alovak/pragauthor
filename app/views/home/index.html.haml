@@ -13,3 +13,5 @@ Upload report:
       .book
         .title
           = book.title
+        .total
+          total: #{book.sales.sum(:units)}

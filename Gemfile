@@ -39,19 +39,20 @@ gem 'spreadsheet'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'growl'
+  gem 'rb-fsevent'
+
   gem 'spork', '~>0.9.0rc'
   gem 'capybara', '~>1.0.0'
   gem 'cucumber-rails'
   gem 'cucumber-websteps'
   gem 'rspec2-rails-views-matchers'
   gem 'factory_girl'
-
+  gem 'faker'
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rspec'
-  gem 'rb-fsevent'
-  gem 'growl'
 
   gem 'email_spec'
   gem 'ruby-debug19'

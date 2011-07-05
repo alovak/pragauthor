@@ -21,6 +21,16 @@ describe Indie::Parser::BarnesNoble do
           book.should_not be_nil
         end
       end
+
+      it "should create sales for the books" do
+        { 'The First Book'  => 8, 
+          'The Second Book' => 11,
+          'The Third Book'  => 2,
+          'The Fourth Book' => 2}.each do |title, units|
+          book = Book.find_by_title(title)
+          book.sales.sum(:units).should == units
+        end
+      end
     end
   end
 end

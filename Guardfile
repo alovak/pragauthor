@@ -1,15 +1,3 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-# guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' } do #, :rspec_env => { 'RAILS_ENV' => 'test' } do
-  # watch('config/application.rb')
-  # watch('config/environment.rb')
-  # watch('config/routes.rb')
-  # watch(%r{^config/environments/.+\.rb$})
-  # watch(%r{^config/initializers/.+\.rb$})
-  # watch('spec/spec_helper.rb')
-# end
-
 guard('rspec', :version => 2,
       :cli => '--drb --debug --format documentation',
       :all_on_start   => false,
@@ -40,9 +28,9 @@ guard('cucumber', :cli => '--no-profile --debug --color --format pretty --strict
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
 
-guard 'bundler' do
-  watch('Gemfile')
+# guard 'bundler' do
+  # watch('Gemfile')
   # Uncomment next line if Gemfile contain `gemspec' command
   # watch(/^.+\.gemspec/)
-end
+# end
 

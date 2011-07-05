@@ -31,4 +31,21 @@ describe "home/index.html.haml" do
       rendered.should =~ /Second Book/
     end
   end
+
+  context "with book when book has sales" do
+    before do
+      book = Factory(:book)
+
+      book.sales << Factory(:sale, :units => 11, :book => book)
+      book.sales << Factory(:sale, :units => 9, :book => book)
+
+      assign(:books, [book])
+    end
+
+    it "should display total" do
+      render
+
+      rendered.should =~ /total: 20/
+    end
+  end
 end
