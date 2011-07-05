@@ -32,20 +32,31 @@ describe "home/index.html.haml" do
     end
   end
 
-  context "with book when book has sales" do
+  context "book exists" do
+    let(:vendor) { Vendor.find_by_name('Barnes&Noble') }
+    let(:book) { Factory(:book) }
+
     before do
-      book = Factory(:book)
-
-      book.sales << Factory(:sale, :units => 11, :book => book)
-      book.sales << Factory(:sale, :units => 9, :book => book)
-
       assign(:books, [book])
     end
 
-    it "should display total" do
-      render
+    context "and when book has sales" do
+      before do
+        book.sales << Factory(:sale, :units => 11, :book => book, :vendor => vendor)
+        book.sales << Factory(:sale, :units => 9, :book => book, :vendor => vendor)
+      end
 
-      rendered.should =~ /total: 20/
+      it "should display total" do
+        render
+
+        rendered.should =~ /total: 20/
+      end
+
+      it "should diplay total for vendor" do
+        render
+
+        rendered.should =~ /Barnes&Noble: 20/
+      end
     end
   end
 end

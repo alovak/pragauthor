@@ -10,4 +10,8 @@ Then /^I should see "([^"]*)" units were sold total$/ do |number|
   }
 end
 
-
+Then /^I should see "([^"]*)" units were sold by "([^"]*)"$/ do |number, vendor|
+  steps %Q{
+    Then I should see "#{vendor}: #{number}"
+  }
+end
