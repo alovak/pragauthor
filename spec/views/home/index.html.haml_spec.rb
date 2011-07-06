@@ -40,6 +40,18 @@ describe "home/index.html.haml" do
       assign(:books, [book])
     end
 
+    context "book title contains ' and \"" do
+      before do
+        book.title = %Q{The "Book 'Super Name}
+      end
+
+      it "should correctly display title" do
+        render
+
+        rendered.should =~ /The \"Book &apos;Super Name/
+      end
+    end
+
     context "and when book has sales" do
       before do
         book.sales << Factory(:sale, :units => 11, :book => book, :vendor => vendor)

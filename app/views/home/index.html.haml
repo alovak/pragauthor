@@ -10,7 +10,7 @@ Upload report:
 - else
   .books
     - @books.each do |book|
-      .book
+      .book{ title: %Q{#{book.title}} }
         .title
           = book.title
         .total

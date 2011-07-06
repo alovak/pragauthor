@@ -1,17 +1,23 @@
-When /^I look statistics for the "([^"]*)"$/ do |book|
+When /^I look statistics for "([^"]*)"$/ do |name|
+  @book_name = name
+
   steps %Q{
-    Then I should see "#{book}"
+    Then I should see "#{name}"
   }
 end
 
 Then /^I should see "([^"]*)" units were sold total$/ do |number|
-  steps %Q{
-    Then I should see "total: #{number}"
-  }
+  within(:xpath, %Q{//div[title="#{@book_name}}) do
+    steps %Q{
+      Then I should see "total: #{number}"
+    }
+  end
 end
 
 Then /^I should see "([^"]*)" units were sold by "([^"]*)"$/ do |number, vendor|
-  steps %Q{
-    Then I should see "#{vendor}: #{number}"
-  }
+  within(:css, %Q{div[@title="#{@book_name}"]}) do
+    steps %Q{
+      Then I should see "#{vendor}: #{number}"
+    }
+  end
 end

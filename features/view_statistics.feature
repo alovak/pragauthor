@@ -24,5 +24,3 @@ Feature:
   Scenario: upload Barnes & Noble file and view statistics
   Scenario: upload Smashwords file and view statistics
   Scenario: upload file with wrong format
-    When I upload "Unknown.xls"
-    Then I should see "Sorry, we could not recognize file format"
