@@ -41,6 +41,7 @@ gem 'spreadsheet'
 group :development, :test do
   gem 'growl'
   gem 'rb-fsevent'
+  gem 'timecop'
 
   gem 'spork', '~>0.9.0rc'
   gem 'capybara', '~>1.0.0'

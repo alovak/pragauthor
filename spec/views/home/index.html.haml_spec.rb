@@ -32,7 +32,7 @@ describe "home/index.html.haml" do
     end
   end
 
-  context "book exists" do
+  context "when book exists" do
     let(:vendor) { Vendor.find_by_name('Barnes&Noble') }
     let(:book) { Factory(:book) }
 
@@ -40,7 +40,7 @@ describe "home/index.html.haml" do
       assign(:books, [book])
     end
 
-    context "book title contains ' and \"" do
+    context "and book title contains ' and \"" do
       before do
         book.title = %Q{The "Book 'Super Name}
       end
@@ -68,6 +68,15 @@ describe "home/index.html.haml" do
         render
 
         rendered.should =~ /Barnes&Noble: 20/
+      end
+
+      it "should display 6 month back from current" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          render
+          %w(Jan Feb Mar Apr May Jun).each do |month|
+            rendered.should have_tag(".months .month.#{month.downcase}_2011[title='#{month} 2011']")
+          end
+        end
       end
     end
   end
