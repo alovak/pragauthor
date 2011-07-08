@@ -21,3 +21,12 @@ Then /^I should see "([^"]*)" units were sold by "([^"]*)"$/ do |number, vendor|
     }
   end
 end
+
+Then /^I should see "([^"]*)" units were sold in "([^"]*)"$/ do |number, month|
+  within(:css, %Q{div[@title="#{@book_name}"]}) do
+    steps %Q{
+      Then I should see "#{month}: #{number}"
+    }
+  end
+end
+

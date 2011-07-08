@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Indie::Parser::BarnesNoble do
   let(:file) do
-    "#{Rails.root}/features/support/files/BNsales_May2011.xls"
+    "#{Rails.root}/features/support/files/BNsales_June2011.xls"
   end
 
   let(:parser) do
@@ -20,25 +20,29 @@ describe Indie::Parser::BarnesNoble do
       end
 
       it "should create books" do
-        Book.count.should == 4
+        Book.count.should == 2
       end
 
       it "should create books with corresponding titles" do
-        ['The First Book', 'The Second Book', 'The Third Book', 'The Fourth Book'].each do |title|
+        ['The First Book', 'The Second Book'].each do |title|
           book = Book.find_by_title(title)
           book.should_not be_nil
         end
       end
 
       it "should create sales" do
-        Sale.count.should == 23
+        Sale.count.should == 6
+      end
+
+      it "should create sales with dates" do
+        ['1 June 2011', '5 June 2011', '10 June 2011', '15 June 2011', '20 June 2011', '25 June 2011'].each do |date|
+          Sale.find_by_date_of_sale(DateTime.parse(date)).should_not be_nil
+        end
       end
 
       it "should create sales with units for the books" do
-        { 'The First Book'  => 8, 
-          'The Second Book' => 11,
-          'The Third Book'  => 2,
-          'The Fourth Book' => 2}.each do |title, units|
+        { 'The First Book'  => 3, 
+          'The Second Book' => 18 }.each do |title, units|
           book = Book.find_by_title(title)
           book.sales.sum(:units).should == units
         end
