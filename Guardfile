@@ -1,8 +1,12 @@
-guard('rspec', :version => 2,
-      :cli => '--drb --debug --format documentation',
+guard 'bundler' do
+  watch('Gemfile')
+end
+
+guard('rspec', 
+      :cli            => '--drb --format documentation',
       :all_on_start   => false,
       :all_after_pass => false,
-      :keep_failed    => false ) do
+      :keep_failed    => true ) do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -19,18 +23,18 @@ guard('rspec', :version => 2,
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 end
 
-guard('cucumber', :cli => '--no-profile --debug --color --format pretty --strict --drb',
+guard('cucumber', :cli => '--no-profile --color --format pretty --strict --drb',
       :all_on_start   => false,
       :all_after_pass => false,
-      :keep_failed    => false ) do
+      :keep_failed    => true ) do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
 
-# guard 'bundler' do
-  # watch('Gemfile')
-  # Uncomment next line if Gemfile contain `gemspec' command
-  # watch(/^.+\.gemspec/)
-# end
-
+# Stop (Ctrl-Z)
+Signal.trap('QUIT') do
+  ::Guard.run do
+    ::Guard.guards.each { |guard| ::Guard.supervised_task(guard, :run_all) }
+  end
+end
