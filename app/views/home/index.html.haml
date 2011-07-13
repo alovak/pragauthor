@@ -11,13 +11,13 @@ Upload report:
   .books
     - @books.each do |book|
       .book{ title: %Q{#{book.title}} }
-        .months
-          - (0..5).collect {|m| { :month => m.month.ago.strftime('%b'), :year => m.month.ago.strftime('%Y') } }.reverse.each do |date|
-            %div{ class: "month #{date[:month].downcase}_#{date[:year]}", title: "#{date[:month]} #{date[:year]}" }
-              = date[:month]
         .title
           = book.title
         .total
           total: #{book.sales.sum(:units)}
         .vendor
           Barnes&Noble: #{book.sales.for_vendor('Barnes&Noble').sum(:units)}
+        .months
+          - monthly_sales(book, {:months => 6}).each do |date, units|
+            .month{ title: "#{date.strftime('%b %Y')}" }
+              #{date.strftime('%b')}: #{units} 
