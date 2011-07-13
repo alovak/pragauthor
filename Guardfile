@@ -2,6 +2,14 @@ guard 'bundler' do
   watch('Gemfile')
 end
 
+guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
+  watch('config/application.rb')
+  watch('config/environment.rb')
+  watch(%r{^config/environments/.+\.rb$})
+  watch(%r{^config/initializers/.+\.rb$})
+  watch('spec/spec_helper.rb')
+end
+
 guard('rspec', 
       :cli            => '--drb --format documentation',
       :all_on_start   => false,
@@ -26,15 +34,9 @@ end
 guard('cucumber', :cli => '--no-profile --color --format pretty --strict --drb',
       :all_on_start   => false,
       :all_after_pass => false,
-      :keep_failed    => true ) do
+      :keep_failed    => false ) do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
 
-# Stop (Ctrl-Z)
-Signal.trap('QUIT') do
-  ::Guard.run do
-    ::Guard.guards.each { |guard| ::Guard.supervised_task(guard, :run_all) }
-  end
-end

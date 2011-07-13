@@ -23,6 +23,7 @@ gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
 
 gem 'spreadsheet'
 
+gem 'mysql2'
 # Deploy with Capistrano
 # gem 'capistrano'
 
@@ -54,6 +55,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rspec'
+  gem 'guard-spork'
 
   gem 'email_spec'
   gem 'ruby-debug19'
