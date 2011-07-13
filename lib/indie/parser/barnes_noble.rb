@@ -29,7 +29,7 @@ module Indie
 
       # TODO get information about date format
       def convert_date(date)
-        DateTime.strptime(date, '%m/%d/%y')
+        DateTime.strptime(date, '%m/%d/%Y')
       end
     end
   end
