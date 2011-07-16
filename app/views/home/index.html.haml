@@ -17,7 +17,8 @@ Upload report:
           total: #{book.sales.sum(:units)}
         .vendor
           Barnes&Noble: #{book.sales.for_vendor('Barnes&Noble').sum(:units)}
+        - report = Indie::Report.create(book)
         .months
-          - monthly_sales(book, {:months => 6}).each do |date, units|
-            .month{ title: "#{date.strftime('%b %Y')}" }
-              #{date.strftime('%b')}: #{units} 
+          - report.months.each do |month|
+            .month{ title: "#{month.title}" }
+              #{month.name}: #{month.units} 
