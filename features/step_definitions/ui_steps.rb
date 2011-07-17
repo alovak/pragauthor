@@ -31,7 +31,7 @@ Then /^I should see "([^"]*)" units were sold in "([^"]*)"$/ do |number, month|
 end
 
 Then /^I should see "([^"]*)" units were sold in "([^"]*)" by "([^"]*)"$/ do |number, month, vendor|
-  within(:css, %Q{div[@title='The First Book'] .month[@title*='May']}) do
+  within(:css, %Q{div[@title='#{@book_name}'] .month[@title*='#{month}']}) do
     steps %Q{
       Then I should see "#{vendor}: #{number}"
     }

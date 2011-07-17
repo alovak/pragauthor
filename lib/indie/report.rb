@@ -1,10 +1,11 @@
 module Indie
   class Report
     class Month
-      attr_accessor :date, :units
+      attr_reader :date, :units, :vendors
 
       def initialize(date, units)
         @date, @units = date, units
+        @vendors = []
       end
 
       def title
@@ -13,6 +14,18 @@ module Indie
 
       def name
         date.strftime('%b')
+      end
+
+      def units
+        vendors.inject(0) {|sum, vendor| sum + vendor.units  }
+      end
+    end
+
+    class Vendor
+      attr_reader :units, :name
+
+      def initialize(name, units)
+        @name, @units = name, units
       end
     end
 
@@ -37,9 +50,19 @@ module Indie
     end
 
     def initialize_months
+      @month_table = {}
+
       @months = (0..MONTHS-1).collect do |m| 
-        Month.new(Date.new(m.month.ago.year, m.month.ago.month), 0)
+        month = Month.new(Date.new(m.month.ago.year, m.month.ago.month), 0)
+        @month_table[month.date] = month
       end
+
+    end
+
+    private
+
+    def month_table(date)
+      @month_table[date]
     end
 
     def calculate_months_units
@@ -47,17 +70,12 @@ module Indie
                   .where("date_of_sale >= ?", MONTHS.month.ago)
                   .group("year(date_of_sale)")
                   .group("month(date_of_sale)")
+                  .group("vendor_id")
                   .sum(:units)
 
-      sales = {}
-
-      data.each do |date, units|
-        sale_date = Date.new(date[0], date[1])
-        sales[sale_date] = units
-      end
-
-      @months.each do |month|
-        month.units = sales[month.date] if sales[month.date]
+      data.each do |group, units|
+        sale_date = Date.new(group[0], group[1])
+        month_table(sale_date).vendors << Vendor.new(::Vendor.find(group[2]).name, units)
       end
     end
   end
