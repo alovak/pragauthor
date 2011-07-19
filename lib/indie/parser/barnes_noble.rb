@@ -14,7 +14,7 @@ module Indie
         sheet = @book.worksheet 0
 
         sheet.each(SKIP_ROWS) do |row|
-          if !row[TITLE].blank?
+          unless row[TITLE].blank?
             book = Book.find_or_create_by_title(row[TITLE])
             book.sales.create(:units => row[UNIT_NET_SALES], :vendor => vendor, :date_of_sale => convert_date(row[DATE_OF_SALE]))
           end
