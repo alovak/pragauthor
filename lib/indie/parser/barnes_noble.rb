@@ -1,10 +1,11 @@
 module Indie
   module Parser
     class BarnesNoble < Base
-      SKIP_ROWS = 1
-      DATE_OF_SALE = 0
-      TITLE = 3
-      UNIT_NET_SALES = 8
+
+      SKIP_ROWS       = 1
+      DATE_OF_SALE    = 0
+      TITLE           = 3
+      UNIT_NET_SALES  = 8
 
       def initialize(file_path)
         @file_path = file_path
@@ -29,7 +30,6 @@ module Indie
         @vendor ||= Vendor.find_by_name('Barnes&Noble')
       end
 
-      # TODO get information about date format
       def convert_date(date)
         DateTime.strptime(date, '%m/%d/%Y')
       end
