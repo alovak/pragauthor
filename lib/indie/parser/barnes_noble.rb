@@ -7,10 +7,12 @@ module Indie
       UNIT_NET_SALES = 8
 
       def initialize(file_path)
-        @book = Spreadsheet.open(file_path)
+        @file_path = file_path
       end
 
       def process
+        @book = Spreadsheet.open(@file_path)
+
         sheet = @book.worksheet 0
 
         sheet.each(SKIP_ROWS) do |row|
