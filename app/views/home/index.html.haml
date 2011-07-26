@@ -8,6 +8,7 @@ Upload report:
 - if @books.blank?
   .introduction You didn't upload any report yet
 - else
+  - vendors = Vendor.all
   .books
     - @books.each do |book|
       .book{ title: %Q{#{book.title}} }
@@ -15,8 +16,10 @@ Upload report:
           = book.title
         .total
           total: #{book.sales.sum(:units)}
-        .vendor
-          Barnes&Noble: #{book.sales.for_vendor('Barnes&Noble').sum(:units)}
+        .vendors
+          - vendors.each do |vendor|
+            .vendor
+              = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
         - report = Indie::Report.create(book)
         .months
           - report.months.each do |month|

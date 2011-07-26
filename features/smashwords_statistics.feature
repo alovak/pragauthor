@@ -9,9 +9,9 @@ Feature:
   Scenario: see Smashwords total statistics for uploaded books
     Given I upload "SmashWords_salesReport-2011-06-08.xls"
     When I look statistics for "The First Book"
-    Then I should see "N" units were sold by "Smashwords"
+    Then I should see "21" units were sold by "Smashwords"
     When I look statistics for "The Second Book"
-    Then I should see "M" units were sold by "Smashwords"
+    Then I should see "2" units were sold by "Smashwords"
 
   # Scenario: see monthly statistics for uploaded books
     # Given I upload "BNsales_May2011.xls"

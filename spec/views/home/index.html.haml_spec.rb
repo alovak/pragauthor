@@ -104,7 +104,7 @@ describe "home/index.html.haml" do
       it "should diplay total for vendor" do
         render
 
-        rendered.should =~ /Barnes&Noble: 24/
+        rendered.should =~ /Barnes&amp;Noble: 24/
       end
     end
   end
