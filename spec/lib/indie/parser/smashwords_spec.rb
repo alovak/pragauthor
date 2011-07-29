@@ -49,8 +49,8 @@ describe Indie::Parser::Smashwords do
 
       it "should create sales with units for the books" do
         { 'The First Book'  => 21, 
-          'The Second Book' => 2,
-          'The Third Book' => 4,
+          'The Second Book' => 4,
+          'The Third Book' => 8,
           'The Fourth Book' => 3,
         }.each do |title, units|
           book = Book.find_by_title(title)

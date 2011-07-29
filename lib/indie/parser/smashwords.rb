@@ -32,7 +32,7 @@ module Indie
       end
 
       def convert_date(date)
-        DateTime.strptime(date, '%m/%d/%y')
+        DateTime.strptime(date, '%Y-%m-%d')
       end
     end
   end
