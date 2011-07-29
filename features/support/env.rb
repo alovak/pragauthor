@@ -56,4 +56,7 @@ Spork.each_run do
   #     DatabaseCleaner.strategy = :transaction
   #   end
   #
+  After('@time_travel') do
+    Timecop.return
+  end
 end
