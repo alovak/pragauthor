@@ -1,10 +1,12 @@
+@time_travel
 Feature:
   As Inez
   I want to upload Barnes&Noble files
   In order to view sale statistics
 
   Background:
-    Given I sign in as "Inez"
+    Given today is "08 Jun 2011"
+    And I sign in as "Inez"
 
   Scenario: see Barnes&Noble total statistics for uploaded books
     Given I upload "BNsales_June2011.xls"
