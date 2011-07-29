@@ -2,6 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body.Home {
+body#home {
+  .book {
+    border: 1px solid #000;
+    clear: both;
+  }
+
+  .info {
+    float: left;
+  }
+
+  .title, .total, .vendors {
+    width: 200px;
+  }
+
+  .vendors {
+    border: 1px solid #000;
+  }
+
+  .months {
+    float: right;
+  }
+  .month {
+    float: left;
+    width: 100px;
+    border: 1px solid #000;
+
+
+    .vendors {
+      width: 100px;
+
+      .vendor {
+        width: 100px;
+        font-size: 12px;
+      }
+    }
+  }
   // Place scoped styles here
 }

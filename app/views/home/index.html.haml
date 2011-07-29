@@ -12,14 +12,15 @@ Upload report:
   .books
     - @books.each do |book|
       .book{ title: %Q{#{book.title}} }
-        .title
-          = book.title
-        .total
-          total: #{book.sales.sum(:units)}
-        .vendors
-          - vendors.each do |vendor|
-            .vendor
-              = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
+        .info
+          .title
+            = book.title
+          .total
+            total: #{book.sales.sum(:units)}
+          .vendors
+            - vendors.each do |vendor|
+              .vendor
+                = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
         - report = Indie::Report.create(book)
         .months
           - report.months.each do |month|
