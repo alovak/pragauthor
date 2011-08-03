@@ -12,6 +12,7 @@ module Indie
         case file_path
         when /bnsales.*xls$/i then Indie::Parser::BarnesNoble
         when /smashwords_salesreport.*xls$/i then Indie::Parser::Smashwords
+        when /kdp-report.*xls$/i then Indie::Parser::Amazon
         end
       end
     end

@@ -11,5 +11,10 @@ describe Indie::Parser do
       parser = Indie::Parser.factory('./path/SmashWords_salesReport-2011-06-08.xls')
       parser.should be_an_instance_of Indie::Parser::Smashwords
     end
+
+    it "should return Amazon parser for Amazon's file" do
+      parser = Indie::Parser.factory('./path/kdp-report-04-2011.xls')
+      parser.should be_an_instance_of Indie::Parser::Amazon
+    end
   end
 end
