@@ -49,10 +49,12 @@ describe Indie::Parser::BarnesNoble do
       end
 
       it "should assign 'Barnes&Noble' as vendor to all sales" do
-        bn = Vendor.find_by_name('Barnes&Noble')
+        vendor  = Vendor.find_by_name('Barnes&Noble')
+
+        vendor.should_not be_nil
 
         Sale.all.each do |sale|
-          sale.vendor.should == bn
+          sale.vendor.should == vendor
         end
       end
     end

@@ -59,10 +59,12 @@ describe Indie::Parser::Smashwords do
       end
 
       it "should assign 'Smashwords' as vendor to all sales" do
-        sw = Vendor.find_by_name('Smashwords')
+        vendor = Vendor.find_by_name('Smashwords')
+
+        vendor.should_not be_nil
 
         Sale.all.each do |sale|
-          sale.vendor.should == sw
+          sale.vendor.should == vendor
         end
       end
     end

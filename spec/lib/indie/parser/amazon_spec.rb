@@ -49,10 +49,12 @@ describe Indie::Parser::Amazon do
       end
 
       it "should assign 'Amazon' as vendor to all sales" do
-        bn = Vendor.find_by_name('Amazon')
+        vendor = Vendor.find_by_name('Amazon')
+
+        vendor.should_not be_nil
 
         Sale.all.each do |sale|
-          sale.vendor.should == bn
+          sale.vendor.should == vendor
         end
       end
     end
