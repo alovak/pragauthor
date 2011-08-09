@@ -63,4 +63,5 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'simplecov', '>= 0.4.0', :require => false
 end
