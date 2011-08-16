@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'rack'
+
 gem 'rails', '3.1.0.rc4' 
 
 gem 'haml-rails'
