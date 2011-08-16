@@ -39,6 +39,10 @@ gem 'capistrano'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
+group :production do
+  gem 'therubyracer'
+end
+
 group :development, :test do
   gem 'growl'
   gem 'rb-fsevent'
