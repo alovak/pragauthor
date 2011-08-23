@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rack'
 
-gem 'rails', '3.1.0.rc4' 
+gem 'rails', '3.1.0.rc6' 
 
 gem 'haml-rails'
 gem 'sass-rails', "~> 3.1.0.rc"
