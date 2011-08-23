@@ -1,7 +1,8 @@
 === Server setup
 
 0. apt-get update
-1. bash -C "`wget -O - babushka.me/up`"
+0. apt-get upgrade
+1. bash -c "`wget -O - babushka.me/up`"
 2. babushka alovak:'user setup'
 3. babushka alovak:'rvm installed'
 4. babushka alovak:'rails project'
