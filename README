@@ -6,6 +6,7 @@
 2. babushka alovak:'user setup'
 3. babushka alovak:'rvm installed'
 4. babushka alovak:'rails project'
+4. babushka alovak:'set.locale'
 
 on local machine
 5. cap deploy:setup
