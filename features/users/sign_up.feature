@@ -15,7 +15,7 @@ Feature: Sign up
       Then I should receive an email to "user@test.com"
       When I open the email
       Then I should see "Confirmation instructions" in the email subject
-      And I should see the email delivered from "support@indie.com"
+      And I should see the email delivered from "welcome@pragauthor.com"
       And I should see "Welcome user@test.com!" in the email body
       And I should see "You can confirm your account through the link below:" in the email body
       When I follow "Confirm my account" in the email
