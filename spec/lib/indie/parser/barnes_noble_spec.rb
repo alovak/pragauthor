@@ -6,8 +6,10 @@ describe Indie::Parser::BarnesNoble do
   end
 
   let(:parser) do
-    described_class.new(file)
+    described_class.new(file, user)
   end
+
+  let(:user) { Factory(:user) }
 
   context "when there are no any books in the app" do
     before do

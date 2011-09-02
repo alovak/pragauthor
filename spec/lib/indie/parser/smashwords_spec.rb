@@ -5,8 +5,10 @@ describe Indie::Parser::Smashwords do
     "#{Rails.root}/features/support/files/SmashWords_salesReport-2011-06-08.xls"
   end
 
+  let(:user) { Factory(:user) }
+
   let(:parser) do
-    described_class.new(file)
+    described_class.new(file, user)
   end
 
   context "when there are no any books in the app" do
@@ -21,6 +23,12 @@ describe Indie::Parser::Smashwords do
 
       it "should create books" do
         Book.count.should == 4
+      end
+
+      it "should assign all books to user" do
+        Book.all.each do |book|
+          book.user.should == user
+        end
       end
 
       it "should create books with corresponding titles" do

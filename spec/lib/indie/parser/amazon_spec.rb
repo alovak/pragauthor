@@ -5,8 +5,10 @@ describe Indie::Parser::Amazon do
     "#{Rails.root}/features/support/files/kdp-report-04-2011.xls"
   end
 
+  let(:user) { Factory(:user) }
+
   let(:parser) do
-    described_class.new(file)
+    described_class.new(file, user)
   end
 
   context "when there are no any books in the app" do

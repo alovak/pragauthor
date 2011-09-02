@@ -24,6 +24,16 @@ module Indie
         @file_path = file_path
         @user = user
       end
+
+      private
+
+      def find_or_create_book(title)
+        book = user.books.find_or_create_by_title(title)
+      end
+
+      def create_sale(book, params)
+        book.sales.create(params.update(:vendor => vendor))
+      end
     end
   end
 end

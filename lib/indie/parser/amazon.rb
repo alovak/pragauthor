@@ -24,8 +24,9 @@ module Indie
 
         sheet.each(header_row_id + BOOKS_OFFSET) do |row|
           return if row[TITLE] =~ /Total Royalty for Sales/
-          book = Book.find_or_create_by_title(row[TITLE])
-          book.sales.create(:units => row[UNIT_NET_SALES], :vendor => vendor, :date_of_sale => sale_date)
+
+          book = find_or_create_book(row[TITLE])
+          create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => sale_date)
         end
       end
 

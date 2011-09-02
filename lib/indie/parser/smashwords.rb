@@ -15,13 +15,14 @@ module Indie
 
         @table.drop(SKIP_ROWS).each do |row|
           if row[SALE] == 'sale'
-            book = Book.find_or_create_by_title(row[TITLE])
-            book.sales.create(:units => row[UNIT_NET_SALES], :vendor => vendor, :date_of_sale => convert_date(row[DATE_OF_SALE]))
+            book = find_or_create_book(row[TITLE])
+            create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => convert_date(row[DATE_OF_SALE]))
           end
         end
       end
 
       private
+
 
       def vendor
         @vendor ||= Vendor.find_by_name('Smashwords')
