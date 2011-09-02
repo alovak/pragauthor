@@ -2,10 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rack'
 
-gem 'rails', '3.1.0.rc6' 
+gem 'rails', '3.1.0' 
 
 gem 'haml-rails'
-gem 'sass-rails', "~> 3.1.0.rc"
+gem 'sass-rails'
 gem 'coffee-script'  
 gem 'uglifier'  
   
@@ -21,7 +21,7 @@ gem 'devise'
 
 gem 'carrierwave'
 
-gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
+gem 'simple_form'
 
 gem 'spreadsheet'
 
