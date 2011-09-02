@@ -7,10 +7,6 @@ module Indie
       BOOKS_OFFSET   = 4
       SALE_DATE_OFFSET = 2
 
-      def initialize(file_path)
-        @file_path = file_path
-      end
-
       def process
         @book = Spreadsheet.open(@file_path)
         sheet = @book.worksheet 0

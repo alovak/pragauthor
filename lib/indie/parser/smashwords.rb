@@ -10,10 +10,6 @@ module Indie
       UNIT_NET_SALES  = 8
       DATE_OF_SALE    = 19
 
-      def initialize(file_path)
-        @file_path = file_path
-      end
-
       def process
         @table = CSV.read(@file_path, :quote_char => '"', :col_sep =>"\t", :row_sep =>:auto)
 
