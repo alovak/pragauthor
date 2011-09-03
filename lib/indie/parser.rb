@@ -26,6 +26,9 @@ module Indie
       end
 
       private
+      def vendor
+        @vendor ||= Vendor.find_by_name(self.class::VENDOR_NAME)
+      end
 
       def find_or_create_book(title)
         book = user.books.find_or_create_by_title(title)

@@ -2,10 +2,12 @@ module Indie
   module Parser
     class Amazon < Base
 
-      TITLE         = 0
-      UNIT_NET_SALES = 4
-      BOOKS_OFFSET   = 4
-      SALE_DATE_OFFSET = 2
+      VENDOR_NAME       = 'Amazon'
+
+      TITLE             = 0
+      UNIT_NET_SALES    = 4
+      BOOKS_OFFSET      = 4
+      SALE_DATE_OFFSET  = 2
 
       def process
         @book = Spreadsheet.open(@file_path)
@@ -28,10 +30,6 @@ module Indie
           book = find_or_create_book(row[TITLE])
           create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => sale_date)
         end
-      end
-
-      def vendor
-        @vendor ||= Vendor.find_by_name('Amazon')
       end
 
       def convert_date(date)

@@ -2,6 +2,8 @@ module Indie
   module Parser
     class BarnesNoble < Base
 
+      VENDOR_NAME       = 'Barnes&Noble'
+
       SKIP_ROWS       = 1
       DATE_OF_SALE    = 0
       TITLE           = 3
@@ -21,10 +23,6 @@ module Indie
       end
 
       private
-
-      def vendor
-        @vendor ||= Vendor.find_by_name('Barnes&Noble')
-      end
 
       def convert_date(date)
         DateTime.strptime(date, '%m/%d/%Y')
