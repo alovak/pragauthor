@@ -1,4 +1,12 @@
+shared_context "parser stuff" do
+  let(:user) { Factory(:user) }
+  let(:parser) { described_class.new(file, user) }
+  let(:vendor) { Vendor.find_by_name(described_class::VENDOR_NAME) } 
+end
+
 shared_examples "a parser" do
+  include_context "parser stuff"
+
   describe "#process" do
     it "should create books for user" do
       expect { parser.process }.to change{ user.books.count }.from(0).to(4)
@@ -38,6 +46,8 @@ end
 
 
 shared_examples "a parser for daily sales"do
+  include_context "parser stuff"
+
   describe "#process" do
     it "should create sales with dates" do
       parser.process
