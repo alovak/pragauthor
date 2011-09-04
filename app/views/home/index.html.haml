@@ -1,9 +1,8 @@
-Home page
-
-Upload report:
-= simple_form_for Upload.new do |f|
-  = f.input :report
-  = f.button :submit
+- content_for :stuff do
+  Upload report:
+  = simple_form_for Upload.new do |f|
+    = f.input :report
+    = f.button :submit
 
 - if @books.blank?
   .introduction You didn't upload any report yet
@@ -15,12 +14,6 @@ Upload report:
         .info
           .title
             = book.title
-          .total
-            total: #{book.sales.sum(:units)}
-          .vendors
-            - vendors.each do |vendor|
-              .vendor
-                = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
         - report = Indie::Report.create(book)
         .months
           - report.months.each do |month|
@@ -30,3 +23,10 @@ Upload report:
                 - month.vendors.each do |vendor|
                   .vendor
                     #{vendor.name}: #{vendor.units} 
+        .totals
+          .total
+            total: #{book.sales.sum(:units)}
+          .vendors
+            - vendors.each do |vendor|
+              .vendor
+                = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"

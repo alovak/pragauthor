@@ -1,0 +1,36 @@
+/* line 6, ../../app/assets/stylesheets/home.css.scss */
+body#home .book {
+  border: 1px solid #000;
+  clear: both;
+}
+/* line 11, ../../app/assets/stylesheets/home.css.scss */
+body#home .info {
+  float: left;
+}
+/* line 15, ../../app/assets/stylesheets/home.css.scss */
+body#home .title, body#home .total, body#home .vendors {
+  width: 200px;
+}
+/* line 19, ../../app/assets/stylesheets/home.css.scss */
+body#home .vendors {
+  border: 1px solid #000;
+}
+/* line 23, ../../app/assets/stylesheets/home.css.scss */
+body#home .months {
+  float: right;
+}
+/* line 26, ../../app/assets/stylesheets/home.css.scss */
+body#home .month {
+  float: left;
+  width: 100px;
+  border: 1px solid #000;
+}
+/* line 32, ../../app/assets/stylesheets/home.css.scss */
+body#home .month .vendors {
+  width: 100px;
+}
+/* line 35, ../../app/assets/stylesheets/home.css.scss */
+body#home .month .vendors .vendor {
+  width: 100px;
+  font-size: 12px;
+}

@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+$blueprint-grid-columns: 32;
+$blueprint-grid-width: 20px;
+$blueprint-grid-margin: 10px;
+
+@import "blueprint/reset";
+@import "blueprint";
+
+@import "compass/css3";
+
+$sidebar-columns: 4;
+
+body.application {
+  @include blueprint-debug;
+  background: #f9f5e9;
+
+  #container {
+    @include container;
+    // @include showgrid;
+  }
+
+  #header {
+    @include column($blueprint-grid-columns);
+  }
+
+  #footer {
+    @include prepend(8);
+    @include column(24, true);
+  }
+
+  #sidebar {
+    @include column(6); 
+    background: #ff0000;
+  }
+
+  #content {
+    // background: #ff0000;
+    @include column(26, true); 
+    background: #fff;
+    @include border-radius;
+  }
+
+  #header {
+    #logo {
+      @include column(6);
+    }
+
+    #stuff{
+      @include column(12);
+    }
+
+    #account_links {
+      @include column(14, true);
+    }
+  }
+}
+
+body#home {
+  .books {
+    @include prepend(1);
+
+    .book {
+      @include column(25, true);
+
+      .title {
+        @include prepend(1);
+        @include column(24, true);
+        color: #834741;
+        font-size: 12px;
+        background: red;
+      }
+
+      .months {
+        @include column(18);
+        background: #f9f5ea;
+      }
+
+      .totals {
+        @include column(7, true);
+        background: green;
+      }
+
+    }
+  }
+}

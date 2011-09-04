@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/chriseppstein/compass.git
+  revision: 22e2458b77519e8eb8463170c1a1fe4bab105f3e
+  branch: rails31
+  specs:
+    compass (0.12.0.alpha.0.22e2458)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -52,6 +62,7 @@ GEM
       activesupport (~> 3.0)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
+    chunky_png (1.2.1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -87,6 +98,7 @@ GEM
     faker (0.9.5)
       i18n (~> 0.4)
     ffi (1.0.9)
+    fssm (0.2.7)
     gherkin (2.4.16)
       json (>= 1.4.6)
     growl (1.0.3)
@@ -252,6 +264,7 @@ DEPENDENCIES
   capybara (~> 1.0.0)
   carrierwave
   coffee-script
+  compass!
   cucumber-rails
   cucumber-websteps
   database_cleaner

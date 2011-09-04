@@ -4,14 +4,32 @@
     %title Indie 
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
     = csrf_meta_tags
-  %body{ id: "#{controller_css_scope_name}" }
-    - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
-    - if user_signed_in?
-      = link_to('Sign out', destroy_user_session_path)
-      = link_to('Edit profile', edit_user_registration_path)
-      %p
-        User:
-        = current_user.name
-    = yield
+  %body{ id: "#{controller_css_scope_name}", class: "application" }
+    #container
+      #header
+        #logo
+          = image_tag('logo.png')
+        #stuff
+          = yield :stuff
+          &nbsp;
+        #account_links
+          - if user_signed_in?
+            = link_to('Sign out', destroy_user_session_path)
+            = link_to('Edit profile', edit_user_registration_path)
+            %p
+              User:
+              = current_user.name
+      #sidebar
+        Menu
+      #content
+        #box
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+          = yield
+      #footer
+        (c) Cool guys ;)
