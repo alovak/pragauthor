@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
-  before_filter :authenticate_user!
 
   def index
-    @books = Book.all
+    @books = current_user.books.all
   end
 end

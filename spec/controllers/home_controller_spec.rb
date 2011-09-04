@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-describe HomeController do
-  describe "GET index" do
-    before { sign_in Factory.create(:confirmed_user) }
+# describe HomeController do
+  # describe "GET index" do
+    # before { sign_in user }
 
-    it "should assign @books" do
-      books = mock
-      Book.should_receive(:all).and_return(books)
+    # let(:user) { Factory.create(:confirmed_user) }
 
-      get :index
+    # it "should assign @books" do
+      # get :index
 
-      assigns(:books).should eq(books)
-    end
-  end
-end
+      # assigns(:books).should eq(books)
+    # end
+  # end
+# end
