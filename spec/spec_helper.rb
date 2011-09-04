@@ -50,6 +50,6 @@ Spork.each_run do
 
   require 'factory_girl'
   # Reload FactoryGirl’s Factories
-  Factory.factories.clear
+  FactoryGirl.factories.clear
   Dir[Rails.root.join("spec/factories/**/*.rb")].each{|f| load f}
 end
