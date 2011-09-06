@@ -48,7 +48,10 @@ body.application {
   #footer {
     @include prepend(8);
     @include column(24, true);
-    margin-top: 20px;
+    margin: {
+      top: 20px;
+      bottom: 20px;
+    }
   }
 
   #sidebar {

@@ -12,3 +12,7 @@ namespace :db do
     run "sh -c 'cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=#{rails_env}'"
   end
 end
+
+after 'deploy:update_code' do
+  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
+end
