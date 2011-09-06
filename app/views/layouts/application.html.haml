@@ -20,11 +20,10 @@
           &nbsp;
         #account_links
           - if user_signed_in?
-            = link_to('Sign out', destroy_user_session_path)
+            = current_user.name
+            %span.separator /
             = link_to('Edit profile', edit_user_registration_path)
-            %p
-              User:
-              = current_user.name
+            %span.sing_out= link_to('Sign out', destroy_user_session_path)
       #sidebar
         Menu
       #content
