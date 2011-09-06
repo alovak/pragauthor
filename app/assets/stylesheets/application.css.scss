@@ -27,6 +27,10 @@ body.application {
     size: 12px;
   }
 
+  a {
+    color: #1d648d;
+  }
+
   color: #726e6b;
 
   @include blueprint-debug;
@@ -49,7 +53,6 @@ body.application {
 
   #sidebar {
     @include column(6); 
-    background: #ff0000;
   }
 
   #content {
@@ -64,16 +67,36 @@ body.application {
   }
 
   #header {
+    height: 120px;
     #logo {
       @include column(6);
+      padding-top: 35px;
     }
 
     #stuff{
       @include column(12);
+      padding-top: 55px;
     }
 
     #account_links {
       @include column(14, true);
+      padding-top: 55px;
+
+      .user_name {
+        font-weight: bold;
+        color: #826d5d;
+      }
+
+      .separator {
+        padding: {
+          left: 10px;
+          right: 10px;
+        }
+      }
+
+      .sign_out {
+        margin-left: 80px;
+      }
     }
   }
 }

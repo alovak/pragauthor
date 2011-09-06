@@ -20,12 +20,12 @@
           &nbsp;
         #account_links
           - if user_signed_in?
-            = current_user.name
+            %span.user_name= current_user.name
             %span.separator /
             = link_to('Edit profile', edit_user_registration_path)
-            %span.sing_out= link_to('Sign out', destroy_user_session_path)
+            %span.sign_out= link_to('Sign out', destroy_user_session_path)
       #sidebar
-        Menu
+        &nbsp;
       #content
         #box
           - flash.each do |name, msg|
