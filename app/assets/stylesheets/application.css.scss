@@ -15,9 +15,20 @@ $blueprint-grid-margin: 10px;
 
 @import "compass/css3";
 
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+
 $sidebar-columns: 4;
 
+body {
+}
 body.application {
+  font: {
+    family: 'PT Sans', sans-serif;
+    size: 12px;
+  }
+
+  color: #726e6b;
+
   @include blueprint-debug;
   background: #f9f5e9;
 
@@ -33,6 +44,7 @@ body.application {
   #footer {
     @include prepend(8);
     @include column(24, true);
+    margin-top: 20px;
   }
 
   #sidebar {
@@ -45,6 +57,10 @@ body.application {
     @include column(26, true); 
     background: #fff;
     @include border-radius;
+
+    padding: {
+      bottom: 40px;
+    }
   }
 
   #header {
@@ -63,28 +79,50 @@ body.application {
 }
 
 body#home {
+  h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #826d5d;
+
+    padding: {
+      top:26px;
+      bottom: 20px;
+    }
+  }
+
+  h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #834741;
+
+    padding: {
+      top:40px;
+      bottom: 25px;
+    }
+  }
+
   .books {
     @include prepend(1);
 
     .book {
       @include column(25, true);
+      font-size: 11px;
 
       .title {
         @include prepend(1);
         @include column(24, true);
-        color: #834741;
-        font-size: 12px;
-        background: red;
       }
 
       .months {
-        @include column(18);
+        @include prepend(1);
+        @include column(17);
         background: #f9f5ea;
+        padding-bottom: 30px;
       }
 
       .totals {
-        @include column(7, true);
-        background: green;
+        @include prepend(1);
+        @include column(6, true);
       }
 
     }

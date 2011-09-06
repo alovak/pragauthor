@@ -13,9 +13,10 @@
       .book{ title: %Q{#{book.title}} }
         .info
           .title
-            = book.title
+            %h1= book.title
         - report = Indie::Report.create(book)
         .months
+          %h2 The Last Six Month
           - report.months.each do |month|
             .month{ title: "#{month.title}" }
               #{month.name}: #{month.units} 
@@ -24,9 +25,10 @@
                   .vendor
                     #{vendor.name}: #{vendor.units} 
         .totals
-          .total
-            total: #{book.sales.sum(:units)}
+          %h2 The Entire Period
           .vendors
             - vendors.each do |vendor|
               .vendor
                 = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
+          .total
+            total: #{book.sales.sum(:units)}
