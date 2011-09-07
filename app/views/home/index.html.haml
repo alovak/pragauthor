@@ -1,7 +1,6 @@
 - content_for :stuff do
   = simple_form_for Upload.new do |f|
-    = f.input :report
-    = f.button :submit
+    = f.input :report, :label => false 
 
 - if @books.blank?
   .introduction You didn't upload any report yet
@@ -31,3 +30,7 @@
                 = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
           .total
             total: #{book.sales.sum(:units)}
+:javascript
+  $(document).ready(function(){
+    $('input:file').jInputFile();
+  });

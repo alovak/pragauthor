@@ -77,8 +77,9 @@ body.application {
     }
 
     #stuff{
-      @include column(12);
-      padding-top: 55px;
+      @include prepend(2);
+      @include column(10);
+      padding-top: 50px;
     }
 
     #account_links {
