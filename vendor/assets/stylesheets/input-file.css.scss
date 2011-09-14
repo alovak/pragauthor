@@ -19,12 +19,12 @@
   z-index: 1;
   width: 121px;
   height: 29px;
-  background: url(/assets/input-file/button.png) no-repeat left top;
+  background: image_url("input-file/button.png") no-repeat left top;
   float: left;
 }
 
 .jInputFile-activeBrowseButton{
-  background: url(/assets/input-file/button_active.png) no-repeat left top;
+  background: image_url("input-file/button_active.png") no-repeat left top;
   display: none;
 }
        
@@ -33,7 +33,7 @@
   z-index: 3;
   width: 150px;
   height: 29px;
-  background: url(/assets/input-file/transparent.gif);
+  background: image_url("input-file/transparent.gif");
   margin-left: -155px;
 }
 
@@ -48,7 +48,7 @@
   margin-top: 2px;
   padding-top: 1px;
   padding-left: 19px;
-  background: url(/assets/input-file/icons.png);
+  background: image_url("input-file/icons.png");
   display: none;
 }
 

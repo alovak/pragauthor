@@ -6,4 +6,5 @@ tmp/
 .sass-cache/
 rerun.txt
 public/uploads/
+public/assets/
 coverage/*
