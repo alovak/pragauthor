@@ -9,8 +9,8 @@
   cursor: default;
   height: 29px;
   z-index: 2;
-  font: 13px Verdana;			/*!!!!!!!!!!!!!!*/
-  filter: alpha(opacity: 0);
+  font: 13px Verdana;
+  filter: alpha(opacity=0);
   opacity: 0;
 }
 
