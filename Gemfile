@@ -13,7 +13,6 @@ gem 'rspec-rails'
 gem 'sqlite3'
 
 # Use unicorn as the web server
-gem 'unicorn'
 
 gem 'devise'
 
@@ -51,6 +50,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'unicorn'
   gem 'growl'
   gem 'rb-fsevent'
   gem 'timecop'
