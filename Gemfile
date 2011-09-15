@@ -50,7 +50,6 @@ group :production do
 end
 
 group :development, :test do
-  gem 'unicorn'
   gem 'growl'
   gem 'rb-fsevent'
   gem 'timecop'
@@ -69,9 +68,11 @@ group :development, :test do
   gem 'guard-spork'
 
   gem 'email_spec'
+
+  gem 'unicorn'
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
-gem 'ruby-debug19', :require => 'ruby-debug'
 group :test do
   gem 'database_cleaner'
   gem 'simplecov', '>= 0.4.0', :require => false
