@@ -5,9 +5,7 @@ gem 'rack'
 gem 'rails', '3.1.0' 
 
 gem 'haml-rails'
-gem 'sass-rails'
-gem 'coffee-script'  
-gem 'uglifier'  
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
   
 gem 'jquery-rails'
 gem 'rspec-rails'
@@ -29,7 +27,12 @@ gem 'mysql2'
 # Deploy with Capistrano
 gem 'capistrano'
 
-gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
+
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
@@ -66,9 +69,9 @@ group :development, :test do
   gem 'guard-spork'
 
   gem 'email_spec'
-  gem 'ruby-debug19'
 end
 
+gem 'ruby-debug19', :require => 'ruby-debug'
 group :test do
   gem 'database_cleaner'
   gem 'simplecov', '>= 0.4.0', :require => false
