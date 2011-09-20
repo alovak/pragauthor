@@ -7,4 +7,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require input-file
+//
+
+
+window.onload = function () {
+  var r = Raphael("raph");
+  r.g.hbarchart(10, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10]])
+};

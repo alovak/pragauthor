@@ -2,6 +2,7 @@
   = simple_form_for Upload.new do |f|
     = f.input :report, :label => false 
 
+
 - if @books.blank?
   .introduction You didn't upload any report yet
 - else
@@ -15,13 +16,24 @@
         - report = Indie::Report.create(book)
         .months
           %h2 The Last Six Month
-          - report.months.each do |month|
-            .month{ title: "#{month.title}" }
-              #{month.name}: #{month.units} 
-              .vendors
-                - month.vendors.each do |vendor|
-                  .vendor
-                    #{vendor.name}: #{vendor.units} 
+          -# .chart
+          .barchart
+            = barchart(210, report.months)
+          -# - report.months.each do |month|
+            -# .month{ title: "#{month.title}" }
+              -# #{month.name}: #{month.units} 
+              -# .vendors
+                -# - month.vendors.each do |vendor|
+                  -# .vendor
+                    -# #{vendor.name}: #{vendor.units} 
+          .month
+            %h2 The Last Six Month
+            .vendors
+              - vendors.each do |vendor|
+                .vendor
+                  = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
+            .total
+              total: #{book.sales.sum(:units)}
         .totals
           %h2 The Entire Period
           .vendors

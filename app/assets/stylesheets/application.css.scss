@@ -40,7 +40,6 @@ body.application {
 
   #container {
     @include container;
-    // @include showgrid;
   }
 
   #header {
@@ -85,7 +84,8 @@ body.application {
     }
 
     #account_links {
-      @include column(14, true);
+      @include column(10, true);
+      @include prepend(4);
       padding-top: 50px;
 
       .user_name {
@@ -101,13 +101,15 @@ body.application {
       }
 
       .sign_out {
-        margin-left: 80px;
+        margin-left: 20px;
       }
     }
   }
 }
 
 body#home {
+
+
   h2 {
     font-size: 14px;
     font-weight: bold;
@@ -147,6 +149,17 @@ body#home {
         @include column(17);
         background: #f9f5ea;
         padding-bottom: 30px;
+        position: relative;
+
+        .month {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 180px;
+          height: 100%;
+          background: #e5ddc6;
+          padding-left: 20px;
+        }
       }
 
       .totals {
@@ -154,6 +167,41 @@ body#home {
         @include column(6, true);
       }
 
+    }
+  }
+
+  .barchart {
+    float: left;
+    width: 299px;
+    font-size: 12px;
+
+    .line {
+      margin-bottom: 2px;
+
+      @include clearfix;
+
+      .label {
+        text-align: right;
+        width: 30px;
+        float: left;
+        padding: {
+          top: 5px;
+          right: 5px;
+        }
+      }
+      .column {
+        float: left;
+        width: 1px;
+        height: 25px;
+      }
+
+      .value {
+        float: left;
+        padding: {
+          left: 4px;
+          top: 5px;
+        }
+      }
     }
   }
 }
