@@ -1,8 +1,11 @@
 - content_for :stuff do
+  %a{href: "#upload", rel: "facebox", class: "upload"}
+
+#upload
+  %h2 Upload report
   = simple_form_for Upload.new do |f|
     = f.input :report, :label => false 
-    = f.submit
-
+    = f.button :submit
 
 - if @books.blank?
   .introduction You didn't upload any report yet

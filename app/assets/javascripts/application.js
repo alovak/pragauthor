@@ -7,10 +7,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require facebox
 //
 
-
-window.onload = function () {
-  var r = Raphael("raph");
-  r.g.hbarchart(10, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10]])
-};
+jQuery(document).ready(function($) {
+  $.facebox.settings.closeImage = '/assets/facebox/closelabel.png'
+  $.facebox.settings.loadingImage = '/assets/facebox/loading.gif'
+  $('a[rel*=facebox]').facebox()
+})

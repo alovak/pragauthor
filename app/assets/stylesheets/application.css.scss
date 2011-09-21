@@ -6,6 +6,7 @@
  *= require_tree . 
  *= require welcome
  *= require screen
+ *= require facebox
 */
 
 $blueprint-grid-columns: 32;
@@ -23,6 +24,7 @@ $sidebar-columns: 4;
 
 body {
 }
+
 body.application {
   font: {
     family: 'PT Sans', sans-serif;
@@ -109,6 +111,19 @@ body.application {
 
 body#home {
 
+  a.upload {
+    display: block;
+    width: 121px;
+    height: 29px;
+    background: url('/assets/upload-button.png');
+  }
+  a.upload:hover {
+    background: url('/assets/upload-button-active.png');
+  }
+
+  #upload {
+    display: none;
+  }
 
   h2 {
     font-size: 14px;
@@ -246,7 +261,5 @@ body#home {
       }
     }
   }
-
-
 
 }
