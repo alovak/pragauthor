@@ -27,7 +27,7 @@
             .total
               total: #{book.sales.sum(:units)}
           - report.months.each do |month|
-            .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none;" }
+            .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none; background: ##{month_color(month.name)[:light]}" }
               %h2= month.name
               .vendors
                 - month.vendors.each do |vendor|
