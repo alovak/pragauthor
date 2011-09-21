@@ -2,3 +2,15 @@
   .label= record[:label]
   .column{ style: "width: #{record[:width]}px; background: #{record[:color]}" }
   .value= record[:value] 
+
+:javascript
+  var n = 0;
+  $("div.column").mouseenter(function(){
+    month = $(this).siblings('.label').text();
+    $(this).parents('.barchart').siblings(".month" + "." + month).show();
+    
+  }).mouseleave(function(){
+    month = $(this).siblings('.label').text();
+    $(this).parents('.barchart').siblings(".month" + "." + month).hide();
+  });
+  

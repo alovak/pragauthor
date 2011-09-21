@@ -145,13 +145,15 @@ body#home {
       }
 
       .months {
-        @include prepend(1);
-        @include column(17);
+        h2 { @include prepend(1); }
+
+        @include column(18);
         background: #f9f5ea;
         padding-bottom: 30px;
         position: relative;
 
         .month {
+          h2 { padding-left: 0; }
           position: absolute;
           top: 0;
           right: 0;
@@ -173,7 +175,7 @@ body#home {
   .barchart {
     float: left;
     width: 299px;
-    font-size: 12px;
+    font-size: 11px;
 
     .line {
       margin-bottom: 2px;
@@ -182,7 +184,7 @@ body#home {
 
       .label {
         text-align: right;
-        width: 30px;
+        width: 27px;
         float: left;
         padding: {
           top: 5px;
