@@ -1,6 +1,7 @@
 - content_for :stuff do
   = simple_form_for Upload.new do |f|
     = f.input :report, :label => false 
+    = f.submit
 
 
 - if @books.blank?
@@ -27,7 +28,7 @@
             .total
               total: #{book.sales.sum(:units)}
           - report.months.each do |month|
-            .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none; background: ##{month_color(month.name)[:light]}" }
+            .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none;" }
               %h2= month.name
               .vendors
                 - month.vendors.each do |vendor|

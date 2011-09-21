@@ -1,6 +1,6 @@
 .line
   .label= record[:label]
-  .column{ style: "width: #{record[:width]}px; background: #{record[:color]}" }
+  .column{ class: "#{record[:label]}", style: "width: #{record[:width]}px;" }
   .value= record[:value] 
 
 :javascript
