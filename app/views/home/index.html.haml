@@ -2,10 +2,14 @@
   %a{href: "#upload", rel: "facebox", class: "upload"}
 
 #upload
-  %h2 Upload report
-  = simple_form_for Upload.new do |f|
-    = f.input :report
-    = f.button :submit
+  .form
+    %h2 Upload report
+    = simple_form_for Upload.new do |f|
+      = f.input :report
+      = f.button :submit
+
+    .links
+      %p.note Please note that currently we support only the following vendors: Amazon KDP, Barnes&Noble, Smashwords 
 
 - if @books.blank?
   .introduction You didn't upload any report yet

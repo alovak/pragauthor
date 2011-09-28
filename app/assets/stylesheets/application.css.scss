@@ -142,10 +142,6 @@ body.common {
     vertical-align: -2px;
     margin-left:   2px;
   }
-}
-
-body.application {
-
   .form {
     h2, .links {
       @include prepend(5);
@@ -158,6 +154,10 @@ body.application {
       }
     }
   }
+}
+
+body.application {
+
 
   #container {
     @include container;
@@ -244,6 +244,9 @@ body#home {
     display: none;
   }
 
+  #facebox .content {
+    width: 450px;
+  }
 
   .books {
     @include prepend(1);
