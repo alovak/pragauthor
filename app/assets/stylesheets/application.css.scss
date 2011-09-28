@@ -202,8 +202,7 @@ body.application {
     }
 
     #account_links {
-      @include column(9, true);
-      @include prepend(4);
+      @include column(13, true);
       @include append(1);
       text-align: right;
 
@@ -410,6 +409,7 @@ body#welcome {
     }
 
     #intro {
+      @include border-radius;
       @include column(20, true);
       @include prepend(6);
       @include append(6);
