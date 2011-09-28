@@ -17,3 +17,13 @@
             = link_to('Sign in', new_user_session_path)
       #content
         = yield
+        - flash.each do |name, msg|
+          :javascript
+            $(function () {
+              $.notifyBar({
+                cls: ("#{name}" == 'notice' ? 'success' : 'error'),
+                html: "#{msg}",
+                delay: 2000,
+                animationSpeed: "normal"
+              });
+            });
