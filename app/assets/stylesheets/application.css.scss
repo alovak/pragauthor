@@ -227,6 +227,25 @@ body.application {
 
 body#home {
 
+  .blank {
+    background: url('/assets/blank.png') 30px 25px no-repeat;
+    height: 550px;
+
+    position: relative;
+
+    h1 {
+      @include border-radius;
+      border:3px solid #e5ddc6;
+      position: absolute;
+      top: 160px;
+      left: 200px;
+      padding: 20px;
+      background: #fff;
+      width: 290px;
+      text-align: center;
+    }
+  }
+
   a.upload {
     display: block;
     width: 121px;

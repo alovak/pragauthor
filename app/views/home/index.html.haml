@@ -12,7 +12,7 @@
       %p.note Please note that currently we support only the following vendors: Amazon KDP, Barnes&Noble, Smashwords 
 
 - if @books.blank?
-  .introduction You didn't upload any report yet
+  = render :partial => 'blank'
 - else
   - vendors = Vendor.all
   .books
