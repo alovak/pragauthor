@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= require facebox
+//= require jquery.notifyBar
 //
 
 jQuery(document).ready(function($) {
