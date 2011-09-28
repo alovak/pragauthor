@@ -5,4 +5,8 @@ class WelcomeController < ApplicationController
 
   def index
   end
+
+  def exception_2211
+    raise "Hello"
+  end
 end

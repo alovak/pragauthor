@@ -95,6 +95,8 @@ GEM
       mail (~> 2.2)
       rspec (~> 2.0)
     erubis (2.7.0)
+    exception_notification (2.5.2)
+      actionmailer (>= 3.0.4)
     execjs (1.2.4)
       multi_json (~> 1.0)
     factory_girl (2.0.5)
@@ -273,6 +275,7 @@ DEPENDENCIES
   database_cleaner
   devise
   email_spec
+  exception_notification
   factory_girl
   faker
   growl

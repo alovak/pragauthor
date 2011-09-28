@@ -5,6 +5,7 @@ Indie::Application.routes.draw do
 
   root :to => "welcome#index"
 
+  match 'exception_2211' => 'welcome#exception_2211'
   match 'home' => 'home#index', :as => :home
 
   resources :uploads, :only => [:create]

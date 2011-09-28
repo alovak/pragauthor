@@ -17,7 +17,7 @@ Feature: Sign up
       Then I should see "Confirmation instructions" in the email subject
       And I should see the email delivered from "welcome@pragauthor.com"
       And I should see "Hi, Inez!" in the email body
-      And I should see "You can confirm your account through the link below:" in the email body
+      And I should see "you need to confirm your email address" in the email body
       When I follow "Confirm my account" in the email
       Then I should see "Your account was successfully confirmed."
       And I should see "You are now signed in."

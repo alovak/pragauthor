@@ -28,5 +28,6 @@ Feature:
     When I upload "unknown.txt"
     Then I should see "Unfortunately, we can't process your file"
     # And I should see what I can do with it now
+    # And admin should receive email with link to file
 
 
