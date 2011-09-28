@@ -3,14 +3,3 @@
   .column{ class: "#{record[:label]}", style: "width: #{record[:width]}px;" }
   .value= record[:value] 
 
-:javascript
-  var n = 0;
-  $("div.column").mouseenter(function(){
-    month = $(this).siblings('.label').text();
-    $(this).parents('.barchart').siblings(".month" + "." + month).show();
-    
-  }).mouseleave(function(){
-    month = $(this).siblings('.label').text();
-    $(this).parents('.barchart').siblings(".month" + "." + month).hide();
-  });
-  

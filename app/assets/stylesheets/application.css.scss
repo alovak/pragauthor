@@ -188,18 +188,9 @@ body#home {
           }
         }
 
-        .month.Jan { background: #f8e6da; h2 { color: #d67534; } }
-        .month.Feb { background: #f3d9d7; h2 { color: #bb2b24; } }
-        .month.Mar { background: #d4e9ec; h2 { color: #118793; } }
-        .month.Apr { background: #d2dacd; h2 { color: #92a489; } }
-        .month.May { background: #f7f0e1; h2 { color: #d1ad58; } }
-        .month.Jun { background: #e5dfec; h2 { color: #714c94; } }
-        .month.Jul { background: #f8e6da; h2 { color: #d67534; } }
-        .month.Aug { background: #f3d9d7; h2 { color: #bb2b24; } }
-        .month.Sep { background: #d4e9ec; h2 { color: #118793; } }
-        .month.Oct { background: #d2dacd; h2 { color: #92a489; } }
-        .month.Nov { background: #f7f0e1; h2 { color: #d1ad58; } }
-        .month.Dec { background: #e5dfec; h2 { color: #714c94; } }
+
+        .month.last_six { background: #e5ddc6; h2 { color: #826d5d; } }
+        .month { background: #d4e9ec; h2 { color: #118793; } }
       }
 
       .totals {
@@ -239,18 +230,8 @@ body#home {
         height: 25px;
       }
 
-      .column.Jan { background: #d67534 }
-      .column.Feb { background: #bb2b24 }
-      .column.Mar { background: #118793 }
-      .column.Apr { background: #92a489 }
-      .column.May { background: #d1ad58 }
-      .column.Jun { background: #714c94 }
-      .column.Jul { background: #d67534 }
-      .column.Aug { background: #bb2b24 }
-      .column.Sep { background: #118793 }
-      .column.Oct { background: #92a489 }
-      .column.Nov { background: #d1ad58 }
-      .column.Dec { background: #714c94 }
+      .column { background: #90c7ce }
+      .column.selected { background: #118793 }
 
       .value {
         float: left;
