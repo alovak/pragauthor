@@ -3,7 +3,7 @@ module ApplicationHelper
     controller_name.gsub('/', '__')
   end
 
-  def barchart(width, months )
+  def barchart(width, months)
     render :partial => 'line', :collection => bardata(width, months), :as => :record
   end
 
@@ -12,9 +12,10 @@ module ApplicationHelper
 
     [].tap do |bars|
       months.each_with_index do |month, index| 
+
         bars << { 
           :value => month.units,
-          :width => month.units*width/max + 2,
+          :width => max == 0 ? 2 : (month.units*width/max + 2),
           :label => month.name
         }
       end

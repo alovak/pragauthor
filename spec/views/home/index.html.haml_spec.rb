@@ -67,10 +67,10 @@ describe "home/index.html.haml" do
       Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
         render
 
-        rendered.should =~ /Jun: 15/
-        rendered.should =~ /Jan: 5/
-        rendered.should_not =~ /Jun: 3/
-        rendered.should_not =~ /Dec: 10/
+        rendered.should have_selector(".Jun .total", :text => /15/)
+        rendered.should have_selector(".Jan .total", :text => /5/)
+        rendered.should_not have_selector(".Jun .total", :text => /3/)
+        rendered.should_not have_selector(".Dec .total", :text => /10/)
       end
     end
 
@@ -80,9 +80,10 @@ describe "home/index.html.haml" do
       it "should display 6 month back with 0 units sold" do
         Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
           render
+
           %w(Jan Feb Mar Apr May Jun).each do |month|
             rendered.should have_tag(".months .month [title='#{month} 2011']")
-            rendered.should =~ /#{month}: 0/
+            rendered.should have_tag(".months .value", :text => "0", :count => 6)
           end
         end
       end
