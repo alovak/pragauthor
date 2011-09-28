@@ -1,0 +1,55 @@
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      Google Visualization API Sample
+    </title>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'x');
+        data.addColumn('number', 'Amazon');
+        data.addColumn('number', 'Barnes&Noble');
+        data.addColumn('number', 'Smashwords');
+        data.addColumn('number', 'Total');
+        data.addRow(["Jun", 3, 12, 22, 37]);
+        data.addRow(["Jul", 6, 17, 17, 39]);
+        data.addRow(["Aug", 2, 12, 12, 49]);
+        data.addRow(["Sep", 8, 12, 40, 60]);
+        data.addRow(["Oct", 7, 10, 99, 116]);
+        data.addRow(["Nov", 7, 14, 45, 66]);
+      
+       
+        // Create and draw the visualization.
+        new google.visualization.LineChart(document.getElementById('visualization')).
+          draw(data, {curveType: "none", fontSize: 11, backgroundColor: '#f9f5ea',
+                        
+                        chartArea: { width: 500, left: 50 },
+                        width: 700, height: 200, pointSize: 6,
+                      
+      
+                        vAxis: {maxValue: 10, minValue: 0}}
+                );
+      }
+      
+
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+  </head>
+  <body style="font-family: Arial;border: 0 none;">
+    <div id="visualization" style="width: 500px; height: 400px;"></div>
+  </body>
+</html>
+
