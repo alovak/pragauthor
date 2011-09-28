@@ -1,2 +1,10 @@
-Welcome!
-
+#intro
+  .header
+    We make the life of authors easier.
+    %br
+    We deliver software that makes it possible for authors
+    %br 
+    to focus on what they do best.
+    %b Write. 
+  - unless user_signed_in?
+    .sign_up= link_to('Sign up', new_user_registration_path)
