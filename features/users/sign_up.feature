@@ -21,7 +21,7 @@ Feature: Sign up
       When I follow "Confirm my account" in the email
       Then I should see "Your account was successfully confirmed."
       And I should see "You are now signed in."
-      And I should see "Home page"
+      And I should be on the home page
 
     Scenario: User signs up with invalid email
       Given I am not logged in

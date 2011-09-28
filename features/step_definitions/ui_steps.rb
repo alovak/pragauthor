@@ -23,9 +23,9 @@ Then /^I should see "([^"]*)" units were sold by "([^"]*)"$/ do |number, vendor|
 end
 
 Then /^I should see "([^"]*)" units were sold in "([^"]*)"$/ do |number, month|
-  within(:css, %Q{div[@title="#{@book_name}"]}) do
+  within(:css, %Q{div[@title="#{@book_name}"] .#{month} .total}) do
     steps %Q{
-      Then I should see "#{month}: #{number}"
+      Then I should see "#{number}"
     }
   end
 end
