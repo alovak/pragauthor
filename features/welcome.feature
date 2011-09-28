@@ -4,7 +4,7 @@ Feature:
 
   Scenario: User is not signed in
     When I go to the index page
-    Then I should see "Welcome!"
+    Then I should see "Pragmatic Author"
     Then I should see "Sign in"
     Then I should see "Sign up"
 
