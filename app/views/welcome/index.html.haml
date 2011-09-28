@@ -6,5 +6,7 @@
     %br 
     to focus on what they do best.
     %b Write. 
-  - unless user_signed_in?
+  - if user_signed_in?
+    .sign_up= link_to('Go to Dashboard', home_path)
+  - else
     .sign_up= link_to('Sign up', new_user_registration_path)
