@@ -22,10 +22,7 @@ $blueprint-grid-margin: 10px;
 
 $sidebar-columns: 4;
 
-body {
-}
-
-body.application {
+body.common {
   font: {
     family: 'PT Sans', sans-serif;
     size: 12px;
@@ -39,6 +36,128 @@ body.application {
 
   @include blueprint-debug;
   background: #f9f5e9;
+
+  h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #826d5d;
+
+    padding: {
+      top:26px;
+      bottom: 20px;
+    }
+  }
+
+  h3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #826d5d;
+
+    padding: {
+      top:20px;
+      bottom: 15px;
+    }
+  }
+
+  h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #834741;
+
+    padding: {
+      top:40px;
+      bottom: 25px;
+    }
+  }
+  .simple_form div.input {
+    margin-bottom: 10px;
+  }
+
+  .simple_form label {
+    float: left;
+    width: 130px;
+    text-align: right;
+    margin: 2px 10px;
+  }
+
+  .simple_form input {
+    &.text,
+    &.title,
+    &[type=email],
+    &[type=text],
+    &[type=password] {
+      width: 200px;
+    }
+  }
+
+  div.boolean, .simple_form input[type='submit'] {
+    margin-left: 150px;
+  }
+
+  div.boolean label, label.collection_radio {
+    float: none;
+    margin: 0;
+  }
+
+  label.collection_radio {
+    margin-right: 10px;
+    vertical-align: -2px;
+    margin-left:   2px;
+  }
+
+  .field_with_errors {
+    background-color: #ff3333;
+  }
+
+  .simple_form .error {
+    clear:   left;
+    color:   black;
+    display: block;
+    margin-left: 150px;
+    font-size:    12px;
+  }
+
+  .simple_form .hint {
+    clear: left;
+    margin-left: 150px;
+    font-size:    12px;
+    color: #555;
+    display: block;
+    font-style: italic;
+  }
+
+  input.radio {
+    margin-right: 5px;
+    vertical-align: -3px;
+  }
+
+  input.check_boxes {
+    margin-left: 3px;
+    vertical-align: -3px;
+  }
+
+  label.collection_check_boxes {
+    float: none;
+    margin: 0;
+    vertical-align: -2px;
+    margin-left:   2px;
+  }
+}
+
+body.application {
+
+  .form {
+    h2, .links {
+      @include prepend(5);
+    }
+
+    .links {
+      padding: {
+        top: 20px;
+        bottom: 20px;
+      }
+    }
+  }
 
   #container {
     @include container;
@@ -125,27 +244,6 @@ body#home {
     display: none;
   }
 
-  h2 {
-    font-size: 14px;
-    font-weight: bold;
-    color: #826d5d;
-
-    padding: {
-      top:26px;
-      bottom: 20px;
-    }
-  }
-
-  h1 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #834741;
-
-    padding: {
-      top:40px;
-      bottom: 25px;
-    }
-  }
 
   .books {
     @include prepend(1);
@@ -242,5 +340,43 @@ body#home {
       }
     }
   }
-
 }
+
+body#devise {
+  #container {
+    @include container;
+    // @include showgrid;
+  }
+  #header, #footer {
+    @include prepend(10);
+    @include column(22, true);
+    padding: {
+      top: 20px;
+      bottom: 20px;
+    }
+  }
+
+  #content {
+    @include column(14, true);
+    @include prepend(9);
+    @include append(9);
+  }
+
+  #box {
+    background: #fff;
+    @include border-radius;
+
+    h2, .links {
+      @include prepend(5);
+    }
+
+    .links {
+      padding: {
+        top: 20px;
+        bottom: 20px;
+      }
+    }
+  }
+}
+
+

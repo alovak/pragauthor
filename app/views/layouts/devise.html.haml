@@ -8,22 +8,11 @@
     /[if lt IE 8]
       = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
     = csrf_meta_tags
-  %body{ id: "#{controller_css_scope_name}", class: "application common" }
+  %body#devise.common
     #container
       #header
         #logo
           = image_tag('logo.gif')
-        #stuff
-          = yield :stuff
-          &nbsp;
-        #account_links
-          - if user_signed_in?
-            %span.user_name= current_user.name
-            %span.separator /
-            = link_to('Edit profile', edit_user_registration_path)
-            %span.sign_out= link_to('Sign out', destroy_user_session_path)
-      #sidebar
-        &nbsp;
       #content
         #box
           - flash.each do |name, msg|
