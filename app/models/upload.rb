@@ -3,4 +3,6 @@ class Upload < ActiveRecord::Base
 
   attr_accessible :report
   mount_uploader :report, ReportUploader
+
+  validates_processing_of :report
 end

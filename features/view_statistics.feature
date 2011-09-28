@@ -23,4 +23,10 @@ Feature:
   Scenario: upload amazon file and view statistics
   Scenario: upload Barnes & Noble file and view statistics
   Scenario: upload Smashwords file and view statistics
-  Scenario: upload file with wrong format
+
+  Scenario: upload file with unknown name
+    When I upload "unknown.txt"
+    Then I should see "Unfortunately, we can't process your file"
+    # And I should see what I can do with it now
+
+

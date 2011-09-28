@@ -21,6 +21,8 @@ class ReportUploader < CarrierWave::Uploader::Base
   def import
     parser = Indie::Parser.factory(current_path, model.user)
     parser.process
+  rescue
+    raise CarrierWave::ProcessingError
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

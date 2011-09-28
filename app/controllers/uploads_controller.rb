@@ -7,7 +7,7 @@ class UploadsController < ApplicationController
       flash[:notice] = "You file was uploaded and processed"
       redirect_to home_path
     else
-      flash[:alert] = "You file was not uploaded and processed" 
+      flash[:alert] = "Unfortunately, we can't process your file" 
       redirect_to home_path
     end
   end
