@@ -26,7 +26,7 @@ module Indie
       private
 
       def convert_date(date)
-        DateTime.strptime(date, '%Y-%m-%d')
+        Chronic.parse(date)
       end
     end
   end

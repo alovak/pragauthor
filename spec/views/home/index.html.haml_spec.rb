@@ -59,7 +59,7 @@ describe "home/index.html.haml" do
         "01 Jun 2011" => 11, 
         "08 Jun 2011" => 4 
       }.each do |date, units|
-          book.sales << Factory(:sale, :units => units, :book => book, :vendor => vendor, :date_of_sale => Date.parse(date))
+          book.sales << Factory(:sale, :units => units, :book => book, :vendor => vendor, :date_of_sale => Chronic.parse(date))
       end
 
       render

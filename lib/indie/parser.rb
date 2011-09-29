@@ -35,7 +35,9 @@ module Indie
       end
 
       def create_sale(book, params)
-        book.sales.create(params.update(:vendor => vendor))
+        unless book.sales.where({:vendor_id => vendor.id}.update(params)).any?
+          book.sales.create(params.update(:vendor => vendor))
+        end
       end
     end
   end

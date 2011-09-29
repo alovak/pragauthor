@@ -36,7 +36,7 @@ describe Indie::Report do
         "01 Jun 2011" => { :units => 11, :vendor => bn }, 
         "08 Jun 2011" => { :units => 4,  :vendor => smash }, 
       }.each do |date, data|
-          book.sales << Factory(:sale, :units => data[:units], :vendor => data[:vendor], :book => book, :date_of_sale => Date.parse(date))
+        book.sales << Factory(:sale, :units => data[:units], :vendor => data[:vendor], :book => book, :date_of_sale => Chronic.parse(date))
       end
     end
 

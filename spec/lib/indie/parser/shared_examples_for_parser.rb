@@ -37,6 +37,16 @@ shared_examples "a parser" do |expectations|
         book.sales.sum(:units).should == units
       end
     end
+
+    it "should not duplicate sales for the same file" do
+      parser.process
+      parser.process
+
+      expectations[:book_units].each do |title, units|
+        book = Book.find_by_title(title)
+        book.sales.sum(:units).should == units
+      end
+    end
   end
 end
 
