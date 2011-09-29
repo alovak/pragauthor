@@ -11,6 +11,7 @@ gem 'simple_form'
 gem 'spreadsheet'
 gem 'mysql2'
 gem 'exception_notification'
+gem 'chronic'
 
 group :assets do
   gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
