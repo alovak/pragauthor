@@ -67,7 +67,7 @@ module Indie
 
     def calculate_months_units
       data =  book.sales
-                  .where("date_of_sale >= ?", MONTHS.month.ago)
+                  .where("date_of_sale > ?", MONTHS.month.ago.end_of_month)
                   .group("year(date_of_sale)")
                   .group("month(date_of_sale)")
                   .group("vendor_id")

@@ -30,6 +30,7 @@ describe Indie::Report do
       { "01 Jun 2010" => { :units => 3,  :vendor => bn },
         "01 Dec 2010" => { :units => 10, :vendor => bn }, 
         "01 Jan 2011" => { :units => 5,  :vendor => bn }, 
+        "09 Dec 2010" => { :units => 12, :vendor => smash }, 
         "05 Jan 2011" => { :units => 12, :vendor => smash }, 
         "11 Feb 2011" => { :units => 35, :vendor => bn }, 
         "01 Jun 2011" => { :units => 11, :vendor => bn }, 
