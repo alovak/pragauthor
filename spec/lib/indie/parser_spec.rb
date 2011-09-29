@@ -8,6 +8,7 @@ describe Indie::Parser do
       {
         './path/BNsales_May2011.xls' => Indie::Parser::BarnesNoble,
         './path/SmashWords_salesReport-2011-06-08.xls' => Indie::Parser::Smashwords,
+        './path/salesReport-2011-06-08.xls' => Indie::Parser::Smashwords,
         './path/kdp-report-04-2011.xls' => Indie::Parser::Amazon
       }.each_pair do |file_name, parser_class|
         parser = Indie::Parser.factory(file_name, user)
