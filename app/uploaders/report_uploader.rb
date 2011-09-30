@@ -21,6 +21,8 @@ class ReportUploader < CarrierWave::Uploader::Base
   def import
     parser = Indie::Parser.factory(current_path, model.user)
     parser.process
+    # Do not rename or edit file in Microsoft Excel, Number, Open Office, 
+    # etc. as they can change column formats and we can't parse your report file.
   rescue => e
     Rails.logger.error("Can't parse file")
     Rails.logger.error(e)

@@ -26,4 +26,23 @@ jQuery(document).ready(function($) {
     month = $(this).siblings('.label').text();
     $(this).parents('.barchart').siblings(".month" + "." + month).hide();
   });
+
+  $(document).bind('reveal.facebox', function() {
+    $('#facebox input[type=submit]').attr('disabled', true);
+
+    $('#facebox input.file').change(function() {
+      file_name = $(this).val();
+      pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i
+
+      if (pattern.test(file_name)) {
+        $('#facebox input[type=submit]').attr('disabled', false);
+        $('#facebox .warning').hide();
+      } else {
+        $('#facebox input[type=submit]').attr('disabled', true);
+        $('#facebox .warning').show();
+        $('#facebox .warning').effect("bounce", { direction:'down', times:3, distance: 10 }, 200);
+      }
+    })
+  })
 })
+
