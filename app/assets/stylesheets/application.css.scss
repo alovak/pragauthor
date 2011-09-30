@@ -35,6 +35,15 @@ body.common {
 
   color: #726e6b;
 
+  ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+  li {
+    list-style: square;
+  }
+
+
   @include blueprint-debug;
   background: #f9f5e9;
 
@@ -259,6 +268,11 @@ body#home {
 
   #upload {
     display: none;
+
+  }
+
+  ul.facebox {
+    margin-left: 170px;
   }
 
   .warning {
@@ -267,13 +281,13 @@ body#home {
     background: #ffcaca;
     color: #000;
     padding: 5px;
+    margin-top: 10px;
   }
 
   .note, .warning {
     margin: {
       left: 150px;
-      top: 10px;
-      bottom: 10px;
+      bottom: 15px;
     }
   }
 

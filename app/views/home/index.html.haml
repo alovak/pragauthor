@@ -6,29 +6,25 @@
     %h2 Upload report
     %p.note
       Currently we support the following vendors:
-      %br
-      \- Amazon KDP
-      %br
-      \- Barnes&Noble
-      %br
-      \- Smashwords
+    %ul.facebox
+      %li Amazon (KDP)
+      %li Barnes&Noble
+      %li Smashwords
     %p.note
       %strong
-        File should be provided as it was receied from vendor
+        File should be provided as it was received from vendor
     = simple_form_for Upload.new do |f|
       = f.input :report
       = f.submit "Upload"
-    %p.note.warning
-      %strong
-        We couldn't identify the vendor of your report!
-      %br
-      Please, check the file name. Examples:
-      %br
-      SmashWords_salesReport-2011-06-08.xls
-      %br
-      kdp-report-04-2011.xls for Amazon
-      %br
-      BNsales_May2011.xls for Barnes&Noble
+    .warning
+      %p
+        %strong
+          We couldn't identify the vendor of your report!
+      %p Please, check the file name. Examples:
+      %ul
+        %li SmashWords_salesReport-2011-06-08.xls
+        %li kdp-report-04-2011.xls for Amazon
+        %li BNsales_May2011.xls for Barnes&Noble
 - if @books.blank?
   = render :partial => 'blank'
 - else
