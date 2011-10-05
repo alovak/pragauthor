@@ -8,9 +8,7 @@ Indie::Application.routes.draw do
   match 'exception_2211' => 'welcome#exception_2211'
   match 'home' => 'home#index', :as => :home
 
-  resources :uploads, :only => [:create]
-
-
+  resources :uploads, :only => [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

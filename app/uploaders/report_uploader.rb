@@ -26,7 +26,7 @@ class ReportUploader < CarrierWave::Uploader::Base
   rescue => e
     Rails.logger.error("Can't parse file")
     Rails.logger.error(e)
-    raise CarrierWave::ProcessingError
+    raise CarrierWave::ProcessingError.new("Can't process file. Original Error: #{e}")
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

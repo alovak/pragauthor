@@ -24,6 +24,10 @@ $blueprint-grid-margin: 10px;
 $sidebar-columns: 4;
 
 body.common {
+  .red {
+    color: red;
+  }
+
   font: {
     family: 'PT Sans', sans-serif;
     size: 12px;
@@ -116,15 +120,23 @@ body.common {
   }
 
   .field_with_errors {
-    background-color: #ff3333;
+    background-color: #ffcaca;
+    margin: {
+      left: 20px;
+      right: 20px;
+    }
   }
 
   .simple_form .error {
     clear:   left;
     color:   black;
     display: block;
-    margin-left: 150px;
+    margin: {
+      top: 5px;
+      left: 150px;
+    }
     font-size:    12px;
+    font-weight: bold;
   }
 
   .simple_form .hint {
@@ -152,9 +164,28 @@ body.common {
     vertical-align: -2px;
     margin-left:   2px;
   }
+
   .form {
-    h2, .links {
+
+    h1, h2, .links {
       @include prepend(5);
+    }
+
+    .warning {
+      display: none;
+      border: 2px solid #ff3333;
+      background: #ffcaca;
+      color: #000;
+      padding: 5px;
+      margin-top: 10px;
+      margin-right: 20px;
+    }
+
+    .note, .warning {
+      margin: {
+        left: 150px;
+        bottom: 15px;
+      }
     }
 
     .links {
@@ -235,7 +266,7 @@ body.application {
   }
 }
 
-body#home {
+body#home, body#uploads {
 
   .blank {
     background: url('/assets/blank.png') 30px 25px no-repeat;
@@ -266,30 +297,11 @@ body#home {
     background: url('/assets/upload-button-active.png');
   }
 
-  #upload {
-    display: none;
-
-  }
 
   ul.facebox {
     margin-left: 170px;
   }
 
-  .warning {
-    display: none;
-    border: 2px solid #ff3333;
-    background: #ffcaca;
-    color: #000;
-    padding: 5px;
-    margin-top: 10px;
-  }
-
-  .note, .warning {
-    margin: {
-      left: 150px;
-      bottom: 15px;
-    }
-  }
 
   #facebox .content {
     width: 450px;
@@ -389,6 +401,12 @@ body#home {
         }
       }
     }
+  }
+}
+
+body#home {
+  #upload {
+    display: none;
   }
 }
 

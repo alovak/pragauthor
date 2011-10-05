@@ -6,9 +6,11 @@ describe UploadsController do
   end
 
   let(:user) { Factory(:confirmed_user) }
+  let(:file) { "#{Rails.root}/features/support/files/kdp-report-04-2011.xls" }
 
-  def post_file
-    post :create, :upload => { :file => "#{Rails.root}/features/support/files/kdp-report-04-2011.xls" }
+  def post_file(file_name = nil)
+    file_name ||= file
+    post :create, :upload => { :report => Rack::Test::UploadedFile.new(file_name, "application/vnd.ms-excel") }
   end
 
   describe "POST 'create'" do
@@ -31,20 +33,16 @@ describe UploadsController do
       end
     end
 
-    context "when the upload was not saved successfully" do 
+    
+    context "when the upload is invalid" do 
+      before { post_file("#{Rails.root}/features/support/files/unknown.txt")}
 
-      it "should show proper explanation of the processing or uploading error" do
-        pending
-        
-        post :create
-
-        flash[:alert].should == "You file was not uploaded and processed"
+      it "should render :new" do
+        response.should render_template :new
       end
 
-      it "redirects to the home" do
-        post_file
-
-        response.should redirect_to(home_path)
+      it "should assign @upload" do
+        assigns(:upload).should be_a_new(Upload)
       end
     end
   end

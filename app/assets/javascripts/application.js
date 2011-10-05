@@ -28,21 +28,25 @@ jQuery(document).ready(function($) {
   });
 
   $(document).bind('reveal.facebox', function() {
-    $('#facebox input[type=submit]').attr('disabled', true);
-
-    $('#facebox input.file').change(function() {
-      file_name = $(this).val();
-      pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i
-
-      if (pattern.test(file_name)) {
-        $('#facebox input[type=submit]').attr('disabled', false);
-        $('#facebox .warning').hide();
-      } else {
-        $('#facebox input[type=submit]').attr('disabled', true);
-        $('#facebox .warning').show();
-        $('#facebox .warning').effect("bounce", { direction:'down', times:3, distance: 10 }, 200);
-      }
-    })
+    init_upload('#facebox')
   })
+
 })
 
+this.init_upload = function(scope) {
+  $(scope + ' input[type=submit]').attr('disabled', true);
+
+  $(scope + ' input.file').change(function() {
+    file_name = $(this).val();
+    pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i
+
+    if (pattern.test(file_name)) {
+      $(scope + ' input[type=submit]').attr('disabled', false);
+      $(scope + ' .warning').hide();
+    } else {
+      $(scope + ' input[type=submit]').attr('disabled', true);
+      $(scope + ' .warning').show();
+      $(scope + ' .warning').effect("bounce", { direction:'down', times:3, distance: 10 }, 200);
+    }
+  })
+}
