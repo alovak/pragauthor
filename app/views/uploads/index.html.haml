@@ -1,0 +1,11 @@
+%h2 Uploads
+%table
+  %thead
+    %tr
+      %th File name
+      %th Uploaded at
+  - @uploads.each do |upload|
+    %tr
+      %td= upload.report_identifier
+      %td= upload.created_at
+

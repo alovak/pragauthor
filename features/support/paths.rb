@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the home page/
       '/home'
 
+    when /the home page/
+      '/uploads'
+
     when /the sign up page/
       '/users/sign_up'
 

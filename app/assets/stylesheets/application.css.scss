@@ -28,6 +28,14 @@ body.common {
     color: red;
   }
 
+  th {
+    font-weight: bold;
+  }
+
+  th, td {
+    padding: 2px 10px;
+  }
+
   font: {
     family: 'PT Sans', sans-serif;
     size: 12px;
