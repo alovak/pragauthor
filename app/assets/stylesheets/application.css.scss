@@ -24,7 +24,7 @@ $blueprint-grid-margin: 10px;
 $sidebar-columns: 4;
 
 body.common {
-  .red {
+  .red, .error_notification {
     color: red;
   }
 

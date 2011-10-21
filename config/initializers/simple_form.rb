@@ -20,7 +20,7 @@ SimpleForm.setup do |config|
   # config.error_method = :first
 
   # Default tag used for error notification helper.
-  # config.error_notification_tag = :p
+  config.error_notification_tag = :h2
 
   # CSS class to add for error notification helper.
   # config.error_notification_class = :error_notification

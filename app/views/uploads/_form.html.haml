@@ -1,0 +1,26 @@
+#upload
+  .form
+    %h2 Upload report
+    %p.note
+      Currently we support the following vendors:
+    %ul.facebox
+      %li Amazon (KDP)
+      %li Barnes&Noble
+      %li Smashwords
+    %p.note
+      %strong
+        File should be provided as it was received from vendor
+    = simple_form_for(@upload || Upload.new) do |f|
+      = f.error_notification
+      = f.input :report
+      = f.submit "Upload"
+    .warning
+      %p
+        %strong
+          We couldn't identify the vendor of your report!
+      %p Please, check the file name. Examples:
+      %ul
+        %li SmashWords_salesReport-2011-06-08.xls
+        %li kdp-report-04-2011.xls for Amazon
+        %li BNsales_May2011.xls for Barnes&Noble
+

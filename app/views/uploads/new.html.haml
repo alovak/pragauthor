@@ -1,35 +1,3 @@
-#upload
-  .form
-    - if @upload.errors.any?
-      %h2.red Unfortunately, we can't process your file
-      %p.note It could happend due to ..
-      %p.note You can ...
-      %p.note
-        We can help you, just drop us an email at
-        %a{ href: "mailto:welcome@pragauthor.com"} welcome@pragauthor.com
-
-    %h2 Upload report
-    %p.note
-      Currently we support the following vendors:
-    %ul.facebox
-      %li Amazon (KDP)
-      %li Barnes&Noble
-      %li Smashwords
-    %p.note
-      %strong
-        File should be provided as it was received from vendor
-    = simple_form_for @upload do |f|
-      = f.input :report
-      = f.submit "Upload"
-    .warning
-      %p
-        %strong
-          We couldn't identify the vendor of your report!
-      %p Please, check the file name. Examples:
-      %ul
-        %li SmashWords_salesReport-2011-06-08.xls
-        %li kdp-report-04-2011.xls for Amazon
-        %li BNsales_May2011.xls for Barnes&Noble
-
+= render :partial => 'uploads/form'
 :javascript
   $(init_upload('#upload'));

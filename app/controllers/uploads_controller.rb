@@ -18,5 +18,4 @@ class UploadsController < ApplicationController
       render :new
     end
   end
-
 end
