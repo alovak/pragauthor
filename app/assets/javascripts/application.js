@@ -9,6 +9,7 @@
 //= require_tree .
 //= require facebox
 //= require jquery.notifyBar
+//= require jquery-ui-1.8.16.custom.min
 //
 
 jQuery(document).ready(function($) {
