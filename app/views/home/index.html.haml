@@ -43,3 +43,10 @@
                 = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
           .total
             total: #{book.sales.sum(:units)}
+          %h2 The Entire Period (Money)
+          .vendors
+            - report.vendors.each do |vendor|
+              .vendor
+                = "#{vendor.name}: #{vendor.money.format}"
+          .total
+            total: #{book.sales.sum(:units)}

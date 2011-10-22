@@ -38,6 +38,15 @@ shared_examples "a parser" do |expectations|
       end
     end
 
+    it "should create sales with money for the books" do
+      parser.process
+
+      expectations[:book_money].each do |title, money|
+        book = Book.find_by_title(title)
+        book.sales.where(:currency => money.currency.iso_code).sum(:amount).should == money.cents
+      end
+    end
+
     it "should not duplicate sales for the same file" do
       parser.process
       parser.process

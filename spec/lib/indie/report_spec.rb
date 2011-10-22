@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Indie::Report do
+  BN_BOOK_PRICE = 500
+  SMASH_BOOK_PRICE = 600
+
   let(:book) { Factory(:book) }
 
   def create_report
@@ -19,24 +22,42 @@ describe Indie::Report do
         month.units.should == 0
       end
     end
+
+    it "should return 0 USD as money for each vendor" do
+      report = create_report
+
+      report.vendors.each do |vendor|
+        vendor.money.should == Money.new(0, 'USD')
+      end
+    end
   end
 
 
   context "when book has sales" do
+
     before do
       bn = Vendor.find_by_name("Barnes&Noble")
       smash = Vendor.find_by_name("Smashwords")
 
-      { "01 Jun 2010" => { :units => 3,  :vendor => bn },
-        "01 Dec 2010" => { :units => 10, :vendor => bn }, 
-        "01 Jan 2011" => { :units => 5,  :vendor => bn }, 
-        "09 Dec 2010" => { :units => 12, :vendor => smash }, 
-        "05 Jan 2011" => { :units => 12, :vendor => smash }, 
-        "11 Feb 2011" => { :units => 35, :vendor => bn }, 
-        "01 Jun 2011" => { :units => 11, :vendor => bn }, 
-        "08 Jun 2011" => { :units => 4,  :vendor => smash }, 
+      { "01 Jun 2010" => { :units => 3,  :vendor => bn,    :amount => 3*BN_BOOK_PRICE,     :currency => 'USD' },
+        "01 Dec 2010" => { :units => 10, :vendor => bn,    :amount => 10*BN_BOOK_PRICE,    :currency => 'USD' }, 
+        "01 Jan 2011" => { :units => 5,  :vendor => bn,    :amount => 5*BN_BOOK_PRICE,     :currency => 'USD'  }, 
+        "09 Dec 2010" => { :units => 12, :vendor => smash, :amount => 12*SMASH_BOOK_PRICE, :currency => 'USD' }, 
+        "05 Jan 2011" => { :units => 12, :vendor => smash, :amount => 12*SMASH_BOOK_PRICE, :currency => 'USD' }, 
+        "11 Feb 2011" => { :units => 35, :vendor => bn,    :amount => 35*BN_BOOK_PRICE,    :currency => 'USD' }, 
+        "01 Jun 2011" => { :units => 11, :vendor => bn,    :amount => 11*BN_BOOK_PRICE,    :currency => 'USD' }, 
+        "08 Jun 2011" => { :units => 4,  :vendor => smash, :amount => 4*SMASH_BOOK_PRICE,  :currency => 'USD' }, 
       }.each do |date, data|
-        book.sales << Factory(:sale, :units => data[:units], :vendor => data[:vendor], :book => book, :date_of_sale => Chronic.parse(date))
+        book.sales << Factory(:sale, data.update(:book => book, :date_of_sale => Chronic.parse(date)))
+      end
+    end
+
+    it "should return money for each vendor" do
+      report = create_report
+
+      report.vendors.each do |vendor|
+        vendor.money.should == Money.new(64*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
+        vendor.money.should == Money.new(28*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
       end
     end
 

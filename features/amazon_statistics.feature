@@ -29,3 +29,12 @@ Feature:
     When I look statistics for "The Third Book"
     Then I should see "5" units were sold in "Apr" by "Amazon"
     Then I should see "1" units were sold in "Jul" by "Amazon"
+
+  Scenario: see how much money I earned 
+    Given I upload "kdp-report-04-2011.xls"
+    When I look statistics for "The First Book"
+    Then I should see "$66.58" were earned on "Amazon"
+    When I look statistics for "The Second Book"
+    Then I should see "$6.76" were earned on "Amazon"
+    When I look statistics for "The Third Book"
+    Then I should see "$1.75" were earned on "Amazon"

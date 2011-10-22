@@ -22,20 +22,25 @@ module Indie
     end
 
     class Vendor
-      attr_reader :units, :name
+      attr_accessor :units, :money
+      attr_reader   :model
 
-      def initialize(name, units)
-        @name, @units = name, units
+      delegate :name, :to => :model
+
+      def initialize(params = {})
+        @model, @units = params[:model], params[:units]
+        @money = Money.us_dollar(0)
       end
     end
 
     MONTHS = 6
 
     attr_accessor :book
-    attr_reader   :months
+    attr_reader   :months, :vendors
 
     def initialize(book)
       @book = book
+      @vendors = ::Vendor.all.collect {|vendor| Vendor.new(:model => vendor)}
     end
 
     def self.create(book)
@@ -47,6 +52,7 @@ module Indie
     def generate
       initialize_months
       calculate_months_units
+      calculate_total_vendors_money
     end
 
     def initialize_months
@@ -60,6 +66,24 @@ module Indie
     end
 
     private
+
+    def calculate_total_vendors_money
+      data = book.sales
+                 .group("vendor_id")
+                 .group("currency")
+                 .sum(:amount)
+
+      data.each do |group, amount|
+        next if amount == 0
+
+        vendor_id = group[0]
+        currency  = group[1]
+
+        if vendor = vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.money = Money.new(amount, currency)
+        end
+      end
+    end
 
     def month_table(date)
       @month_table[date]
@@ -75,7 +99,7 @@ module Indie
 
       data.each do |group, units|
         sale_date = Date.new(group[0], group[1])
-        month_table(sale_date).vendors << Vendor.new(::Vendor.find(group[2]).name, units)
+        month_table(sale_date).vendors << Vendor.new(:model => ::Vendor.find(group[2]), :units => units)
       end
     end
   end

@@ -6,7 +6,11 @@ module Indie
 
       TITLE             = 0
       UNIT_NET_SALES    = 4
+      CURRENCY          = 10
+      REVENUE           = 10
+
       BOOKS_OFFSET      = 4
+      CURRENCY_OFFSET   = 1
       SALE_DATE_OFFSET  = 2
 
       def process
@@ -23,13 +27,18 @@ module Indie
         return if sheet.row(header_row_id + BOOKS_OFFSET)[0] == 'There were no sales during this period.'
 
         sale_date = convert_date(sheet.row(header_row_id + SALE_DATE_OFFSET)[0])
+        currency = get_currency(sheet.row(header_row_id + CURRENCY_OFFSET)[CURRENCY])
 
         sheet.each(header_row_id + BOOKS_OFFSET) do |row|
           return if row[TITLE] =~ /Total Royalty for Sales/
 
           book = find_or_create_book(row[TITLE])
-          create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => sale_date)
+          create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => sale_date, :amount => row[REVENUE].to_money.cents, :currency => currency)
         end
+      end
+
+      def get_currency(currency)
+        currency.gsub(/\(|\)/, '')
       end
 
       def convert_date(date)

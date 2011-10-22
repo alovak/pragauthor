@@ -14,6 +14,11 @@ describe Indie::Parser::Amazon do
       'The First Book'  => 190, 
       'The Second Book' => 13,
       'The Third Book'  => 5
+    },
+    :book_money => { 
+      'The First Book'  => Money.us_dollar(66_58), 
+      'The Second Book' => Money.us_dollar(6_76),
+      'The Third Book'  => Money.us_dollar(1_75)
     }
   }
 
@@ -25,5 +30,9 @@ describe Indie::Parser::Amazon do
     parser.process
 
     Sale.where(:date_of_sale => DateTime.parse('1 Apr 2011')).all.should have(3).sales
+  end
+
+  it "should create sales with correct money" do
+
   end
 end
