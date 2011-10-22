@@ -32,3 +32,14 @@ Feature:
     Then I should see "2" units were sold in "Mar" by "Smashwords"
     When I look statistics for "The Fourth Book"
     Then I should see "3" units were sold in "May" by "Smashwords"
+
+  Scenario: see how much money I earned 
+    Given I upload "SmashWords_salesReport-2011-06-08.xls"
+    When I look statistics for "The First Book"
+    Then I should see "$8.59" were earned on "Smashwords"
+    When I look statistics for "The Second Book"
+    Then I should see "$1.20" were earned on "Smashwords"
+    When I look statistics for "The Third Book"
+    Then I should see "$3.35" were earned on "Smashwords"
+    When I look statistics for "The Fourth Book"
+    Then I should see "$2.06" were earned on "Smashwords"

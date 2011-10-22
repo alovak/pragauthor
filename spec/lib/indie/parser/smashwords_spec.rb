@@ -15,6 +15,12 @@ describe Indie::Parser::Smashwords do
       'The Second Book' => 4,
       'The Third Book' => 8,
       'The Fourth Book' => 3,
+    },
+    :book_money => { 
+      'The First Book'  => Money.us_dollar(8_59), 
+      'The Second Book' => Money.us_dollar(1_20),
+      'The Third Book'  => Money.us_dollar(3_35),
+      'The Fourth Book' => Money.us_dollar(2_06)
     }
   }
 
