@@ -12,6 +12,7 @@ gem 'spreadsheet'
 gem 'mysql2'
 gem 'exception_notification'
 gem 'chronic'
+gem 'money', :path => 'vendor/gems/money-3.7.1'
 
 group :assets do
   gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'

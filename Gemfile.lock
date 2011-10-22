@@ -8,6 +8,12 @@ GIT
       fssm (>= 0.2.7)
       sass (~> 3.1)
 
+PATH
+  remote: vendor/gems/money-3.7.1
+  specs:
+    money (3.7.1)
+      i18n (~> 0.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -288,6 +294,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   jquery-rails
+  money!
   mysql2
   rack
   rails (= 3.1.0)

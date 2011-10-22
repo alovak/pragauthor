@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929101309) do
+ActiveRecord::Schema.define(:version => 20111022200519) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20110929101309) do
     t.datetime "updated_at"
     t.integer  "vendor_id"
     t.datetime "date_of_sale"
+    t.integer  "amount"
+    t.string   "currency",     :limit => 3
   end
 
   create_table "uploads", :force => true do |t|
