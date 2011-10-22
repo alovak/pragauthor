@@ -33,7 +33,10 @@ module Indie
           return if row[TITLE] =~ /Total Royalty for Sales/
 
           book = find_or_create_book(row[TITLE])
-          create_sale(book, :units => row[UNIT_NET_SALES], :date_of_sale => sale_date, :amount => row[REVENUE].to_money.cents, :currency => currency)
+          create_sale(book, :units => row[UNIT_NET_SALES], 
+                            :date_of_sale => sale_date, 
+                            :amount => row[REVENUE].to_money.cents,
+                            :currency => currency)
         end
       end
 

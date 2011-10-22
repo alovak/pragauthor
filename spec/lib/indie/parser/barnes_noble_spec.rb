@@ -13,6 +13,11 @@ describe Indie::Parser::BarnesNoble do
     :book_units => { 
       'The First Book'  => 3, 
       'The Second Book' => 18 
+    },
+
+    :book_money => { 
+      'The First Book'  => Money.us_dollar(1_20), 
+      'The Second Book' => Money.us_dollar(7_20),
     }
   }
 
