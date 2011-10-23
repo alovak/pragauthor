@@ -108,14 +108,10 @@ describe Indie::Report do
       end
     end
 
-    it "should have 2 vendors in Jan" do
-      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
-        report = create_report
+    it "should have all vendors for report month" do
+      report = create_report
 
-        jan = report.months.find {|month| month.title == "Jan 2011"}
-
-        jan.should have(2).vendors
-      end
+      report.months.first.should have(Vendor.count).vendors
     end
 
     it "should have corresponding amount of units for vendors" do
@@ -124,18 +120,18 @@ describe Indie::Report do
 
         jan = report.months.find {|month| month.title == "Jan 2011"}
 
-        jan_vendor_units = { "Barnes&Noble" => 5, "Smashwords" => 12 }
+        jan_vendor_units = { "Barnes&Noble" => 5, "Smashwords" => 12, "Amazon" => 0 }
 
         jan.vendors.each do |vendor|
-          jan_vendor_units[vendor.name].should == vendor.units
+          vendor.units.should == jan_vendor_units[vendor.name]
         end
 
         jun = report.months.find {|month| month.title == "Jun 2011"}
 
-        jun_vendor_units = { "Barnes&Noble" => 11, "Smashwords" => 4 }
+        jun_vendor_units = { "Barnes&Noble" => 11, "Smashwords" => 4, "Amazon" => 0 }
 
         jun.vendors.each do |vendor|
-          jun_vendor_units[vendor.name].should == vendor.units
+          vendor.units.should == jun_vendor_units[vendor.name]
         end
       end
     end

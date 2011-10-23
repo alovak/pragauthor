@@ -5,7 +5,7 @@ module Indie
 
       def initialize(date, units)
         @date, @units = date, units
-        @vendors = []
+        @vendors = ::Vendor.all.collect {|vendor| Vendor.new(:model => vendor)}
       end
 
       def title
@@ -64,16 +64,6 @@ module Indie
       calculate_last_n_vendors_money
     end
 
-    def initialize_months
-      @month_table = {}
-
-      @months = (MONTHS-1).downto(0).collect do |m| 
-        month = Month.new(Date.new(m.month.ago.year, m.month.ago.month), 0)
-        @month_table[month.date] = month
-      end
-
-    end
-
     def total_units
       vendors.inject(0) {|sum, vendor| sum + vendor.units }
     end
@@ -91,6 +81,15 @@ module Indie
     end
 
     private
+    def initialize_months
+      @month_table = {}
+
+      @months = (MONTHS-1).downto(0).collect do |m| 
+        month = Month.new(Date.new(m.month.ago.year, m.month.ago.month), 0)
+        @month_table[month.date] = month
+      end
+    end
+
 
     def calculate_total_vendors_units
       data = book.sales
@@ -172,7 +171,11 @@ module Indie
 
       data.each do |group, units|
         sale_date = Date.new(group[0], group[1])
-        month_table(sale_date).vendors << Vendor.new(:model => ::Vendor.find(group[2]), :units => units)
+        vendor_id = group[2]
+
+        if vendor = month_table(sale_date).vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.units = units
+        end
       end
     end
   end
