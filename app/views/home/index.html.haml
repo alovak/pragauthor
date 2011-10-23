@@ -15,17 +15,17 @@
             %h1= book.title
         - report = Indie::Report.create(book)
         .months
-          %h2 The Last Six Month
+          %h2 Last Six Month
           .barchart
             = barchart(150, report.months)
           .month.last_six
-            %h2 The Entire Period
+            %h2 Last Six Months
             .vendors
-              - vendors.each do |vendor|
+              - report.vendors.each do |vendor|
                 .vendor
-                  = "#{vendor.name}: #{book.sales.for_vendor(vendor.name).sum(:units)}"
+                  = "#{vendor.name}: #{vendor.last_n_units} (#{vendor.last_n_money.format})"
             .total
-              total: #{book.sales.sum(:units)}
+              total: #{report.total_last_n_units} (#{report.total_last_n_money.format})
           - report.months.each do |month|
             .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none;" }
               %h2= month.name

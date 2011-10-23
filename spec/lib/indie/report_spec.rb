@@ -82,6 +82,31 @@ describe Indie::Report do
       report.total_money.should == Money.new(64*BN_BOOK_PRICE, 'USD') + Money.new(28*SMASH_BOOK_PRICE, 'USD')
     end
 
+    it "should return units for each vendor for the last 6 month" do
+      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+        report = create_report
+
+        report.vendors.each do |vendor|
+          vendor.last_n_units.should == 51 if vendor.name == "Barnes&Noble"
+          vendor.last_n_units.should == 16 if vendor.name == "Smashwords"
+        end
+
+        report.total_last_n_units.should == 51+16
+      end
+    end
+
+    it "should return money for each vendor for the last 6 month" do
+      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+        report = create_report
+
+        report.vendors.each do |vendor|
+          vendor.last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
+          vendor.last_n_money.should == Money.new(16*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
+        end
+
+        report.total_last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD') + Money.new(16*SMASH_BOOK_PRICE, 'USD')
+      end
+    end
 
     it "should have 2 vendors in Jan" do
       Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do

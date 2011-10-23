@@ -22,15 +22,19 @@ module Indie
     end
 
     class Vendor
-      attr_accessor :units, :money
+      attr_accessor :units, :money, :last_n_units, :last_n_money
       attr_reader   :model
 
       delegate :name, :to => :model
 
       def initialize(params = {})
         @model = params[:model] 
+
         @units = params[:units] || 0
+        @last_n_units = params[:last_n_units] || 0
+
         @money = params[:money] || Money.us_dollar(0)
+        @last_n_money = params[:last_n_money] || Money.us_dollar(0)
       end
     end
 
@@ -55,6 +59,9 @@ module Indie
       calculate_months_units
       calculate_total_vendors_money
       calculate_total_vendors_units
+
+      calculate_last_n_vendors_units
+      calculate_last_n_vendors_money
     end
 
     def initialize_months
@@ -70,9 +77,17 @@ module Indie
     def total_units
       vendors.inject(0) {|sum, vendor| sum + vendor.units }
     end
+
+    def total_last_n_units
+      vendors.inject(0) {|sum, vendor| sum + vendor.last_n_units }
+    end
     
     def total_money
       vendors.inject(Money.us_dollar(0)) {|sum, vendor| sum + vendor.money }
+    end
+
+    def total_last_n_money
+      vendors.inject(Money.us_dollar(0)) {|sum, vendor| sum + vendor.last_n_money }
     end
 
     private
@@ -91,6 +106,21 @@ module Indie
       end
     end
 
+    def calculate_last_n_vendors_units
+      data = book.sales
+                 .where("date_of_sale > ?", MONTHS.month.ago.end_of_month)
+                 .group("vendor_id")
+                 .sum(:units)
+
+      data.each do |vendor_id, units|
+        next if units == 0
+
+        if vendor = vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.last_n_units = units
+        end
+      end
+    end
+
     def calculate_total_vendors_money
       data = book.sales
                  .group("vendor_id")
@@ -105,6 +135,25 @@ module Indie
 
         if vendor = vendors.find {|vendor| vendor.model.id == vendor_id }
           vendor.money = Money.new(amount, currency)
+        end
+      end
+    end
+
+    def calculate_last_n_vendors_money
+      data = book.sales
+                 .where("date_of_sale > ?", MONTHS.month.ago.end_of_month)
+                 .group("vendor_id")
+                 .group("currency")
+                 .sum(:amount)
+
+      data.each do |group, amount|
+        next if amount == 0
+
+        vendor_id = group[0]
+        currency  = group[1]
+
+        if vendor = vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.last_n_money = Money.new(amount, currency)
         end
       end
     end
