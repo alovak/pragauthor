@@ -42,4 +42,4 @@
               .vendor
                 = "#{vendor.name}: #{vendor.units} (#{vendor.money.format})"
           .total
-            total: #{book.sales.sum(:units)}
+            total: #{report.total_units} (#{report.total_money.format})

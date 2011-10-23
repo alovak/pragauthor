@@ -67,6 +67,8 @@ describe Indie::Report do
         vendor.units.should == 64 if vendor.name == "Barnes&Noble"
         vendor.units.should == 28 if vendor.name == "Smashwords"
       end
+
+      report.total_units.should == 92
     end
 
     it "should return money for each vendor" do
@@ -76,6 +78,8 @@ describe Indie::Report do
         vendor.money.should == Money.new(64*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
         vendor.money.should == Money.new(28*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
       end
+
+      report.total_money.should == Money.new(64*BN_BOOK_PRICE, 'USD') + Money.new(28*SMASH_BOOK_PRICE, 'USD')
     end
 
 

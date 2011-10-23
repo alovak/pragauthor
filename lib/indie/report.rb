@@ -67,6 +67,14 @@ module Indie
 
     end
 
+    def total_units
+      vendors.inject(0) {|sum, vendor| sum + vendor.units }
+    end
+    
+    def total_money
+      vendors.inject(Money.us_dollar(0)) {|sum, vendor| sum + vendor.money }
+    end
+
     private
 
     def calculate_total_vendors_units
