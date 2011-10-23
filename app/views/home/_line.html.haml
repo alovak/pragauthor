@@ -1,5 +1,7 @@
 .line
-  .label= record[:label]
-  .column{ class: "#{record[:label]}", style: "width: #{record[:width]}px;" }
-  .value= record[:value] 
-
+  .column{ style: "height: #{record[:spacer]}px;" }
+  .column.value= record[:value] 
+  .column.blue{ style: "height: 1px;" }
+  .column.data{ class: "#{record[:label]}", style: "height: #{record[:height]}px;" }
+  .column.blue{ style: "height: 1px;" }
+  .column.label= record[:label]

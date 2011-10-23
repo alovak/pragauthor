@@ -58,7 +58,7 @@ module Indie
     def initialize_months
       @month_table = {}
 
-      @months = (0..MONTHS-1).collect do |m| 
+      @months = (MONTHS-1).downto(0).collect do |m| 
         month = Month.new(Date.new(m.month.ago.year, m.month.ago.month), 0)
         @month_table[month.date] = month
       end

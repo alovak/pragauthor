@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
   $.facebox.settings.loadingImage = '/assets/facebox/loading.gif'
   $('a[rel*=facebox]').facebox()
 
-  $("div.column").mouseenter(function(){
+  $("div.data").mouseenter(function(){
     $(this).addClass('selected')
     month = $(this).siblings('.label').text();
     $(this).parents('.barchart').siblings(".month" + "." + month).show();
