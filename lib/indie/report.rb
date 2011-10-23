@@ -28,8 +28,9 @@ module Indie
       delegate :name, :to => :model
 
       def initialize(params = {})
-        @model, @units = params[:model], params[:units]
-        @money = Money.us_dollar(0)
+        @model = params[:model] 
+        @units = params[:units] || 0
+        @money = params[:money] || Money.us_dollar(0)
       end
     end
 
@@ -53,6 +54,7 @@ module Indie
       initialize_months
       calculate_months_units
       calculate_total_vendors_money
+      calculate_total_vendors_units
     end
 
     def initialize_months
@@ -66,6 +68,20 @@ module Indie
     end
 
     private
+
+    def calculate_total_vendors_units
+      data = book.sales
+                 .group("vendor_id")
+                 .sum(:units)
+
+      data.each do |vendor_id, units|
+        next if units == 0
+
+        if vendor = vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.units = units
+        end
+      end
+    end
 
     def calculate_total_vendors_money
       data = book.sales

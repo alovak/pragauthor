@@ -24,7 +24,7 @@ end
 
 Then /^I should see "([^"]*)" were earned on "([^"]*)"$/ do |money, vendor|
   within(:css, %Q{div[@title="#{@book_name}"]}) do
-    regexp_str = Regexp.quote("#{vendor}: #{money}")
+    regexp_str = "#{Regexp.quote(vendor)}.*#{Regexp.quote(money)}"
     steps %Q{
       Then I should see /#{regexp_str}/
     }

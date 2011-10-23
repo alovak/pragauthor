@@ -30,6 +30,14 @@ describe Indie::Report do
         vendor.money.should == Money.new(0, 'USD')
       end
     end
+
+    it "should return 0 units for each vendor" do
+      report = create_report
+
+      report.vendors.each do |vendor|
+        vendor.units.should == 0
+      end
+    end
   end
 
 
@@ -49,6 +57,15 @@ describe Indie::Report do
         "08 Jun 2011" => { :units => 4,  :vendor => smash, :amount => 4*SMASH_BOOK_PRICE,  :currency => 'USD' }, 
       }.each do |date, data|
         book.sales << Factory(:sale, data.update(:book => book, :date_of_sale => Chronic.parse(date)))
+      end
+    end
+
+    it "should return total units for each vendor" do
+      report = create_report
+
+      report.vendors.each do |vendor|
+        vendor.units.should == 64 if vendor.name == "Barnes&Noble"
+        vendor.units.should == 28 if vendor.name == "Smashwords"
       end
     end
 
