@@ -56,7 +56,9 @@ module Indie
 
     def generate
       initialize_months
+
       calculate_months_units
+
       calculate_total_vendors_money
       calculate_total_vendors_units
 
