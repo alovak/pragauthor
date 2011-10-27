@@ -31,6 +31,16 @@ describe Indie::Report do
       end
     end
 
+    it "should return 0 USD as money for each vendor of each month" do
+      report = create_report
+
+      report.months.each do |month|
+        month.vendors.each do |vendor|
+          vendor.money.should == Money.new(0, 'USD')
+        end
+      end
+    end
+
     it "should return 0 units for each vendor" do
       report = create_report
 
@@ -60,100 +70,118 @@ describe Indie::Report do
       end
     end
 
-    it "should return total units for each vendor" do
-      report = create_report
-
-      report.vendors.each do |vendor|
-        vendor.units.should == 64 if vendor.name == "Barnes&Noble"
-        vendor.units.should == 28 if vendor.name == "Smashwords"
-      end
-
-      report.total_units.should == 92
-    end
-
-    it "should return money for each vendor" do
-      report = create_report
-
-      report.vendors.each do |vendor|
-        vendor.money.should == Money.new(64*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
-        vendor.money.should == Money.new(28*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
-      end
-
-      report.total_money.should == Money.new(64*BN_BOOK_PRICE, 'USD') + Money.new(28*SMASH_BOOK_PRICE, 'USD')
-    end
-
-    it "should return units for each vendor for the last 6 month" do
-      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+    describe "totals" do
+      it "should return total units for each vendor" do
         report = create_report
 
         report.vendors.each do |vendor|
-          vendor.last_n_units.should == 51 if vendor.name == "Barnes&Noble"
-          vendor.last_n_units.should == 16 if vendor.name == "Smashwords"
+          vendor.units.should == 64 if vendor.name == "Barnes&Noble"
+          vendor.units.should == 28 if vendor.name == "Smashwords"
         end
 
-        report.total_last_n_units.should == 51+16
+        report.total_units.should == 92
       end
-    end
 
-    it "should return money for each vendor for the last 6 month" do
-      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+      it "should return money for each vendor" do
         report = create_report
 
         report.vendors.each do |vendor|
-          vendor.last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
-          vendor.last_n_money.should == Money.new(16*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
+          vendor.money.should == Money.new(64*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
+          vendor.money.should == Money.new(28*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
         end
 
-        report.total_last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD') + Money.new(16*SMASH_BOOK_PRICE, 'USD')
+        report.total_money.should == Money.new(64*BN_BOOK_PRICE, 'USD') + Money.new(28*SMASH_BOOK_PRICE, 'USD')
       end
     end
 
-    it "should have all vendors for report month" do
-      report = create_report
+    describe "last 6 month" do
+      it "should return units for each vendor for the last 6 month" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          report = create_report
 
-      report.months.first.should have(Vendor.count).vendors
+          report.vendors.each do |vendor|
+            vendor.last_n_units.should == 51 if vendor.name == "Barnes&Noble"
+            vendor.last_n_units.should == 16 if vendor.name == "Smashwords"
+          end
+
+          report.total_last_n_units.should == 51+16
+        end
+      end
+
+      it "should return money for each vendor for the last 6 month" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          report = create_report
+
+          report.vendors.each do |vendor|
+            vendor.last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
+            vendor.last_n_money.should == Money.new(16*SMASH_BOOK_PRICE, 'USD') if vendor.name == "Smashwords"
+          end
+
+          report.total_last_n_money.should == Money.new(51*BN_BOOK_PRICE, 'USD') + Money.new(16*SMASH_BOOK_PRICE, 'USD')
+        end
+      end
+
     end
 
-    it "should have corresponding amount of units for vendors" do
-      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+    describe "month" do
+      it "should have all vendors for report month" do
         report = create_report
 
-        jan = report.months.find {|month| month.title == "Jan 2011"}
+        report.months.first.should have(Vendor.count).vendors
+      end
 
-        jan_vendor_units = { "Barnes&Noble" => 5, "Smashwords" => 12, "Amazon" => 0 }
+      it "should have corresponding money for vendors" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          report = create_report
 
-        jan.vendors.each do |vendor|
-          vendor.units.should == jan_vendor_units[vendor.name]
+          jun = report.months.find {|month| month.name == "Jun"}
+
+          jun.vendors.each do |vendor|
+            vendor.money.should == Money.new(11*BN_BOOK_PRICE, 'USD')    if vendor.name == "Barnes&Noble"
+            vendor.money.should == Money.new(4*SMASH_BOOK_PRICE, 'USD')  if vendor.name == "Smashwords"
+          end
         end
+      end
+      it "should have corresponding amount of units for vendors" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          report = create_report
 
-        jun = report.months.find {|month| month.title == "Jun 2011"}
+          jan = report.months.find {|month| month.title == "Jan 2011"}
 
-        jun_vendor_units = { "Barnes&Noble" => 11, "Smashwords" => 4, "Amazon" => 0 }
+          jan_vendor_units = { "Barnes&Noble" => 5, "Smashwords" => 12, "Amazon" => 0 }
 
-        jun.vendors.each do |vendor|
-          vendor.units.should == jun_vendor_units[vendor.name]
+          jan.vendors.each do |vendor|
+            vendor.units.should == jan_vendor_units[vendor.name]
+          end
+
+          jun = report.months.find {|month| month.title == "Jun 2011"}
+
+          jun_vendor_units = { "Barnes&Noble" => 11, "Smashwords" => 4, "Amazon" => 0 }
+
+          jun.vendors.each do |vendor|
+            vendor.units.should == jun_vendor_units[vendor.name]
+          end
+        end
+      end
+
+      it "should have corresponding units count" do
+        Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
+          report = create_report
+
+          expected_sales = {
+            Date.new(2011, 1) => 17,
+            Date.new(2011, 2) => 35,
+            Date.new(2011, 3) => 0,
+            Date.new(2011, 4) => 0,
+            Date.new(2011, 5) => 0,
+            Date.new(2011, 6) => 15,
+          }
+
+          report.months.each do |month|
+            month.units.should == expected_sales[month.date]
+          end
         end
       end
     end
-
-    it "should have last 6 month with corresponding units count" do
-      Timecop.freeze(DateTime.parse("Fri, 08 Jun 2011")) do
-        report = create_report
-
-        expected_sales = {
-          Date.new(2011, 1) => 17,
-          Date.new(2011, 2) => 35,
-          Date.new(2011, 3) => 0,
-          Date.new(2011, 4) => 0,
-          Date.new(2011, 5) => 0,
-          Date.new(2011, 6) => 15,
-        }
-
-        report.months.each do |month|
-          month.units.should == expected_sales[month.date]
-        end
-      end
-    end
-
   end
 end

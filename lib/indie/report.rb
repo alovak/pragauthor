@@ -58,6 +58,7 @@ module Indie
       initialize_months
 
       calculate_months_units
+      calculate_months_money
 
       calculate_total_vendors_money
       calculate_total_vendors_units
@@ -161,6 +162,28 @@ module Indie
 
     def month_table(date)
       @month_table[date]
+    end
+
+    def calculate_months_money
+      data =  book.sales
+                  .where("date_of_sale > ?", MONTHS.month.ago.end_of_month)
+                  .group("year(date_of_sale)")
+                  .group("month(date_of_sale)")
+                  .group("vendor_id")
+                  .group("currency")
+                  .sum(:amount)
+
+      data.each do |group, amount|
+        next if amount == 0
+
+        sale_date = Date.new(group[0], group[1])
+        vendor_id = group[2]
+        currency  = group[3]
+
+        if vendor = month_table(sale_date).vendors.find {|vendor| vendor.model.id == vendor_id }
+          vendor.money = Money.new(amount, currency)
+        end
+      end
     end
 
     def calculate_months_units

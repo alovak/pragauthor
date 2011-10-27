@@ -32,7 +32,7 @@
               .vendors
                 - month.vendors.each do |vendor|
                   .vendor
-                    #{vendor.name}: #{vendor.units} 
+                    #{vendor.name}: #{vendor.units} (#{vendor.money.format})
               .total
                 total: #{month.units}
         .totals

@@ -31,6 +31,15 @@ Then /^I should see "([^"]*)" were earned on "([^"]*)"$/ do |money, vendor|
   end
 end
 
+Then /^I should see "([^"]*)" were earned in "([^"]*)" by "([^"]*)"$/ do |money, month, vendor|
+  within(:css, %Q{div[@title='#{@book_name}'] .month[@title*='#{month}']}) do
+    regexp_str = "#{Regexp.quote(vendor)}.*#{Regexp.quote(money)}"
+    steps %Q{
+      Then I should see /#{regexp_str}/
+    }
+  end
+end
+
 Then /^I should see "([^"]*)" units were sold in "([^"]*)"$/ do |number, month|
   within(:css, %Q{div[@title="#{@book_name}"] .#{month} .total}) do
     steps %Q{
