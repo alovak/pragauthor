@@ -19,6 +19,10 @@ module Indie
       def units
         vendors.inject(0) {|sum, vendor| sum + vendor.units  }
       end
+
+      def money
+        vendors.inject(Money.us_dollar(0)) {|sum, vendor| sum + vendor.money }
+      end
     end
 
     class Vendor
