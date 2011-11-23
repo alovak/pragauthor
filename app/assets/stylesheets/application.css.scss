@@ -45,12 +45,16 @@ body.common {
     color: #1d648d;
   }
 
+  a:hover{
+    font-weight: bold;
+  }
+
   color: #726e6b;
 
   ul {
-    margin-left: 20px;
     margin-bottom: 10px;
   }
+
   li {
     list-style: square;
   }
@@ -412,6 +416,33 @@ body#home {
   #upload {
     display: none;
   }
+
+  #book_list {
+    position: absolute;
+    z-index: 10000;
+    overflow: visible;
+    top: 65px;
+
+    .navigation {
+      position: absolute;
+      top: 5px;
+      left: -180px;
+      width: 160px;
+
+      ul {
+        maring-left: 0;
+        padding: 0;
+
+        li {
+          padding: 0 0 10px 0;
+          margin: 0;
+          list-style: none;
+        }
+      }
+    }
+  }
+
+
 }
 
 body#devise {

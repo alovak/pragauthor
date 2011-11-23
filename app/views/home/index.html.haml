@@ -6,10 +6,11 @@
 - if @books.blank?
   = render :partial => 'blank'
 - else
+  = render :partial => 'book_list'
   - vendors = Vendor.all
   .books
     - @books.each do |book|
-      .book{ title: %Q{#{book.title}} }
+      .book{ title: %Q{#{book.title}}, id: "book_#{book.id}" }
         .info
           .title
             %h1= book.title
