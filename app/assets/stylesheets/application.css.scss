@@ -249,7 +249,8 @@ body.application {
       left: 0;
 
       li {
-        padding: 5px 0 5px 10px;
+        padding: 8px 0 8px 10px;
+        @include border-left-radius;
       }
 
       li.active { background: #fff; }
