@@ -32,6 +32,21 @@ jQuery(document).ready(function($) {
     init_upload('#facebox')
   })
 
+  $(".menu a").on("click", function(e) {
+    // hide all items
+    $(".menu li").removeClass('active')
+
+    $(".menu li a").each(function() {
+      item = $(this).attr("href")
+      $('#' + item).hide();
+    });
+
+    item = $(this).attr("href")
+    $('#' + item).show();
+    $(this).parents('li').addClass('active');
+    e.preventDefault();
+  })
+
 })
 
 this.init_upload = function(scope) {

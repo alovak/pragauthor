@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rack'
-gem 'rails', '3.1.0' 
+gem 'rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'rspec-rails'
@@ -15,8 +15,8 @@ gem 'chronic'
 gem 'money', :path => 'vendor/gems/money-3.7.1'
 
 group :assets do
-  gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'compass', "~> 0.12.alpha"
+  gem 'sass-rails', " ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end

@@ -23,6 +23,12 @@ $blueprint-grid-margin: 10px;
 
 $sidebar-columns: 4;
 
+  
+html {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+}
+
 body.common {
   .red, .error_notification {
     color: red;
@@ -63,7 +69,7 @@ body.common {
   @include blueprint-debug;
   background: #f9f5e9;
 
-  h2 {
+  h3 {
     font-size: 14px;
     font-weight: bold;
     color: #826d5d;
@@ -74,16 +80,16 @@ body.common {
     }
   }
 
-  h3 {
-    font-size: 12px;
-    font-weight: bold;
-    color: #826d5d;
+  // h3 {
+    // font-size: 12px;
+    // font-weight: bold;
+    // color: #826d5d;
 
-    padding: {
-      top:20px;
-      bottom: 15px;
-    }
-  }
+    // padding: {
+      // top:20px;
+      // bottom: 15px;
+    // }
+  // }
 
   h1 {
     font-size: 18px;
@@ -94,7 +100,10 @@ body.common {
       top:25px;
       bottom: 10px;
     }
+
+    @include prepend(1);
   }
+
   .simple_form div.input {
     margin-bottom: 10px;
   }
@@ -230,6 +239,19 @@ body.application {
 
   #sidebar {
     @include column(6); 
+
+    ul.menu {
+      position: relative;
+      width: 180px;
+
+      left: 0;
+
+      li {
+        padding: 5px 0 5px 10px;
+      }
+
+      li.active { background: #fff; }
+    }
   }
 
   #content {
@@ -286,17 +308,17 @@ body#home, body#uploads {
 
     position: relative;
 
-    h1 {
-      @include border-radius;
-      border:3px solid #e5ddc6;
-      position: absolute;
-      top: 160px;
-      left: 200px;
-      padding: 20px;
-      background: #fff;
-      width: 290px;
-      text-align: center;
-    }
+    // h1 {
+      // @include border-radius;
+      // border:3px solid #e5ddc6;
+      // position: absolute;
+      // top: 160px;
+      // left: 200px;
+      // padding: 20px;
+      // background: #fff;
+      // width: 290px;
+      // text-align: center;
+    // }
   }
 
   a.upload {
@@ -319,71 +341,74 @@ body#home, body#uploads {
     width: 450px;
   }
 
-  .books {
-    @include prepend(1);
+  #books {
+    display: none;
+    .books {
+      @include prepend(1);
 
-    .book {
-      @include column(25, true);
-      font-size: 11px;
+      .book {
+        @include column(25, true);
+        font-size: 11px;
 
-      h2 {
-        padding: {
-          bottom: 10px;
-          top: 20px;
-        }
-      }
-
-      .title {
-        @include prepend(1);
-        @include column(24, true);
-      }
-
-      .total {
-        margin-top: 10px;
-        padding-top: 10px;
-        width: 100px;
-      }
-
-      .months {
-        h2 { 
-          @include prepend(1);
-        }
-
-        @include column(18);
-
-        background: #f9f5ea;
-        padding-bottom: 20px;
-        position: relative;
-
-        .month {
-          h2 { padding-left: 0; }
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 180px;
-          height: 100%;
-          background: #e5ddc6;
-          padding-left: 20px;
-
-          .total {
-            border-top: 1px dotted #a8a291;
+        h2 {
+          padding: {
+            bottom: 10px;
+            top: 20px;
           }
         }
 
-
-        .month.last_six { background: #e5ddc6; h2 { color: #826d5d; } }
-        .month { background: #d4e9ec; h2 { color: #118793; } }
-      }
-
-      .totals {
-        @include prepend(1);
-        @include column(6, true);
+        .title {
+          @include prepend(1);
+          @include column(24, true);
+        }
 
         .total {
-          border-top: 1px dotted #e3e2e1;
+          margin-top: 10px;
+          padding-top: 10px;
+          width: 100px;
         }
-      }
 
+        .months {
+          h2 { 
+            @include prepend(1);
+          }
+
+          @include column(18);
+
+          background: #f9f5ea;
+          padding-bottom: 20px;
+          position: relative;
+
+          .month {
+            h2 { padding-left: 0; }
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 100%;
+            background: #e5ddc6;
+            padding-left: 20px;
+
+            .total {
+              border-top: 1px dotted #a8a291;
+            }
+          }
+
+
+          .month.last_six { background: #e5ddc6; h2 { color: #826d5d; } }
+          .month { background: #d4e9ec; h2 { color: #118793; } }
+        }
+
+        .totals {
+          @include prepend(1);
+          @include column(6, true);
+
+          .total {
+            border-top: 1px dotted #e3e2e1;
+          }
+        }
+
+      }
     }
   }
 
@@ -413,8 +438,28 @@ body#home, body#uploads {
 }
 
 body#home {
+
+  #dashboard {
+    @include prepend(1);
+    @include append(1);
+
+    .totals {
+      @include prepend(1);
+    }
+  }
+
   #upload {
     display: none;
+  }
+
+  .royalties {
+    padding-right: 20px;
+  }
+
+  .number {
+    color: #000;
+    font-size: 140%;
+    font-weight: bold;
   }
 
   #book_list {
@@ -465,6 +510,7 @@ body#devise {
     @include append(9);
   }
 
+
   #box {
     background: #fff;
     @include border-radius;
@@ -479,6 +525,7 @@ body#devise {
         bottom: 20px;
       }
     }
+
   }
 }
 
