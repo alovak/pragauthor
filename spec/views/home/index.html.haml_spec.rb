@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "home/index.html.haml" do
   before { assign(:books, []) }
+  before { assign(:sales, Sale) }
 
   it "should contain form with file field to upload report" do
     render

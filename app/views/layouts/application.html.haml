@@ -24,18 +24,24 @@
             %span.sign_out= link_to('Sign out', destroy_user_session_path)
       #sidebar
         &nbsp;
+        %ul.menu
+          %li.active
+            %a{ href: "dashboard" }
+              Dashboard
+          %li
+            %a{ href: "books" }
+              Books
       #content
-        #box
-          - flash.each do |name, msg|
-            :javascript
-              $(function () {
-                $.notifyBar({
-                  cls: ("#{name}" == 'notice' ? 'success' : 'error'),
-                  html: "#{msg}",
-                  delay: 2000,
-                  animationSpeed: "normal"
-                });
+        - flash.each do |name, msg|
+          :javascript
+            $(function () {
+              $.notifyBar({
+                cls: ("#{name}" == 'notice' ? 'success' : 'error'),
+                html: "#{msg}",
+                delay: 2000,
+                animationSpeed: "normal"
               });
-          = yield
+            });
+        = yield
       #footer
         © Pragmatic Author, 2011
