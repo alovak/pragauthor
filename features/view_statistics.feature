@@ -17,12 +17,14 @@ Feature:
   # or just leave as Amazon?
 
   Background:
+    Given today is "08 Jul 2011"
     Given I sign in as "Inez"
 
-  Scenario: show welcome message and instructions how to use application
-  Scenario: upload amazon file and view statistics
-  Scenario: upload Barnes & Noble file and view statistics
-  Scenario: upload Smashwords file and view statistics
+  Scenario: view totals for uploaded files
+    Given I upload "kdp-report-04-2011.xls"
+    Then I should see "208"
+    And I should see "75.09"
+
 
 
 

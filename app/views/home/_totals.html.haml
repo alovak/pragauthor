@@ -1,0 +1,8 @@
+.totals
+  - sales_report = Indie::SalesReport.new(current_user.sales)
+  %span.units
+    units sold
+    %span.number= sales_report.units
+  %span.royalties
+    royalties
+    %span.number= sales_report.money.collect {|m| m.format}.join(", ")
