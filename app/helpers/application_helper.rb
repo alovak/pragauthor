@@ -25,4 +25,42 @@ module ApplicationHelper
     end
   end
 
+  def raw_data(sales)
+    data = Hash.new do |hash, key|
+      hash[key] = []
+    end
+
+    report = Indie::SalesReport.new(sales)
+    res_books = []
+
+    report.books_top(5).each_with_index do |book, index|
+      stat = Indie::Report.create(book)
+
+      if stat.months
+        res_books << book
+        stat.months.each do |month|
+          data[month.name][index] = month.units
+        end
+      end
+    end
+
+    res = []
+
+    data.each do |key, val|
+      sum = val.inject(0, :+)
+      average = (sum / val.size)
+      val << sum << average  
+      res << ([key] + val).to_a.flatten.to_json
+    end
+
+    "var rowData = 
+      [ 
+        [ 'Month', 
+          #{ res_books.uniq.collect {|b| %Q{"#{b.title}"}}.join(",\n") },
+          'Totals',
+          'Average'],
+        #{res.join(",\n")},
+      ]
+    "
+  end
 end

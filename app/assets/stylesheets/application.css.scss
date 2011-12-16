@@ -69,7 +69,10 @@ body.common {
   @include blueprint-debug;
   background: #f9f5e9;
 
-  h2 { font-size: 16px; }
+  h2 { 
+    font-size: 16px;
+    @include prepend(1);
+  }
   h3 { font-size: 14px; }
 
   h2, h3 {
@@ -353,13 +356,14 @@ body#home, body#uploads {
 
     .books {
 
-      padding-bottom: 20px;
 
       .book {
         @include column(25, true);
         font-size: 11px;
+        padding-bottom: 20px;
 
         h2 {
+          @include prepend(0);
           padding: {
             bottom: 10px;
             top: 0px;
