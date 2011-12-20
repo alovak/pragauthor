@@ -55,6 +55,18 @@ describe Indie::Chart do
           }
         end
       end
+
+      it "should contain average and total if trend option set" do
+        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
+          chart = Indie::Chart::Sales.new(Sale, :show_trend => true, :top => 2, :period => 3)
+
+          chart.data[:cols].should include({ label: 'Average', type: 'number' })
+          chart.data[:cols].should include({ label: 'Totals', type: 'number' })
+
+          chart.data[:rows].first[:c][-1][:v].should == 25
+          chart.data[:rows].first[:c][-2][:v].should == 12
+        end
+      end
     end
   end
 end

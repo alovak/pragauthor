@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  helper :chart
 
   def index
     @books = current_user.books

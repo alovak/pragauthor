@@ -5,23 +5,38 @@ module Indie
         @sales = sales
         @top_books = options[:top] || 5
         @period = options[:period] || 6
+        @show_trend = options[:show_trend]
       end
 
       def data
-        { cols: [ { label: 'Month', type: 'string' } ] + build_cols,
-          rows: build_rows
+        @data ||= { 
+          cols: cols,
+          rows: rows
         }
+      end
+
+      def show_trend?
+        @show_trend == true
       end
 
       private
 
-      def build_cols
+      def cols
         books = Book.order(:title).find(top_book_ids)
 
-        books.collect { |b| {label: b.title, type: 'number'} }
+        [].tap do |cols|
+          cols << { label: 'Month', type: 'string' }
+
+          books.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
+
+          if show_trend?
+            cols << { label: 'Average', type: 'number' }
+            cols << { label: 'Totals',  type: 'number' }
+          end
+        end
       end
 
-      def build_rows
+      def rows
         books = Book.order(:title).find(top_book_ids)
 
         [].tap do |rows|
@@ -30,10 +45,20 @@ module Indie
 
             row[:c] << { v: month.strftime('%b') }
 
+            sum = 0
+
             books.each do |book|
               raw_key = [month.year, month.month, book.id]
               units = raw_data[raw_key] || 0
+
+              sum = sum + units
+
               row[:c] << { v: units }
+            end
+
+            if show_trend?
+              row[:c] << { v: sum/books.count }
+              row[:c] << { v: sum }
             end
 
             rows << row
@@ -42,7 +67,7 @@ module Indie
       end
 
       def months
-        @months ||= (@period-1).downto(0).collect { |m| Date.new(m.month.ago.year, m.month.ago.month) }
+        (@period-1).downto(0).collect { |m| Date.new(m.month.ago.year, m.month.ago.month) }
       end
 
       def raw_data

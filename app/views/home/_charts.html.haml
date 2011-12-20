@@ -3,23 +3,5 @@
 
 :javascript
   $(function drawVisualization() {
-
-    var dt = new google.visualization.DataTable(#{Indie::Chart::Sales.new(@sales, :top => 3, :period => 12).data.to_json})
-
-    // Create and draw the visualization.
-    var ac = new google.visualization.ComboChart(document.getElementById('visualization'));
-
-    ac.draw(dt, {
-      width: 710,
-      height: 200,
-      seriesType: "bars",
-      chartArea: {left: 30, top: 4, width: 500, height: 180},
-      fontSize: 11,
-      fontName: 'PT Sans',
-      pointSize: 3,
-      tooltip: {textStyle: {color: '#726E6B'}},
-      legend: {textStyle: {color: '#726E6B'}, position: 'right'},
-      vAxis: {textStyle: {color: '#726E6B', fontSize: 10}, baselineColor: '#726E6B', textPosition: 'in', },
-      hAxis: {textStyle: {color: '#726E6B'}},
-    });
+    #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true), :render_to => 'visualization')}
   });
