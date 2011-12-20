@@ -2,7 +2,6 @@ module ChartHelper
   def sales_chart(chart, options = {})
     container_id = options.delete(:render_to)
 
-
     if chart.show_trend?
       trend_series = %Q{
         series: {#{chart.data[:cols].size-3}: {type: "line"}, #{chart.data[:cols].size-2}: {type: "line"}}
