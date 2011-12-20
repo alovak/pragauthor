@@ -19,17 +19,6 @@ module Indie
       end
     end
 
-    def books_top(number)
-      book_ids = @sales
-                    .where(@conditions)
-                    .group(:book_id)
-                    .order('sum_units DESC')
-                    .limit(number)
-                    .sum(:units).keys
-
-      Book.find(book_ids)
-    end
-
     private
 
     def period_conditons

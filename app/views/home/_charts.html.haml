@@ -3,18 +3,16 @@
 
 :javascript
   $(function drawVisualization() {
-    #{raw_data(@sales)}
 
-    // Create and populate the data table.
-    var data = google.visualization.arrayToDataTable(rowData);
+    var dt = new google.visualization.DataTable(#{Indie::Chart::Sales.new(@sales, :top => 3, :period => 12).data.to_json})
 
     // Create and draw the visualization.
     var ac = new google.visualization.ComboChart(document.getElementById('visualization'));
-    ac.draw(data, {
+
+    ac.draw(dt, {
       width: 710,
       height: 200,
       seriesType: "bars",
-      series: { 5: {type: 'line'}, 6: { type: 'line'}},
       chartArea: {left: 30, top: 4, width: 500, height: 180},
       fontSize: 11,
       fontName: 'PT Sans',
