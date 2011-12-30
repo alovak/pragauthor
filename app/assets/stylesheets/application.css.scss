@@ -451,7 +451,7 @@ body#home, body#uploads {
 
 body#home {
 
-  #dashboard {
+  #dashboard, #vendors {
     .totals {
       @include prepend(1);
     }
