@@ -571,12 +571,22 @@ body#welcome {
       @include column(10);
     }
 
-    #intro {
-      @include border-radius;
-      @include column(20, true);
-      @include prepend(6);
-      @include append(6);
 
+    .intro {
+      @include border-radius;
+      @include column(32, true);
+
+      .gallery {
+        @include clearfix;
+        margin-left: 150px; 
+        .thumbnail {
+          width: 150px;
+          height: 150px;
+          float: left;
+          border: 3px #e6dcbe solid;
+          margin-right: 5px;
+        }
+      }
 
       padding: {
         top: 40px;
@@ -592,8 +602,15 @@ body#welcome {
         color: #826d5d;
       }
 
+      .header2 {
+        font-size: 20px;
+        color: #826d5d;
+        padding: 30px 0 10px 0;
+        font-weight: bold;
+      }
+
       .video {
-        padding-top: 30px;
+        padding-top: 40px;
       }
 
       .sign_up {

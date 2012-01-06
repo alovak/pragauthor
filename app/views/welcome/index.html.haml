@@ -1,4 +1,4 @@
-#intro
+.intro
   .header
     We make the life of authors easier.
     %br
@@ -6,6 +6,13 @@
     %br 
     to focus on what they do best.
     %b Write. 
+  .header2
+    Get valuable insights by viewing your sales reports from different angles.
+  .gallery
+    - %w(dashboard vendors books upload).each do |img|
+      .thumbnail
+        %a{href: "/assets/gallery/#{img}.png", rel: "facebox"}
+          = image_tag("gallery/#{img}-small.png")
   .video
     %iframe(width="560" height="315" src="http://www.youtube.com/embed/V1uW-2wnGoE" frameborder="0" allowfullscreen)
   .header
