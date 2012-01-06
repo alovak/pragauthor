@@ -13,11 +13,10 @@
       .thumbnail
         %a{href: "/assets/gallery/#{img}.png", rel: "facebox"}
           = image_tag("gallery/#{img}-small.png")
+  - if user_signed_in?
+    .sign_up= link_to('Go to Dashboard', home_path)
+  - else
+    .sign_up= link_to('Sign up', new_user_registration_path)
   .video
     %iframe(width="560" height="315" src="http://www.youtube.com/embed/V1uW-2wnGoE" frameborder="0" allowfullscreen)
-  .header
-    - if user_signed_in?
-      .sign_up= link_to('Go to Dashboard', home_path)
-    - else
-      .sign_up= link_to('Sign up', new_user_registration_path)
 
