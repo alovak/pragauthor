@@ -546,7 +546,7 @@ body#devise {
 body#welcome {
   #container {
     @include container;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
   #header {
@@ -567,6 +567,8 @@ body#welcome {
   #content {
     @include column(32, true);
 
+    margin-bottom: 20px;
+
     #links {
       @include column(10);
     }
@@ -576,17 +578,22 @@ body#welcome {
       @include border-radius;
       @include column(32, true);
 
-      .gallery {
-        @include clearfix;
-        margin-left: 150px; 
-        .thumbnail {
-          width: 150px;
-          height: 150px;
-          float: left;
+      a.video {
+        text-decoration: none;
+        img {
           border: 3px #e6dcbe solid;
-          margin-right: 5px;
         }
       }
+      a.video:hover {
+        img {
+          border: 3px #c4b587 solid;
+        }
+      }
+
+      .gallery {
+        padding-top: 30px;
+      }
+
 
       padding: {
         top: 40px;
@@ -605,16 +612,16 @@ body#welcome {
       .header2 {
         font-size: 20px;
         color: #826d5d;
-        padding: 30px 0 10px 0;
+        padding: 20px 0 10px 0;
         font-weight: bold;
       }
 
-      .video {
-        padding-top: 40px;
+      #video {
+        display: none;
       }
 
       .sign_up {
-        margin-top: 30px;
+        margin-top: 20px;
         font-size: 23px;
 
         a {

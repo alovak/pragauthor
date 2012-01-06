@@ -1,22 +1,19 @@
 .intro
   .header
-    We make the life of authors easier.
+    You make your self-published book available through multiple channels,
     %br
-    We deliver software that makes it possible for authors
-    %br 
-    to focus on what they do best.
-    %b Write. 
-  .header2
-    Get valuable insights by viewing your sales reports from different angles.
+    and we'll aggregate your sales figures so you can track your progress.
   .gallery
     - %w(upload dashboard vendors books).each do |img|
-      .thumbnail
-        %a{href: "/assets/gallery/#{img}.png", rel: "facebox"}
-          = image_tag("gallery/#{img}-small.png")
+      %a.video{href: "/assets/gallery/#{img}.png", rel: "facebox"}
+        = image_tag("gallery/#{img}-small.png")
+  .header2
+    Video
+  %a.video{href: "#video", rel: "facebox"}
+    = image_tag("gallery/video.png")
   - if user_signed_in?
     .sign_up= link_to('Go to Dashboard', home_path)
   - else
     .sign_up= link_to('Sign up', new_user_registration_path)
-  .video
-    %iframe(width="560" height="315" src="http://www.youtube.com/embed/V1uW-2wnGoE" frameborder="0" allowfullscreen)
-
+  #video
+    %iframe(width="640" height="360" src="http://www.youtube.com/embed/V1uW-2wnGoE" frameborder="0" allowfullscreen)
