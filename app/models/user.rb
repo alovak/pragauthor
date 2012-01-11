@@ -12,8 +12,4 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :books
   has_many :sales, :through => :books
-
-  def headers_for(action)
-    action == :confirmation_instructions ? { :bcc => 'pavel@pragauthor.com' } : {}
-  end
 end
