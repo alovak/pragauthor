@@ -453,6 +453,27 @@ body#home, body#uploads {
   }
 }
 
+body#admins__dashboard {
+  .users, .books {
+    @include prepend(1);
+  }
+
+  table {
+    width: 100%;
+  }
+  table th, table td {
+    padding: 5px;
+  }
+
+  table th {
+    background: #F9F5E9;
+  }
+
+  table td {
+    border-bottom: 1px solid #F9F5E9;
+  }
+}
+
 body#home {
 
   #dashboard, #vendors {

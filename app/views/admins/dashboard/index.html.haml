@@ -1,1 +1,33 @@
-hello, admin
+%h1 Users
+.users
+  .confirmed
+    Confirmed:
+    = User.confirmed.count
+  .unconfirmed
+    Not confirmed:
+    = User.count - User.confirmed.count
+%h2 Last 10 registred users
+.users
+  .last
+    %table
+      %tr
+        %th Name
+        %th Email
+        %th Confirmed?
+        %th Created at
+        %th Confirmed at
+        %th Books
+      - User.order("created_at DESC").limit(10).each do |user|
+        %tr
+          %td= user.name
+          %td= user.email
+          %td= user.confirmed? ? "Yes" : "No"
+          %td= user.created_at
+          %td= user.confirmed_at || 'N/A'
+          %td= user.confirmed? ? user.books.count : 'N/A'
+
+%h1 Books
+.books
+  .uploaded
+    Total uploaded:
+    = Book.count

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def controller_css_scope_name
-    controller_name.gsub('/', '__')
+    controller.class.name.underscore.gsub('_controller', '').gsub('/', '__')
   end
 
   def barchart(height, months)

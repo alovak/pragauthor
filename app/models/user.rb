@@ -12,4 +12,6 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :books
   has_many :sales, :through => :books
+
+  scope :confirmed, where('confirmed_at is not ?', nil)
 end

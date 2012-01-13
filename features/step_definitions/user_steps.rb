@@ -42,10 +42,41 @@ Then /^I should be signed out$/ do
 end
 
 Given /^a lot of users with books$/ do
-  3.times do 
-    Factory.create(:confirmed_user) do |user|
-      5.times { Factory :book, :user => user }
+  5.times do 
+    user = Factory.create(:confirmed_user)
+    5.times { Factory.create(:book, :user => user) }
+  end
+end
+
+Given /^some unconfirmed users$/ do
+  2.times { Factory.create :user }
+end
+
+Then /^I should see how many users comfirmed their account$/ do
+  within(:css, ".users .confirmed") do
+    page.should have_content("5")
+  end
+end
+
+Then /^I should see how many books uploaded into the system$/ do
+  within(:css, ".books .uploaded") do
+    page.should have_content("25")
+  end
+end
+
+Then /^I should see user list with book count$/ do
+  within(:css, ".users .last") do
+    User.all.each do |user|
+      page.should have_content(user.name)
+      page.should have_content(user.email)
+      page.should have_content(user.books.count) if user.confirmed?
     end
+  end
+end
+
+Then /^I should see how many users didn't confirmed their account$/ do
+  within(:css, ".users .unconfirmed") do
+    page.should have_content("2")
   end
 end
 
