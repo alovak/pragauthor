@@ -2,11 +2,14 @@ Indie::Application.routes.draw do
   get "uploads/create"
 
   devise_for :users
+  devise_for :admins, :controllers => { :sessions => "admins/sessions" }
+  
+  match 'home' => 'home#index', :as => :user_root
+  match 'admins/dashboard' => 'admins/dashboard#index', :as => :admin_root
 
   root :to => "welcome#index"
 
   match 'exception_2211' => 'welcome#exception_2211'
-  match 'home' => 'home#index', :as => :home
 
   resources :uploads, :only => [:index, :new, :create]
 

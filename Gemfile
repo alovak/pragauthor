@@ -41,6 +41,7 @@ group :development, :test do
   gem 'cucumber-websteps'
   gem 'rspec2-rails-views-matchers'
   gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'guard'
   gem 'guard-bundler'

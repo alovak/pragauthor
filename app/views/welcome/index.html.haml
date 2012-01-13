@@ -12,7 +12,7 @@
   %a.video{href: "#video", rel: "facebox"}
     = image_tag("gallery/video.png")
   - if user_signed_in?
-    .sign_up= link_to('Go to Dashboard', home_path)
+    .sign_up= link_to('Go to Dashboard', user_root_path)
   - else
     .sign_up= link_to('Sign up', new_user_registration_path)
   #video

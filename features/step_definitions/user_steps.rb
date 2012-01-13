@@ -40,3 +40,24 @@ Then /^I should be signed out$/ do
   And %{I should see "Sign in"}
   And %{I should not see "Sign out"}
 end
+
+Given /^a lot of users with books$/ do
+  3.times do 
+    Factory.create(:confirmed_user) do |user|
+      5.times { Factory :book, :user => user }
+    end
+  end
+end
+
+Given /^I sign in as admin$/ do
+  admin = Factory(:admin)
+
+  visit "/admins/sign_in"
+
+  fill_in "Email", with: admin.email
+  fill_in "Password", with: admin.password
+
+  click_button "Sign in"
+
+  page.should have_content("Signed in successfully")
+end

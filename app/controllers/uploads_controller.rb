@@ -13,7 +13,7 @@ class UploadsController < ApplicationController
 
     if @upload.save
       flash[:notice] = "You file was uploaded and processed"
-      redirect_to home_path
+      redirect_to user_root_path
     else
       render :new
     end

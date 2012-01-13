@@ -29,7 +29,7 @@ describe UploadsController do
       it "redirects to the home" do
         post_file
 
-        response.should redirect_to(home_path)
+        response.should redirect_to(user_root_path)
       end
     end
 

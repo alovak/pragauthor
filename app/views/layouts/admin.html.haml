@@ -1,0 +1,40 @@
+!!! 5
+%html
+  %head
+    %title Pragmatic Author
+    %link{ href: 'http://fonts.googleapis.com/css?family=PT+Sans:400,700', rel: 'stylesheet', type: 'text/css' }
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+  %body{ id: "#{controller_css_scope_name}", class: "application common" }
+    #container
+      #header
+        #logo
+          = image_tag('logo.gif')
+        #stuff
+          = yield :stuff
+          &nbsp;
+        #account_links
+          - if admin_signed_in?
+            %span.user_name= current_admin.email
+            %span.separator /
+            %span.sign_out= link_to('Sign out', destroy_admin_session_path)
+      #sidebar
+        &nbsp;
+        %ul.menu
+          %li.active
+            %a{ href: "dashboard" }
+              Dashboard
+      #content
+        - flash.each do |name, msg|
+          :javascript
+            $(function () {
+              $.notifyBar({
+                cls: ("#{name}" == 'notice' ? 'success' : 'error'),
+                html: "#{msg}",
+                delay: 2000,
+                animationSpeed: "normal"
+              });
+            });
+        = yield
+      #footer
+        © Pragmatic Author, 2011

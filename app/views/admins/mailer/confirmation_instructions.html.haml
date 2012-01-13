@@ -1,0 +1,13 @@
+%p
+  Hi, #{@resource.name}!
+
+%p You've successfully created an account at Pragmatic Author.
+%p Before you can use your account you need to confirm your email address within 2 days.
+%p= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+%p Once your account is activated, you can log in.
+%p 
+  Have a nice day,
+  %br
+  The Pragmatic Author Team
+  %br
+  = link_to "www.pragauthor.com", "http://www.pragauthor.com"
