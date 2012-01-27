@@ -17,20 +17,20 @@ module Indie
         @book = Spreadsheet.open(@file_path)
         sheet = @book.worksheet 0
         sheet.each do |row|
-          process_books_for_store(sheet, row.idx) if row[0] == 'Title'
+          process_books_for_store(sheet, row.idx) if row[0] =~ /Title/i
         end
       end
 
       private
 
       def process_books_for_store(sheet, header_row_id)
-        return if sheet.row(header_row_id + BOOKS_OFFSET)[0] == 'There were no sales during this period.'
+        return if sheet.row(header_row_id + BOOKS_OFFSET)[0] =~ /There were no sales during this period/i
 
         sale_date = convert_date(sheet.row(header_row_id + SALE_DATE_OFFSET)[0])
         currency = get_currency(sheet.row(header_row_id + CURRENCY_OFFSET)[CURRENCY])
 
         sheet.each(header_row_id + BOOKS_OFFSET) do |row|
-          return if row[TITLE] =~ /Total Royalty for Sales/
+          return if row[TITLE] =~ /Total Royalty for Sales/i
 
           book = find_or_create_book(row[TITLE])
           create_sale(book, :units => row[UNIT_NET_SALES], 
@@ -41,7 +41,7 @@ module Indie
       end
 
       def get_currency(currency)
-        currency.gsub(/\(|\)/, '')
+        currency.gsub(/\(|\)| /, '')
       end
 
       def convert_date(date)
