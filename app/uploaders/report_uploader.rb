@@ -23,10 +23,11 @@ class ReportUploader < CarrierWave::Uploader::Base
     parser.process
     # Do not rename or edit file in Microsoft Excel, Number, Open Office, 
     # etc. as they can change column formats and we can't parse your report file.
-  # rescue => e
-    # Rails.logger.error("Can't parse file")
-    # Rails.logger.error(e)
-    # raise CarrierWave::ProcessingError.new("Can't process file. Original Error: #{e}")
+ rescue => e
+    Rails.logger.error("Can't parse file")
+    Rails.logger.error(e)
+    Rails.logger.error(e.backtrace)
+    raise CarrierWave::ProcessingError.new("Can't process file. Original Error: #{e}")
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
