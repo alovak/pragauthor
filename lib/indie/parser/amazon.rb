@@ -1,9 +1,24 @@
 module Indie
   module Parser
     class Amazon < Base
-
       VENDOR_NAME       = 'Amazon'
 
+      def process
+        parser = AmazonParserV1.new(self)
+        parser.process
+      end
+
+      private
+
+      def sheet
+        @sheet ||= begin
+                     book  = Spreadsheet.open(file_path)
+                     sheet = book.worksheet 0
+                   end
+      end
+    end
+
+    class AmazonParserV1
       TITLE             = 0
       UNIT_NET_SALES    = 4
       CURRENCY          = 10
@@ -13,9 +28,15 @@ module Indie
       CURRENCY_OFFSET   = 1
       SALE_DATE_OFFSET  = 2
 
+      delegate :sheet, :find_or_create_book, :create_sale, :to => :@parser
+
+      def initialize(parser)
+        @parser = parser
+      end
+
       def process
         sheet.each do |row|
-          process_books_for_store(row.idx) if beginning_of_the_block?(row) && block_has_sales?(row)
+          process_books_for_store(row.idx) if beginning_of_the_store?(row) && store_has_sales?(row)
         end
       end
 
@@ -26,7 +47,7 @@ module Indie
         currency = get_currency(sheet.row(header_row_id + CURRENCY_OFFSET)[CURRENCY])
 
         sheet.each(header_row_id + BOOKS_OFFSET) do |row|
-          return if end_of_block?(row)
+          return if end_of_store?(row)
 
           book = find_or_create_book(row[TITLE])
           create_sale(book, :units => row[UNIT_NET_SALES], 
@@ -36,22 +57,16 @@ module Indie
         end
       end
 
-      def sheet
-        @sheet ||= begin
-                     book  = Spreadsheet.open(@file_path)
-                     sheet = book.worksheet 0
-                   end
-      end
 
-      def beginning_of_the_block?(row)
+      def beginning_of_the_store?(row)
         row[TITLE] =~ /Title/i
       end
 
-      def end_of_block?(row)
+      def end_of_store?(row)
         row[TITLE] =~ /Total Royalty for Sales/i
       end
 
-      def block_has_sales?(row)
+      def store_has_sales?(row)
         sheet.row(row.idx + BOOKS_OFFSET)[0] !~ /There were no sales during this period/i
       end
 

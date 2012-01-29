@@ -18,7 +18,7 @@ module Indie
     end
 
     class Base
-      attr_reader :user
+      attr_reader :user, :file_path
 
       def initialize(file_path, user)
         @file_path = file_path
