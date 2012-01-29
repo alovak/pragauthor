@@ -16,12 +16,21 @@ module Indie
       def process
         @book = Spreadsheet.open(@file_path)
         sheet = @book.worksheet 0
+
         sheet.each do |row|
-          process_books_for_store(sheet, row.idx) if row[0] =~ /Title/i
+          process_books_for_store(sheet, row.idx) if beginning_of_the_block?(row)
         end
       end
 
       private
+
+      def beginning_of_the_block?(row)
+        row[TITLE] =~ /Title/i
+      end
+
+      def end_of_block?(row)
+        row[TITLE] =~ /Total Royalty for Sales/i
+      end
 
       def process_books_for_store(sheet, header_row_id)
         return if sheet.row(header_row_id + BOOKS_OFFSET)[0] =~ /There were no sales during this period/i
@@ -30,7 +39,7 @@ module Indie
         currency = get_currency(sheet.row(header_row_id + CURRENCY_OFFSET)[CURRENCY])
 
         sheet.each(header_row_id + BOOKS_OFFSET) do |row|
-          return if row[TITLE] =~ /Total Royalty for Sales/i
+          return if end_of_block?(row)
 
           book = find_or_create_book(row[TITLE])
           create_sale(book, :units => row[UNIT_NET_SALES], 
@@ -43,6 +52,7 @@ module Indie
       def get_currency(currency)
         currency.gsub(/\(|\)| /, '')
       end
+
 
       def convert_date(date)
         # match with:
