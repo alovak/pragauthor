@@ -14,27 +14,14 @@ module Indie
       SALE_DATE_OFFSET  = 2
 
       def process
-        @book = Spreadsheet.open(@file_path)
-        sheet = @book.worksheet 0
-
         sheet.each do |row|
-          process_books_for_store(sheet, row.idx) if beginning_of_the_block?(row)
+          process_books_for_store(row.idx) if beginning_of_the_block?(row) && block_has_sales?(row)
         end
       end
 
       private
 
-      def beginning_of_the_block?(row)
-        row[TITLE] =~ /Title/i
-      end
-
-      def end_of_block?(row)
-        row[TITLE] =~ /Total Royalty for Sales/i
-      end
-
-      def process_books_for_store(sheet, header_row_id)
-        return if sheet.row(header_row_id + BOOKS_OFFSET)[0] =~ /There were no sales during this period/i
-
+      def process_books_for_store(header_row_id)
         sale_date = convert_date(sheet.row(header_row_id + SALE_DATE_OFFSET)[0])
         currency = get_currency(sheet.row(header_row_id + CURRENCY_OFFSET)[CURRENCY])
 
@@ -49,10 +36,28 @@ module Indie
         end
       end
 
+      def sheet
+        @sheet ||= begin
+                     book  = Spreadsheet.open(@file_path)
+                     sheet = book.worksheet 0
+                   end
+      end
+
+      def beginning_of_the_block?(row)
+        row[TITLE] =~ /Title/i
+      end
+
+      def end_of_block?(row)
+        row[TITLE] =~ /Total Royalty for Sales/i
+      end
+
+      def block_has_sales?(row)
+        sheet.row(row.idx + BOOKS_OFFSET)[0] !~ /There were no sales during this period/i
+      end
+
       def get_currency(currency)
         currency.gsub(/\(|\)| /, '')
       end
-
 
       def convert_date(date)
         # match with:
