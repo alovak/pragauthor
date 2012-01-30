@@ -16,8 +16,8 @@ gem 'money', :path => 'vendor/gems/money-3.7.1'
 
 group :assets do
   gem 'compass', "~> 0.12.alpha"
-  gem 'sass-rails', " ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier'
 end
 
@@ -34,6 +34,7 @@ group :development, :test do
   gem 'growl'
   gem 'rb-fsevent'
   gem 'timecop'
+  gem 'annotate'
 
   gem 'spork', '~>0.9.0rc'
   gem 'capybara', '~>1.0.0'
