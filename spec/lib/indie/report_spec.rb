@@ -7,7 +7,7 @@ describe Indie::Report do
   let(:book) { Factory(:book) }
 
   def create_report
-    report = Indie::Report.create(book)
+    report = Indie::Report::Base.create(book, 'USD')
   end
 
   context "when book has no any sales" do

@@ -6,7 +6,7 @@
       .info
         .title
           %h2= book.title
-      - report = Indie::Report.create(book)
+      - report = Indie::Report::Base.create(book, params[:currency] || 'USD')
       .months
         %h3 Last Six Month
         .barchart
