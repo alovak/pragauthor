@@ -1,7 +1,121 @@
 // Place all the styles related to the wellcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+ *= require facebox
+*/
 
-body.wellcome {
-  // Place scoped styles here
+@import "blueprint/reset";
+@import "blueprint";
+
+@import "compass/css3";
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+
+body.common {
+  background: #f9f5e9;
+  a { color: #a18169; }
+  font: {
+    family: 'PT Sans', sans-serif;
+    size: 14px;
+  }
+}
+
+body#welcome {
+  #container {
+    width: $blueprint-container-size;
+    margin: 0 auto;
+    @include pie-clearfix;
+  }
+
+  #header, #content, #footer  {
+    @include column(24, true);
+  }
+
+  #header {
+    margin: 20px 0;
+    @include column(24, true);
+
+    #logo {
+      float: left;
+      margin-left: 20px;
+    }
+
+    #navigation {
+      float: left;
+      margin-top: 14px;
+      margin-left: 80px;
+
+      font-size: 20px;
+
+
+      ul li {
+        list-style: none;
+        display: inline;
+        margin-right: 15px;
+      }
+      ul li.selected {
+        font-weight: bold;
+      }
+    }
+
+    #links {
+      float: right;
+      margin-right: 20px;
+    }
+  }
+
+
+  #content {
+    background: #fff;
+    @include single-box-shadow(#a3a3a3, 0,0, 2px);
+    @include border-radius;
+    behavior: url(/css-ie/PIE.htc);
+
+    .intro {
+      margin: 30px 0 20px 0;
+      font-size: 23px;
+      color: #826d5d;
+      text-align: center;
+    }
+
+    .action {
+      margin-bottom: 30px;
+
+      .sign_up {
+        text-align: center;
+        width: 200px;
+        margin: 0 auto;
+        background: #a18169;
+        @include border-radius;
+        behavior: url(/css-ie/PIE.htc);
+        padding: 10px 30px;
+        color: #fff;
+      }
+
+      .sign_up a {
+        color: #fff;
+        font-size: 23px;
+      }
+    }
+
+    #video { display: none; }
+
+    .gallery {
+      margin: 20px 0;
+      text-align: center;
+
+      a.video {
+        text-decoration: none;
+        img {
+          border: 3px #e6dcbe solid;
+        }
+      }
+      a.video:hover {
+        img {
+          border: 3px #c4b587 solid;
+        }
+      }
+    }
+  }
 }

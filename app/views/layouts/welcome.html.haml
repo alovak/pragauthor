@@ -2,8 +2,8 @@
 %html
   %head
     %title Pragmatic Author
-    = stylesheet_link_tag    "application"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag    "welcome"
+    = javascript_include_tag "welcome"
     = csrf_meta_tags
     :javascript
       var _gaq = _gaq || [];
@@ -27,6 +27,8 @@
       #header
         #logo
           = image_tag('logo.gif')
+        #navigation
+          = render_navigation
         #links
           - if user_signed_in?
             = link_to('Sign out', destroy_user_session_path)

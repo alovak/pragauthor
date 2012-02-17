@@ -1,19 +1,20 @@
 .intro
-  .header
-    You make your self-published book available through multiple channels,
-    %br
-    and we'll aggregate your sales figures so you can track your progress.
-  .gallery
-    - %w(upload dashboard vendors books).each do |img|
-      %a.video{href: "/assets/gallery/#{img}.png", rel: "facebox"}
-        = image_tag("gallery/#{img}-small.png")
-  .header2
-    Video
+  You make your self-published book available through multiple channels,
+  %br
+  and we'll aggregate your sales figures so you can track your progress.
+.gallery
+  - %w(upload dashboard vendors books).each do |img|
+    %a.video{href: "/assets/gallery/#{img}.png", rel: "facebox"}
+      = image_tag("gallery/#{img}-small.png")
+.gallery
   %a.video{href: "#video", rel: "facebox"}
     = image_tag("gallery/video.png")
+#video
+  #player
+.action
   - if user_signed_in?
     .sign_up= link_to('Go to Dashboard', user_root_path)
   - else
-    .sign_up= link_to('Sign up', new_user_registration_path)
-  #video
-    %iframe(width="640" height="360" src="http://www.youtube.com/embed/V1uW-2wnGoE" frameborder="0" allowfullscreen)
+    .sign_up
+      = link_to('Sign up!', new_user_registration_path)
+      %p Free during beta period!

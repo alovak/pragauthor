@@ -6,7 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require facebox
 //= require jquery.notifyBar
 //= require jquery-ui-1.8.16.custom.min

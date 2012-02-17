@@ -8,6 +8,7 @@ Indie::Application.routes.draw do
   match 'admins/dashboard' => 'admins/dashboard#index', :as => :admin_root
 
   root :to => "welcome#index"
+  match 'about' => 'welcome#about', :as => :about
 
   match 'exception_2211' => 'welcome#exception_2211'
 
