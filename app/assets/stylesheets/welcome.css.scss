@@ -12,6 +12,32 @@
 
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
 
+h1, h2, h3 {
+  color: #826d5d;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 23px;
+  margin: 0px 0 20px 0;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0px 0 15px 0;
+}
+
+h3 {
+  font-size: 16px;
+  margin: 0px 0 10px 0;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+ul { margin-left: 20px; margin-bottom: 10px; }
+
 body.common {
   background: #f9f5e9;
   a { color: #a18169; }
@@ -67,21 +93,20 @@ body#welcome {
 
 
   #content {
+    padding: 30px 20px;
     background: #fff;
     @include single-box-shadow(#a3a3a3, 0,0, 2px);
     @include border-radius;
     behavior: url(/css-ie/PIE.htc);
 
     .intro {
-      margin: 30px 0 20px 0;
+      margin: 0px 0 20px 0;
       font-size: 23px;
       color: #826d5d;
       text-align: center;
     }
 
     .action {
-      margin-bottom: 30px;
-
       .sign_up {
         text-align: center;
         width: 200px;
