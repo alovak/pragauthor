@@ -9,6 +9,7 @@ Indie::Application.routes.draw do
 
   root :to => "welcome#index"
   match 'about' => 'welcome#about', :as => :about
+  match 'contact' => 'welcome#contact', :as => :contact
 
   match 'exception_2211' => 'welcome#exception_2211'
 

@@ -9,6 +9,9 @@ class WelcomeController < ApplicationController
   def about
   end
 
+  def contact
+  end
+
   def exception_2211
     raise "Hello"
   end

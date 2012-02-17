@@ -58,9 +58,16 @@ body#welcome {
     @include column(24, true);
   }
 
-  #header {
+  #footer {
     margin: 20px 0;
-    @include column(24, true);
+    p {
+      margin-left: 20px;
+      color: #a18163;
+      font-size: 11px;
+    }
+  }
+  #header {
+    margin: 10px 0;
 
     #logo {
       float: left;
@@ -69,16 +76,21 @@ body#welcome {
 
     #navigation {
       float: left;
-      margin-top: 14px;
-      margin-left: 80px;
+
+      margin: {
+        top: 14px;
+        left: 80px;
+      }
 
       font-size: 20px;
 
+      ul { margin: 0; }
 
       ul li {
         list-style: none;
         display: inline;
         margin-right: 15px;
+
       }
       ul li.selected {
         font-weight: bold;
@@ -87,7 +99,10 @@ body#welcome {
 
     #links {
       float: right;
-      margin-right: 20px;
+      margin: {
+        top: 20px;
+        right: 20px;
+      }
     }
   }
 
