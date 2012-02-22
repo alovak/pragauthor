@@ -110,12 +110,14 @@ body#welcome {
 
 
   #content {
-    padding: 30px 20px;
     background: #fff;
     @include single-box-shadow(#a3a3a3, 0,0, 2px);
     @include border-radius;
     behavior: url(/css-ie/PIE.htc);
 
+    .box {
+      padding:30px 20px;
+    }
     .intro {
       margin: 0px 0 20px 0;
       font-size: 23px;

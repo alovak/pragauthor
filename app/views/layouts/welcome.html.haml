@@ -35,7 +35,8 @@
           - else
             = link_to('Sign in', new_user_session_path)
       #content
-        = yield
+        .box
+          = yield
         - flash.each do |name, msg|
           :javascript
             $(function () {
