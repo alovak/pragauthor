@@ -1,3 +1,6 @@
 = render :partial => 'uploads/form'
 :javascript
-  $(init_upload('#upload'));
+  $(function() {
+    $('#upload').show();
+    init_upload('#upload');
+  });

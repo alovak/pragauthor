@@ -1,0 +1,46 @@
+= render :partial => 'uploads/form'
+
+- if @books.blank?
+  = render :partial => 'shared/blank'
+- else
+  #books
+    %h1 Books
+    - vendors = Vendor.all
+    .books
+      - @books.each do |book|
+        .book{ title: %Q{#{book.title}}, id: "book_#{book.id}" }
+          .info
+            .title
+              %h2= book.title
+          - report = Indie::Report::Base.create(book, params[:currency] || 'USD')
+          .months
+            %h3 Last Six Month
+            .barchart
+              = barchart(150, report.months)
+            .month.last_six
+              %h3 Last Six Months
+              .vendors
+                - report.vendors.each do |vendor|
+                  .vendor
+                    = "#{vendor.name}: #{vendor.last_n_units} (#{vendor.last_n_money.format})"
+              .total
+                total: #{report.total_last_n_units} (#{report.total_last_n_money.format})
+            - report.months.each do |month|
+              .month{ title: "#{month.title}", :class => "#{month.name}", style: "display: none;" }
+                %h3= month.name
+                .vendors
+                  - month.vendors.each do |vendor|
+                    .vendor
+                      #{vendor.name}: #{vendor.units} (#{vendor.money.format})
+                .total
+                  total: #{month.units} (#{month.money.format})
+          .totals
+            %h3 The Entire Period
+            .vendors
+              - report.vendors.each do |vendor|
+                .vendor
+                  = "#{vendor.name}: #{vendor.units} (#{vendor.money.format})"
+            .total
+              total: #{report.total_units} (#{report.total_money.format})
+
+

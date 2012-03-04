@@ -17,18 +17,18 @@
       })();
     :javascript
       var uvOptions = {};
-      (function() {
+      $(function() {
         var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
         uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/VtYepqixGVlQJWiL9vVbg.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-      })();
+      });
   %body#welcome.common
     #container
       #header
         #logo
           = image_tag('logo.gif')
         #navigation
-          = render_navigation
+          = render_navigation(:context => :public)
         #links
           - if user_signed_in?
             = link_to('Sign out', destroy_user_session_path)

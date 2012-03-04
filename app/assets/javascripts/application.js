@@ -12,38 +12,23 @@
 //
 
 jQuery(document).ready(function($) {
-  $.facebox.settings.closeImage = '/assets/facebox/closelabel.png'
-  $.facebox.settings.loadingImage = '/assets/facebox/loading.gif'
-  $('a[rel*=facebox]').facebox()
+  $.facebox.settings.closeImage = '/assets/facebox/closelabel.png';
+  $.facebox.settings.loadingImage = '/assets/facebox/loading.gif';
+  $('a[rel*=facebox]').facebox();
 
   $("div.data").mouseenter(function(){
-    $(this).addClass('selected')
+    $(this).addClass('selected');
     month = $(this).siblings('.label').text();
     $(this).parents('.barchart').siblings(".month" + "." + month).show();
     
   }).mouseleave(function(){
-    $(this).removeClass('selected')
+    $(this).removeClass('selected');
     month = $(this).siblings('.label').text();
     $(this).parents('.barchart').siblings(".month" + "." + month).hide();
-  });
-
-  $(document).bind('reveal.facebox', function() {
-    init_upload('#facebox')
   })
 
-  $(".menu a").on("click", function(e) {
-    // hide all items
-    $(".menu li").removeClass('active')
-
-    $(".menu li a").each(function() {
-      item = $(this).attr("href")
-      $('#' + item).hide();
-    });
-
-    item = $(this).attr("href")
-    $('#' + item).show();
-    $(this).parents('li').addClass('active');
-    e.preventDefault();
+  $(document).bind('reveal.facebox', function() {
+    init_upload('#facebox');
   })
 
 })
@@ -53,7 +38,7 @@ this.init_upload = function(scope) {
 
   $(scope + ' input.file').change(function() {
     file_name = $(this).val();
-    pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i
+    pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i;
 
     if (pattern.test(file_name)) {
       $(scope + ' input[type=submit]').attr('disabled', false);

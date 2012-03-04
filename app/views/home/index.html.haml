@@ -1,14 +1,27 @@
-- content_for :stuff do
-  %a{href: "#upload", rel: "facebox", class: "upload"}
-
 = render :partial => 'uploads/form'
 
 - if @books.blank?
-  = render :partial => 'blank'
+  = render :partial => 'shared/blank'
 - else
   #dashboard
-    = render 'dashboard'
-  #vendors
-    = render 'vendors'
-  #books
-    = render 'books'
+    %h1 Dashboard
+    .totals
+      - sales_report = Indie::SalesReport.new(@sales)
+      %span.royalties
+        %span.number= sales_report.money.collect {|m| m.format}.join(", ")
+        royalties
+      %span.units
+        %span.number= sales_report.units
+        units sold
+
+    %h2 Monthly Book Sales in Units
+    #visualization{ style: "width:710px;height:220px" }
+
+    %h2 Monthly Book Sales in $$$
+    #visualization2{ style: "width:710px;height:220px" }
+
+    :javascript
+      $(function drawVisualization() {
+        #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true), :render_to => 'visualization')}
+        #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true), :render_to => 'visualization2')}
+      });

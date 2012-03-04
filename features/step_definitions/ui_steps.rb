@@ -1,3 +1,7 @@
+When /^I navigated to "([^"]*)"$/ do |page|
+  click_link(page)
+end
+
 When /^I look statistics for "([^"]*)"$/ do |name|
   @book_name = name
 

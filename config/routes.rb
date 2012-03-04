@@ -11,9 +11,17 @@ Indie::Application.routes.draw do
   match 'about' => 'welcome#about', :as => :about
   match 'contact' => 'welcome#contact', :as => :contact
 
+  resources :vendors, :only => :index
+  resources :books, :only => :index
+
   match 'exception_2211' => 'welcome#exception_2211'
 
   resources :uploads, :only => [:index, :new, :create]
+
+  scope "accounts", :module => :accounts do
+    resource :leanpub_account
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

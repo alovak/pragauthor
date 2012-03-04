@@ -61,7 +61,7 @@ body.common {
   }
 
   li {
-    list-style: square;
+    list-style: square inside;
   }
 
 
@@ -204,6 +204,7 @@ body.common {
       padding: 5px;
       margin-top: 10px;
       margin-right: 20px;
+      font-size: 11px;
     }
 
     .note, .warning {
@@ -244,18 +245,21 @@ body.application {
   #sidebar {
     @include column(6); 
 
-    ul.menu {
-      position: relative;
-      width: 180px;
+    #menu {
+      ul {
+        position: relative;
+        width: 185px;
 
-      left: 0;
+        left: 0;
 
-      li {
-        padding: 8px 0 8px 10px;
-        @include border-left-radius;
+        li {
+          padding: 8px 0 8px 10px;
+          @include border-left-radius;
+          list-style: none;
+        }
+
+        li.selected { background: #fff; }
       }
-
-      li.active { background: #fff; }
     }
   }
 
@@ -309,25 +313,13 @@ body.application {
   }
 }
 
-body#home, body#uploads {
+body.application {
 
   .blank {
     background: url('/assets/blank.png') 30px 25px no-repeat;
     height: 550px;
 
     position: relative;
-
-    // h1 {
-      // @include border-radius;
-      // border:3px solid #e5ddc6;
-      // position: absolute;
-      // top: 160px;
-      // left: 200px;
-      // padding: 20px;
-      // background: #fff;
-      // width: 290px;
-      // text-align: center;
-    // }
   }
 
   a.upload {
@@ -350,12 +342,7 @@ body#home, body#uploads {
     width: 450px;
   }
 
-  #vendors {
-    display: none;
-  }
-
   #books {
-    display: none;
 
     .books {
 
@@ -473,7 +460,7 @@ body#admins__dashboard {
   }
 }
 
-body#home {
+body.application {
 
   #dashboard, #vendors {
     .totals {

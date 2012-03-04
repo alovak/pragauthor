@@ -10,6 +10,7 @@ Feature:
 
   Scenario: see Smashwords total statistics for uploaded books
     Given I upload "SmashWords_salesReport-2011-06-08.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "21" units were sold by "Smashwords"
     When I look statistics for "The Second Book"
@@ -21,6 +22,7 @@ Feature:
 
   Scenario: see monthly statistics for uploaded books
     Given I upload "SmashWords_salesReport-2011-06-08.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "1" units were sold in "May" by "Smashwords"
     Then I should see "3" units were sold in "Mar" by "Smashwords"
@@ -35,6 +37,7 @@ Feature:
 
   Scenario: see how much money I earned 
     Given I upload "SmashWords_salesReport-2011-06-08.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "$8.59" were earned on "Smashwords"
     When I look statistics for "The Second Book"

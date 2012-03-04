@@ -10,6 +10,7 @@ Feature:
 
   Scenario: see Amazon total statistics for uploaded books
     Given I upload "kdp-report-04-2011.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "190" units were sold by "Amazon"
     When I look statistics for "The Second Book"
@@ -20,6 +21,7 @@ Feature:
   Scenario: see monthly statistics for uploaded books
     Given I upload "kdp-report-04-2011.xls"
     Given I upload "kdp-report-07-2011.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "190" units were sold in "Apr" by "Amazon"
     Then I should see "2" units were sold in "Jul" by "Amazon"
@@ -34,6 +36,7 @@ Feature:
     Given I upload "kdp-report-04-2011.xls"
     Given I upload "kdp-report-5-2011.xls"
     Given I upload "kdp-report-07-2011.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "$75.81" were earned on "Amazon"
     Then I should see "$66.58" were earned in "Apr" by "Amazon"
@@ -57,6 +60,7 @@ Feature:
   Scenario: see how much money I earned 
     Given I upload "kdp-report-04-2011.xls"
     Given I upload "kdp-report-07-2011.xls"
+    And I navigated to "Books"
     When I look statistics for "The First Book"
     Then I should see "$73.42" were earned on "Amazon"
     Then I should see "$66.58" were earned in "Apr" by "Amazon"
