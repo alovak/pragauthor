@@ -1,16 +1,20 @@
 module Indie
   class SalesReport
-    def initialize(sales, months = 6)
+    def initialize(sales, months = nil)
       @sales = sales
       @months = months
     end
 
     def units
-      @sales.sum(:units)
+      data = @sales
+      data = data.where(period_conditons) if @months
+      data.sum(:units)
     end
 
     def money
-      data = @sales.group(:currency).sum(:amount)
+      data = @sales
+      data = data.where(period_conditons) if @months
+      data = data.group(:currency).sum(:amount)
 
       [].tap do |money_collection|
         data.each do |currency, amount|

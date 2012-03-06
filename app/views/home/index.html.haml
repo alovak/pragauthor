@@ -6,7 +6,7 @@
   #dashboard
     %h1 Dashboard
     .totals
-      - sales_report = Indie::SalesReport.new(@sales, 12)
+      - sales_report = Indie::SalesReport.new(@sales)
       %span.royalties
         %span.number= sales_report.money.collect {|m| m.format}.join(", ")
         royalties
