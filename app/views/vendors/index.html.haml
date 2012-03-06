@@ -23,6 +23,6 @@
 
     :javascript
       $(function drawVisualization() {
-        #{sales_chart(Indie::Chart::VendorSales.new(@sales, :show_trend => false), :render_to => 'vendor_units')}
-        #{sales_chart(Indie::Chart::VendorMoney.new(@sales, :show_trend => false), :render_to => 'vendor_money')}
+        #{sales_chart(Indie::Chart::VendorSales.new(@sales, :show_trend => false, :period => 12), :render_to => 'vendor_units')}
+        #{sales_chart(Indie::Chart::VendorMoney.new(@sales, :show_trend => false, :period => 12), :render_to => 'vendor_money')}
       });

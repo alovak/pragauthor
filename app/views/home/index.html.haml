@@ -6,7 +6,7 @@
   #dashboard
     %h1 Dashboard
     .totals
-      - sales_report = Indie::SalesReport.new(@sales)
+      - sales_report = Indie::SalesReport.new(@sales, 12)
       %span.royalties
         %span.number= sales_report.money.collect {|m| m.format}.join(", ")
         royalties
@@ -22,6 +22,6 @@
 
     :javascript
       $(function drawVisualization() {
-        #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true), :render_to => 'visualization')}
-        #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true), :render_to => 'visualization2')}
+        #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true, :period => 12), :render_to => 'visualization')}
+        #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true, :period => 12), :render_to => 'visualization2')}
       });
