@@ -1,4 +1,18 @@
 module Indie::Chart
+  module HelperMethods
+    def months
+      @months ||= begin
+        months = []
+        date = @date_range.from_date
+        while (date <= @date_range.to_date)
+          months << Date.new(date.year, date.month)
+          date = date >> 1
+        end
+        months
+      end
+    end
+  end
+
   module Base
     class Units
       include HelperMethods
@@ -24,12 +38,11 @@ module Indie::Chart
       private
 
       def cols
-        books = Book.order(:title).find(top_book_ids)
 
         [].tap do |cols|
           cols << { label: 'Month', type: 'string' }
 
-          books.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
+          items.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
 
           if show_trend?
             cols << { label: 'Average', type: 'number' }
@@ -39,8 +52,6 @@ module Indie::Chart
       end
 
       def rows
-        books = Book.order(:title).find(top_book_ids)
-
         [].tap do |rows|
           months.each do |month|
             row = { c: [] }
@@ -49,8 +60,8 @@ module Indie::Chart
 
             sum = 0
 
-            books.each do |book|
-              raw_key = [month.year, month.month, book.id]
+            items.each do |item|
+              raw_key = [month.year, month.month, item.id]
               units = raw_data[raw_key] || 0
 
               sum = sum + units
@@ -58,8 +69,8 @@ module Indie::Chart
               row[:c] << { v: units }
             end
 
-            if show_trend? && books.any?
-              row[:c] << { v: sum/books.count }
+            if show_trend? && items.any?
+              row[:c] << { v: sum/items.count }
               row[:c] << { v: sum }
             end
 
@@ -93,12 +104,10 @@ module Indie::Chart
       private
 
       def cols
-        books = Book.order(:title).find(top_book_ids)
-
         [].tap do |cols|
           cols << { label: 'Month', type: 'string' }
 
-          books.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
+          items.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
 
           if show_trend?
             cols << { label: 'Average', type: 'number' }
@@ -108,8 +117,6 @@ module Indie::Chart
       end
 
       def rows
-        books = Book.order(:title).find(top_book_ids)
-
         [].tap do |rows|
           months.each do |month|
             row = { c: [] }
@@ -118,8 +125,8 @@ module Indie::Chart
 
             sum = 0
 
-            books.each do |book|
-              raw_key = [month.year, month.month, book.id]
+            items.each do |item|
+              raw_key = [month.year, month.month, item.id]
               units = raw_data[raw_key] || 0
 
               sum = sum + units
@@ -127,8 +134,8 @@ module Indie::Chart
               row[:c] << { v: ::Money.new(units, @currency).dollars, f: ::Money.new(units, @currency).format }
             end
 
-            if show_trend? && books.any?
-              row[:c] << { v: ::Money.new(sum/books.count, @currency).dollars, f: ::Money.new(sum/books.count, @currency).format }
+            if show_trend? && items.any?
+              row[:c] << { v: ::Money.new(sum/items.count, @currency).dollars, f: ::Money.new(sum/items.count, @currency).format }
               row[:c] << { v: ::Money.new(sum, @currency).dollars, f: ::Money.new(sum, @currency).format }
             end
 

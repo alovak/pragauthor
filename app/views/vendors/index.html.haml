@@ -6,14 +6,7 @@
   #vendors
     %h1 Vendors
 
-    .totals
-      - sales_report = Indie::SalesReport.new(@sales)
-      %span.royalties
-        %span.number= sales_report.money.collect {|m| m.format}.join(", ")
-        royalties
-      %span.units
-        %span.number= sales_report.units
-        units sold
+    = render 'shared/totals_with_date_range'
 
     %h2 Monthly Book Sales in Units by Vendor
     #vendor_units{ style: "width:710px;height:220px" }
@@ -23,6 +16,6 @@
 
     :javascript
       $(function drawVisualization() {
-        #{sales_chart(Indie::Chart::VendorSales.new(@sales, :show_trend => false, :period => 12), :render_to => 'vendor_units')}
-        #{sales_chart(Indie::Chart::VendorMoney.new(@sales, :show_trend => false, :period => 12), :render_to => 'vendor_money')}
+        #{sales_chart(Indie::Chart::VendorSales.new(@sales, :show_trend => false, :period => @date_range), :render_to => 'vendor_units')}
+        #{sales_chart(Indie::Chart::VendorMoney.new(@sales, :show_trend => false, :period => @date_range), :render_to => 'vendor_money')}
       });
