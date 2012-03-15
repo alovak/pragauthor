@@ -37,5 +37,5 @@
     :javascript
       $(function drawVisualization() {
         #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true, :period => @date_range), :render_to => 'visualization')}
-        #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true, :period => 12), :render_to => 'visualization2')}
+        #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true, :period => @date_range), :render_to => 'visualization2')}
       });
