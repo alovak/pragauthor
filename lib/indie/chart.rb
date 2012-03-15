@@ -257,7 +257,7 @@ module Indie
       def initialize(sales, options = {})
         @sales = sales
         @top_books = options[:top] || 5
-        @period = options[:period] || 6
+        @date_range = options[:period] || DateRange.new
         @show_trend = options[:show_trend]
       end
 
@@ -320,12 +320,20 @@ module Indie
       end
 
       def months
-        (@period-1).downto(0).collect { |m| Date.new(m.month.ago.year, m.month.ago.month) }
+        @months ||= begin
+          months = []
+          date = @date_range.from_date
+          while (date <= @date_range.to_date)
+            months << Date.new(date.year, date.month)
+            date = date >> 1
+          end
+          months
+        end
       end
 
       def raw_data
         @sales
-          .where("date_of_sale > ? and book_id in (?)", @period.month.ago.end_of_month, top_book_ids)
+          .where("date_of_sale >= ? and date_of_sale <= ? and book_id in (?)", @date_range.from_date, @date_range.to_date, top_book_ids)
           .group("year(date_of_sale)")
           .group("month(date_of_sale)")
           .group(:book_id)
@@ -334,7 +342,7 @@ module Indie
 
       def top_book_ids
         @sales
-          .where("date_of_sale > ?", @period.month.ago.end_of_month)
+          .where("date_of_sale >= ? and date_of_sale <= ?", @date_range.from_date, @date_range.to_date)
           .group(:book_id)
           .order('sum_units DESC')
           .limit(@top_books)

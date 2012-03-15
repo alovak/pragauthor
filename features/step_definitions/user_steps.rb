@@ -1,12 +1,5 @@
 Given /^I sign in as "([^"]*)"$/ do |name|
-  email = "#{name.downcase}@test.com"
-  password = "test123pass"
-
-  steps %Q{
-    Given I am a user named "#{name}" with an email "#{email}" and password "#{password}"
-    And I sign in as "#{email}" and password "#{password}"
-    Then I should be signed in
-  }
+  sign_in :with => {:name => name}
 end
 
 Given /^I am a user named "([^"]*)" with an email "([^"]*)" and password "([^"]*)"$/ do |name, email, password|

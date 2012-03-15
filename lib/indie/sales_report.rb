@@ -1,19 +1,19 @@
 module Indie
   class SalesReport
-    def initialize(sales, months = nil)
+    def initialize(sales, date_range = nil)
       @sales = sales
-      @months = months
+      @date_range = date_range
     end
 
     def units
       data = @sales
-      data = data.where(period_conditons) if @months
+      data = data.where(period_conditons) if @date_range
       data.sum(:units)
     end
 
     def money
       data = @sales
-      data = data.where(period_conditons) if @months
+      data = data.where(period_conditons) if @date_range
       data = data.group(:currency).sum(:amount)
 
       [].tap do |money_collection|
@@ -26,7 +26,7 @@ module Indie
     private
 
     def period_conditons
-      ["date_of_sale > ?", @months.month.ago.end_of_month]
+      ["date_of_sale >= ? AND date_of_sale <= ?", @date_range.from_date, @date_range.to_date]
     end
   end
 end

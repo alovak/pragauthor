@@ -73,7 +73,7 @@ describe Indie::Chart do
     describe "#data" do
       it "should contain valid representation of sales for provided parameters" do
         Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::Sales.new(Sale, :top => 2, :period => 3)
+          chart = Indie::Chart::Sales.new(Sale, :top => 2, :period => DateRange.new(:from => 'June 2010'))
 
           chart.data.should == {
             cols: [{label: 'Month',       type: 'string'},
@@ -90,7 +90,7 @@ describe Indie::Chart do
 
       it "should contain average and total if trend option set" do
         Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::Sales.new(Sale, :show_trend => true, :top => 2, :period => 3)
+          chart = Indie::Chart::Sales.new(Sale, :show_trend => true, :top => 2, :period => DateRange.new(:from => 'June 2010'))
 
           chart.data[:cols].should include({ label: 'Average', type: 'number' })
           chart.data[:cols].should include({ label: 'Totals', type: 'number' })

@@ -6,9 +6,23 @@
   #dashboard
     %h1 Dashboard
     .totals
+      Total:
       - sales_report = Indie::SalesReport.new(@sales)
       %span.royalties
-        %span.number= sales_report.money.collect {|m| m.format}.join(", ")
+        %span.number= sales_report.money.collect {|m| m.format}.join(" / ")
+        royalties
+      %span.units
+        %span.number= sales_report.units
+        units sold
+    .period_totals
+      - @date_range = DateRange.new(params[:date_range] || {})
+      = simple_form_for(@date_range, :url => '', :method => :get) do |f|
+        = f.input :from, :collection => @date_range.list
+        = f.input :to, :collection => @date_range.list
+        = f.submit "Show"
+      - sales_report = Indie::SalesReport.new(@sales, @date_range)
+      %span.royalties
+        %span.number= sales_report.money.collect {|m| m.format}.join(" / ")
         royalties
       %span.units
         %span.number= sales_report.units
@@ -22,6 +36,6 @@
 
     :javascript
       $(function drawVisualization() {
-        #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true, :period => 12), :render_to => 'visualization')}
+        #{sales_chart(Indie::Chart::Sales.new(@sales, :show_trend => true, :period => @date_range), :render_to => 'visualization')}
         #{sales_chart(Indie::Chart::Money.new(@sales, :show_trend => true, :period => 12), :render_to => 'visualization2')}
       });
