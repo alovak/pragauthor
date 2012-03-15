@@ -330,8 +330,19 @@ body.application {
   .blank {
     background: url('/assets/blank.png') 30px 25px no-repeat;
     height: 550px;
-
     position: relative;
+
+
+    h1 {
+      position: absolute;
+      top: 150px;
+      left: 200px;
+      background: #fff;
+      border: 3px solid #A18169;
+      padding: 30px;
+      @include border-radius;
+      behavior: url(/css-ie/PIE.htc);
+    }
   }
 
   a.upload {
