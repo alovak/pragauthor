@@ -15,7 +15,7 @@
         %th Email
         %th Confirmed?
         %th Created at
-        %th Confirmed at
+        %th Last sign in at
         %th Books
       - User.order("created_at DESC").limit(10).each do |user|
         %tr
@@ -23,7 +23,7 @@
           %td= user.email
           %td= user.confirmed? ? "Yes" : "No"
           %td= user.created_at
-          %td= user.confirmed_at || 'N/A'
+          %td= user.last_sign_in_at || 'N/A'
           %td= user.confirmed? ? user.books.count : 'N/A'
 
 %h1 Books
