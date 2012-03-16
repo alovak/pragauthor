@@ -30,7 +30,10 @@ html {
   overflow-y: scroll;
 }
 
+
 body.common {
+  background: url('/assets/sand-bg.gif') #f9f5e9;
+
   .red, .error_notification {
     color: red;
   }
@@ -44,7 +47,7 @@ body.common {
   }
 
   font: {
-    family: 'PT Sans', sans-serif;
+    family: 'PT Sans', Arial, sans-serif;
     size: 12px;
   }
 
@@ -68,13 +71,19 @@ body.common {
 
 
   @include blueprint-debug;
-  background: #f9f5e9;
+  /* background: #f9f5e9; */
 
   h2 { 
     font-size: 16px;
     @include prepend(1);
   }
   h3 { font-size: 14px; }
+
+  h4 { 
+    color: #7e4b43;
+    font-size: 12px;
+    font-weight: bold;
+  }
 
   h2, h3 {
     font-weight: bold;
@@ -85,17 +94,6 @@ body.common {
       bottom: 20px;
     }
   }
-
-  // h3 {
-    // font-size: 12px;
-    // font-weight: bold;
-    // color: #826d5d;
-
-    // padding: {
-      // top:20px;
-      // bottom: 15px;
-    // }
-  // }
 
   h1 {
     font-size: 18px;
@@ -262,6 +260,8 @@ body.application {
           padding: 8px 0 8px 10px;
           @include border-radius(5px 0 0 5px);
           list-style: none;
+
+          a { text-decoration: none; font-size: 14px; }
         }
 
         li.selected { 
@@ -485,6 +485,87 @@ body#admins__dashboard {
 
 body.application {
 
+  .simple_form.new_date_range {
+    @include pie-clearfix;
+
+    margin: {
+      left: 30px;
+      top: 20px;
+    }
+
+    div.input { 
+      float: left;
+      margin: {
+        right: 5px;
+        top: 5px;
+      }
+    }
+    select {
+      font-weight: 12px;
+      vertical-align: middle;
+      margin: 0;
+    }
+
+    input[type=submit] {
+      font-weight: 12px;
+      vertical-align: middle;
+      margin: 0 0 0 5px;
+    }
+  }
+
+  #totals {
+    background: url('/assets/sand-bg.gif') #f8f4e9;
+    @include border-radius;
+    behavior: url(/css-ie/PIE.htc);
+    @include pie-clearfix;
+
+
+    .date_range, .whole_period {
+      float: left;
+      padding: 10px 20px 10px 30px;
+
+
+      ul { margin: 5px 0 0 0; }
+      ul li {
+        display: inline;
+        list-style: none;
+        margin-right: 5px;
+        line-height: 18px;
+      }
+
+      .currency, .amount { 
+        display: inline;
+      }
+
+      .currency {
+        font-size: 14px;
+        margin-right: -3px;
+      }
+
+      .amount {
+        font-size: 18px;
+      }
+
+      .units, .number { display: inline; }
+
+      .units {
+        color: #726e6b;
+        font-size: 12px;
+
+        .number {
+          color: #000;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .date_range {
+      background: url('/assets/totals-separator.gif') repeat-y right;
+      width: 300px;
+    }
+
+
+  }
   #dashboard, #vendors {
     .period_totals, .totals {
       @include prepend(1);
@@ -505,32 +586,6 @@ body.application {
     font-size: 140%;
     font-weight: bold;
   }
-
-  #book_list {
-    position: absolute;
-    z-index: 10000;
-    overflow: visible;
-    top: 65px;
-
-    .navigation {
-      position: absolute;
-      top: 5px;
-      left: -180px;
-      width: 160px;
-
-      ul {
-        maring-left: 0;
-        padding: 0;
-
-        li {
-          padding: 0 0 10px 0;
-          margin: 0;
-          list-style: none;
-        }
-      }
-    }
-  }
-
 
 }
 

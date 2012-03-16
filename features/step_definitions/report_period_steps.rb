@@ -48,18 +48,18 @@ When /^I navigated to dashboard$/ do
 end
 
 Then /^I should see total sales$/ do
-  find("select#date_range_from").should have_content("December 2011")
-  find("select#date_range_to").should have_content("December 2010")
-  find(".royalties .number").should have_content("$80.00")
-  find(".units .number").should have_content("8")
+  within(".whole_period") do
+    find(".royalties .number").should have_content("80")
+    find(".units .number").should have_content("8")
+  end
 end
 
 Then /^I should see monthly sales for the last year$/ do
   find("select#date_range_from").should have_content("December 2011")
   find("select#date_range_to").should have_content("December 2010")
 
-  within(".period_totals") do
-    find(".royalties .number").should have_content("$50.00")
+  within(".date_range") do
+    find(".royalties .number").should have_content("50")
     find(".units .number").should have_content("5")
   end
 end
@@ -67,15 +67,15 @@ end
 When /^I set period for the last 5 months$/ do
   select "December 2011", :from => "date_range_to"
   select "August 2011", :from => "date_range_from"
-  click_button "Show"
+  click_button "Set Period"
 end
 
 Then /^I should see monthly sales for the last 5 months$/ do
   find("select#date_range_from").should have_content("August 2011")
   find("select#date_range_to").should have_content("December 2011")
 
-  within(".period_totals") do
-    find(".royalties .number").should have_content("$20.00")
+  within(".date_range") do
+    find(".royalties .number").should have_content("20")
     find(".units .number").should have_content("2")
   end
 end
