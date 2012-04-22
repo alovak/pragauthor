@@ -30,10 +30,7 @@ module ChartHelper
       new google.visualization.PieChart(document.getElementById('#{container_id}')).
         draw(new google.visualization.DataTable(#{data_table.to_json}),
         {
-          width: 280,
-          height: 280,
-          chartArea: {left: 10, top: 10, width: 260, height: 260},
-          fontSize: 11,
+          chartArea: {left: 10, top: 10, height: 190, width: 300 },
           fontName: 'PT Sans',
           tooltip: {textStyle: {color: '#726E6B'}},
           legend: { position: "right", text: "value" },

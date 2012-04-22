@@ -7,20 +7,10 @@
     %h1= @book.title
     = render :partial => 'shared/date_range'
     .charts
-      .money
-        %h2 Royalties
-        #royalties_chart{ style: "width:650px; height:240px" }
-        %h2 Vendor Share
-        #vendor_share_chart{ style: "width:180px;height:220px" }
-        :javascript
-          $(document).ready(function() {
-            google.setOnLoadCallback(drawVisualization);
-
-            function drawVisualization() {
-              #{linear_chart(@chart_data, { render_to: 'royalties_chart', chartArea: {left: 30, top: 0, width: 650, height: 170}, :legend => 'none'})}
-              #{pie_chart(@pie_chart_data, :render_to => 'vendor_share_chart')}
-            };
-          });
+      %h2 Royalties
+      #royalties_chart{ style: "width:650px; height:240px" }
+    .charts
+      .table
         %table.royalties
           %thead
             %tr
@@ -35,3 +25,14 @@
                 %td= row[:date].to_s(:month_and_year)
                 %td= row[:money].format
                 %td= row[:units]
+      .chart
+        #vendor_share_chart{ style: "width:330px;height:260px;" }
+        :javascript
+          $(document).ready(function() {
+            google.setOnLoadCallback(drawVisualization);
+
+            function drawVisualization() {
+              #{linear_chart(@chart_data, { render_to: 'royalties_chart', chartArea: {left: 30, top: 0, width: 650, height: 170}, :legend => 'none'})}
+              #{pie_chart(@pie_chart_data, :render_to => 'vendor_share_chart')}
+            };
+          });

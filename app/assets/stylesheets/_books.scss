@@ -1,13 +1,23 @@
 body.application {
   #book {
-    .charts {
-      .money, .money_vendor {
-      }
-    }
-    #visualization {
+    position: relative;
+
+    .review_params {
+      position: absolute;
+      right: 30px;
+      top: 3px;
     }
 
-    #visualization2 {
+    .charts {
+      @include clearfix;
+
+      .table {
+        float: left;
+      }
+
+      .chart {
+        float: right;
+      }
     }
 
     table.royalties {
