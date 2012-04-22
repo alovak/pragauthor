@@ -12,7 +12,7 @@ Indie::Application.routes.draw do
   match 'contact' => 'welcome#contact', :as => :contact
 
   resources :vendors, :only => :index
-  resources :books, :only => :index
+  resources :books, :only => [:index, :show]
 
   match 'exception_2211' => 'welcome#exception_2211'
 

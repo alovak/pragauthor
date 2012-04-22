@@ -1,0 +1,7 @@
+= simple_form_for(@date_range, :url => '', :method => :get) do |f|
+  %h4 Review Period
+  = f.input :from, :collection => @date_range.list, :label => false
+  .input &mdash;
+  = f.input :to, :collection => @date_range.list, :label => false
+  = select_tag "currency", options_for_select(%w(USD EUR GBP), params[:currency])
+  .input= f.submit "Review"

@@ -1,0 +1,43 @@
+body.application {
+  #book {
+    .charts {
+      .money, .money_vendor {
+      }
+    }
+    #visualization {
+    }
+
+    #visualization2 {
+    }
+
+    table.royalties {
+      /* font-size: 12px; */
+      margin-left: 30px;
+
+      th, td {
+        padding: 3px 10px;
+        width: 60px;
+        text-align: right;
+      }
+
+      th:first-child, td:first-child {
+        /* padding-left: 10px; */
+        text-align: left;
+      }
+
+      thead tr th {
+        border-bottom: 2px solid #726E6B;
+      }
+      tbody tr th {
+        border-bottom: 1px solid #726E6B;
+      }
+      tbody tr td {
+        border-bottom: 1px solid #726E6B;
+      }
+
+      tbody tr td:first-child {
+        width: 100px;
+      }
+    }
+  }
+}

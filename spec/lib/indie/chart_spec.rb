@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Indie::Chart do
   let(:user) { Factory(:user) }
+
+  let(:amazon) { Vendor.find_by_name("Amazon") }
+  let(:bn) { Vendor.find_by_name("Barnes&Noble") }
+  let(:smashwords) { Vendor.find_by_name("Smashwords") }
   
   before do
     @first_book  = Factory(:book, :title => 'First Book',  :user => user)
@@ -10,19 +14,19 @@ describe Indie::Chart do
 
     [ { book: @first_book, 
         sales: [
-          { units: 10, amount: 1000, date: '01 jun 2010' },
-          { units: 20, amount: 2000, date: '01 jul 2010' },
-          { units: 30, amount: 3000, date: '01 aug 2010' } ]},
+          { units: 10, amount: 1000, date: '01 jun 2010', :vendor => amazon },
+          { units: 20, amount: 2000, date: '01 jul 2010', :vendor => bn },
+          { units: 30, amount: 3000, date: '01 aug 2010', :vendor => smashwords } ]},
       { book: @second_book, 
         sales: [
-          { units: 15, amount: 1500, date: '01 jun 2010' },
-          { units: 25, amount: 2500, date: '01 jul 2010' },
-          { units: 35, amount: 3500, date: '01 aug 2010' } ]},
+          { units: 15, amount: 1500, date: '01 jun 2010', :vendor => amazon },
+          { units: 25, amount: 2500, date: '01 jul 2010', :vendor => bn },
+          { units: 35, amount: 3500, date: '01 aug 2010', :vendor => smashwords } ]},
       { book: @third_book, 
         sales: [
-          { units: 1, amount: 1000, date: '01 jun 2010' },
-          { units: 2, amount: 2000, date: '01 jul 2010' },
-          { units: 3, amount: 3000, date: '01 aug 2010' } ]},
+          { units: 1, amount: 1000, date: '01 jun 2010', :vendor => amazon },
+          { units: 2, amount: 2000, date: '01 jul 2010', :vendor => bn },
+          { units: 3, amount: 3000, date: '01 aug 2010', :vendor => smashwords } ]},
     ].each do |data|
         data[:book]
 
@@ -31,12 +35,56 @@ describe Indie::Chart do
                   :book => data[:book],
                   :units => sale[:units],
                   :amount => sale[:amount],
+                  :vendor => sale[:vendor],
                   :currency => "USD",
                   :date_of_sale => Chronic.parse(sale[:date]))
         end
     end
   end
 
+  describe "VendorUnitsShare" do
+    describe "#data" do
+      it "should contain valid representation of vendor sales for provided parameters" do
+        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
+          chart = Indie::Chart::VendorUnitsShare.new(Sale, :period => DateRange.new(:from => 'June 2010'))
+
+          chart.data.should == {
+            cols: [{label: 'Vendor',       type: 'string'},
+                   {label: 'Amazon',       type: 'number'},
+                   {label: 'Barnes&Noble', type: 'number'},
+                   {label: 'Smashwords',   type: 'number'},
+                  ],
+            rows: [ {c: [{v: "Amazon"}, {v: 26.0}]},
+                    {c: [{v: "Barnes&Noble"}, {v: 47.0}]},
+                    {c: [{v: "Smashwords"}, {v: 68}]}
+                  ]
+          }
+        end
+      end
+    end
+  end
+
+  describe "VendorMoneyShare" do
+    describe "#data" do
+      it "should contain valid representation of vendor sales for provided parameters" do
+        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
+          chart = Indie::Chart::VendorMoneyShare.new(Sale, :period => DateRange.new(:from => 'June 2010'))
+
+          chart.data.should == {
+            cols: [{label: 'Vendor',       type: 'string'},
+                   {label: 'Amazon',       type: 'number'},
+                   {label: 'Barnes&Noble', type: 'number'},
+                   {label: 'Smashwords',   type: 'number'},
+                  ],
+            rows: [ {c: [{v: "Amazon"}, {v: 35.0, f: "$35.00"}]},
+                    {c: [{v: "Barnes&Noble"}, {v: 65.0, f: "$65.00"}]},
+                    {c: [{v: "Smashwords"}, {v: 95.0, f: "$95.00"}]}
+                  ]
+          }
+        end
+      end
+    end
+  end
   describe "Money" do
     describe "#data" do
       it "should contain valid representation of sales for provided parameters" do

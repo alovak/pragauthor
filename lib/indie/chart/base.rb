@@ -22,6 +22,7 @@ module Indie::Chart
         @top_books = options[:top] || 5
         @date_range = options[:period] || DateRange.new
         @show_trend = options[:show_trend]
+        @currency   = options[:currency] || 'USD'
       end
 
       def data
@@ -79,6 +80,7 @@ module Indie::Chart
         end
       end
     end
+
     class Money 
       include HelperMethods
 
@@ -101,7 +103,6 @@ module Indie::Chart
         @show_trend == true
       end
 
-      private
 
       def cols
         [].tap do |cols|

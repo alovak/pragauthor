@@ -55,8 +55,8 @@ Then /^I should see total sales$/ do
 end
 
 Then /^I should see monthly sales for the last year$/ do
-  find("select#date_range_from").should have_content("December 2011")
-  find("select#date_range_to").should have_content("December 2010")
+  find("select#date_range_from").should have_content("Dec 2011")
+  find("select#date_range_to").should have_content("Dec 2010")
 
   within(".date_range") do
     find(".royalties .number").should have_content("50")
@@ -65,14 +65,14 @@ Then /^I should see monthly sales for the last year$/ do
 end
 
 When /^I set period for the last 5 months$/ do
-  select "December 2011", :from => "date_range_to"
-  select "August 2011", :from => "date_range_from"
+  select "Dec 2011", :from => "date_range_to"
+  select "Aug 2011", :from => "date_range_from"
   click_button "Set Period"
 end
 
 Then /^I should see monthly sales for the last 5 months$/ do
-  find("select#date_range_from").should have_content("August 2011")
-  find("select#date_range_to").should have_content("December 2011")
+  find("select#date_range_from").should have_content("Aug 2011")
+  find("select#date_range_to").should have_content("Dec 2011")
 
   within(".date_range") do
     find(".royalties .number").should have_content("20")

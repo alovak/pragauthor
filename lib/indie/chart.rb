@@ -1,5 +1,6 @@
 module Indie
   module Chart
+
     class VendorSales < Base::Units
       private
 
@@ -34,6 +35,88 @@ module Indie
       end
     end
 
+
+    class VendorUnitsShare < Base::Units
+      private
+
+      def items
+        @vendors ||= Vendor.order(:name)
+      end
+
+      def raw_data
+        @sales
+          .where("date_of_sale >= ? and date_of_sale <=? and currency = ?", @date_range.from_date, @date_range.to_date, @currency)
+          .group(:vendor_id)
+          .sum(:units)
+      end
+
+      def cols
+        [].tap do |cols|
+          cols << { label: 'Vendor', type: 'string' }
+
+          items.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
+        end
+      end
+
+      def rows
+        [].tap do |rows|
+          items.each do |vendor|
+            row = { c: [] }
+
+            row[:c] << { v: vendor.name }
+
+            sum = 0
+
+            units = raw_data[vendor.id] || 0
+
+            row[:c] << { v: units }
+
+            rows << row
+          end
+        end
+      end
+    end
+
+    class VendorMoneyShare < Base::Money
+      private
+
+      def items
+        @vendors ||= Vendor.order(:name)
+      end
+
+      def raw_data
+        @sales
+          .where("date_of_sale >= ? and date_of_sale <=? and currency = ?", @date_range.from_date, @date_range.to_date, @currency)
+          .group(:vendor_id)
+          .sum(:amount)
+      end
+
+      def cols
+        [].tap do |cols|
+          cols << { label: 'Vendor', type: 'string' }
+
+          items.inject(cols) { |acc, b| acc << {label: b.title, type: 'number'} }
+        end
+      end
+
+      def rows
+        [].tap do |rows|
+          items.each do |vendor|
+            row = { c: [] }
+
+            row[:c] << { v: vendor.name }
+
+            sum = 0
+
+            units = raw_data[vendor.id] || 0
+
+            row[:c] << { v: ::Money.new(units, @currency).dollars, f: ::Money.new(units, @currency).format }
+
+            rows << row
+          end
+        end
+      end
+    end
 
     class Money < Base::Money
       private
