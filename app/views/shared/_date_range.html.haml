@@ -3,5 +3,5 @@
     = f.input :from, :collection => @date_range.list, :label => false
     .input &mdash;
     = f.input :to, :collection => @date_range.list, :label => false
-    .input= select_tag "currency", options_for_select(@currencies, params[:currency] || Money.default_currency)
-    .input= f.submit "Review"
+    = hidden_field_tag "currency", @current_currency
+    .input= f.submit "Set Period"

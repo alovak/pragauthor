@@ -4,11 +4,18 @@
   = render :partial => 'shared/blank'
 - else
   #book
-    %h1= @book.title
+    #head
+      %h1= @book.title
+      %ul.submenu
+        %li.title Royalties
+        - @currencies.each do |currency|
+          %li{class: (@current_currency == currency) && 'active'}= link_to currency, book_path(@book, {currency: currency}.merge(@date_range.to_hash))
+        %li.title &nbsp;
+        -# %li= link_to "Units", "http://www.com"
     = render :partial => 'shared/date_range'
     .charts
       %h2 Royalties
-      #royalties_chart{ style: "width:650px; height:240px" }
+      #royalties_chart{ style: "width:710px; height:240px" }
     .charts
       .table
         %table.royalties
@@ -26,13 +33,13 @@
                 %td= row[:money].format
                 %td= row[:units]
       .chart
-        #vendor_share_chart{ style: "width:330px;height:260px;" }
+        #vendor_share_chart{ style: "width:330px;height:280px;" }
         :javascript
           $(document).ready(function() {
             google.setOnLoadCallback(drawVisualization);
 
             function drawVisualization() {
-              #{linear_chart(@chart_data, { render_to: 'royalties_chart', chartArea: {left: 30, top: 0, width: 650, height: 170}, :legend => 'none'})}
+              #{linear_chart(@chart_data, { render_to: 'royalties_chart', chartArea: {left: 0, top: 0, width: 710, height: 170}, :legend => 'none'})}
               #{pie_chart(@pie_chart_data, :render_to => 'vendor_share_chart')}
             };
           });

@@ -13,6 +13,8 @@ class BooksController < ApplicationController
 
     @currencies = @book.sales.select("distinct currency").collect(&:currency)
 
+    @current_currency = params[:currency] || @currencies.first
+
     @money_report = Indie::Report::Book::Royalties.new(@book.sales, :period => @date_range, :currency => params[:currency] )
     @chart_data = Indie::Formatter.to_data_table(@money_report.data, {
       date:  { label: 'Date', type: 'string', f: lambda { |v| v.to_s(:month_and_year) } },

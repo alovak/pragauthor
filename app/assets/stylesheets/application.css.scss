@@ -265,9 +265,9 @@ body.application {
         }
 
         li.selected { 
-          behavior: url(/css-ie/PIE.htc);
-          background: #fff;
-          @include box-shadow(-3px 0 2px #A3A3A3);
+          /* behavior: url(/css-ie/PIE.htc); */
+          /* background: #fff; */
+          /* @include box-shadow(-3px 0 2px #A3A3A3); */
         }
       }
     }
@@ -275,9 +275,10 @@ body.application {
 
   #content {
     // background: #ff0000;
-    @include column(24, true); 
-    @include prepend(1); 
-    @include append(1); 
+
+    @include column(26, true); 
+    /* @include prepend(1);  */
+    /* @include append(1);  */
 
     background: #fff;
 
@@ -297,8 +298,8 @@ body.application {
     }
 
     #stuff{
-      @include prepend(2);
-      @include column(10);
+      @include prepend(1);
+      @include column(11);
     }
 
     #account_links {

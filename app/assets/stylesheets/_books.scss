@@ -1,5 +1,70 @@
 body.application {
+  #books {
+    @include clearfix;
+
+    .book {
+      float: left;
+      width: 120px;
+      height: 180px;
+      background: #f9f5e9;
+      margin: 5px;
+      padding: 5px;
+    }
+  }
+
+  /* dark: #bda99f; */
+  /* light: #d5c5be; */
+   
   #book {
+    h1 {
+      padding-bottom: 25px;
+      width: 400px;
+    }
+
+    h2 {
+      padding-left: 0;
+      color: #835541;
+    }
+    #head {
+      background: url('/assets/head-bg.gif') bottom;
+      @include border-radius(5px 5px 0 0);
+      behavior: url(/css-ie/PIE.htc);
+      @include clearfix;
+    }
+
+    ul.submenu {
+      position: relative;
+      top: 1px;
+      margin: 0 0 8px 30px;
+      padding: 0;
+
+      li.title {
+        margin-right: 20px;
+      }
+      li.active {
+        a {
+          background: #fff;
+        }
+      }
+      li {
+        display: inline;
+        list-style: none;
+        font-size: 14px;
+        color: #835541;
+
+        a {
+          font-size: 12px;
+          font-weight: bold;
+          text-decoration: none;
+          color: #835541;
+          padding: 8px 20px;
+          @include border-radius(3px 3px 0 0);
+          border: solid;
+          border-width: 1px 1px 0 1px;
+          border-color: #d5c5be;
+        }
+      }
+    }
     position: relative;
 
     .review_params {
@@ -10,6 +75,7 @@ body.application {
 
     .charts {
       @include clearfix;
+      margin-left: 30px;
 
       .table {
         float: left;
@@ -22,7 +88,6 @@ body.application {
 
     table.royalties {
       /* font-size: 12px; */
-      margin-left: 30px;
 
       th, td {
         padding: 3px 10px;

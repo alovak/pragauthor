@@ -34,6 +34,10 @@ class DateRange
     @from ||= from_date.to_s(:month_and_year)
   end
 
+  def to_hash
+    {date_range: { to: to, from: from } }
+  end
+
   def list
     [].tap do |collection|
       (0..24).each do |month|

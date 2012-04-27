@@ -50,8 +50,8 @@ end
 When /^I set a period and currency$/ do
   select "Jan 2010", :from => "date_range_from"
   select "Aug 2010", :from => "date_range_to"
-  select "EUR",      :from => "currency"
-  click_button "Review"
+  click_button "Set Period"
+  click_link "EUR"
 end
 
 Then /^I should see royalties for the period and currency$/ do
