@@ -51,7 +51,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :dashboard, 'Dashboard', user_root_path
     primary.item :vendors,   'Vendors',   vendors_path
-    primary.item :books,     'Books',     books_path, { :highlights_on => :subpath }
+    primary.item :your_books,'Books',     books_path, { :highlights_on => :subpath }
     primary.item :uploads,   'Uploads',   uploads_path
 
     # Add an item which has a sub navigation (same params, but with block)

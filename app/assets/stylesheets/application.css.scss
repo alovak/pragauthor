@@ -249,25 +249,22 @@ body.application {
 
     #menu {
       ul {
-        position: relative;
-        width: 183px;
-        z-index: 80;
-
-        left: 0;
-        top: 20px;
+        margin-top: 25px;
+        padding: 0;
 
         li {
-          padding: 8px 0 8px 10px;
-          @include border-radius(5px 0 0 5px);
           list-style: none;
 
-          a { text-decoration: none; font-size: 14px; }
+          a {
+            font-size: 14px;
+          }
+          margin-bottom: 10px;
         }
 
         li.selected { 
-          /* behavior: url(/css-ie/PIE.htc); */
-          /* background: #fff; */
-          /* @include box-shadow(-3px 0 2px #A3A3A3); */
+          a {
+            font-weight: bold;
+          }
         }
       }
     }
