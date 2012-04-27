@@ -519,6 +519,7 @@ body.application {
     @include border-radius;
     behavior: url(/css-ie/PIE.htc);
     @include pie-clearfix;
+    margin: 0 30px;
 
 
     .date_range, .whole_period {
@@ -626,6 +627,20 @@ body#devise {
       }
     }
 
+  }
+}
+
+body#uploads {
+  table.uploads {
+    margin: 0 30px;
+
+    th:first-child {
+      padding-left: 0;
+    }
+
+    td:first-child {
+      padding-left: 0;
+    }
   }
 }
 
