@@ -4,6 +4,8 @@
   = render :partial => 'shared/blank'
 - else
   #books
-    - @books.each do |book|
-      .book{ title: %Q{#{book.title}}, id: "book_#{book.id}" }
-        .title= link_to book.title, book
+    %h1 Your Books
+    .list
+      - @books.each do |book|
+        .book{ title: %Q{#{book.title}}, id: "book_#{book.id}" }
+          .title= link_to book.title, book
