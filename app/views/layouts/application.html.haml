@@ -37,7 +37,7 @@
             %span.sign_out= link_to('Sign out', destroy_user_session_path)
       #sidebar
         #menu
-          = render_navigation(:context => :app)
+          = render_navigation(:level => 1, :context => :app)
       #content
         - flash.each do |name, msg|
           :javascript

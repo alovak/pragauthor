@@ -1,18 +1,38 @@
 body.application {
   #books {
     .list {
-      margin: 0 30px;
+      margin: 20px 30px;
     }
     @include clearfix;
 
     .book {
       float: left;
-      width: 120px;
-      height: 130px;
-      background: #f9f5e9;
-      margin: 0 12px 15px 0;
-      padding: 50px 5px 10px 5px;
-      text-align: center;
+      .bookmark {
+        display: none;
+        position: relative;
+        top: 0;
+        left: 100px;
+        width: 13px;
+        height: 23px;
+        background: url(/assets/bookmark.png) no-repeat;
+      }
+      a {
+        display: block;
+        float: left;
+        width: 100px;
+        height: 130px;
+        background: url(/assets/binder.gif) left repeat-y #f9f5e9;
+        margin: 0 12px 25px 0;
+        padding: 40px 8px 10px 20px;
+        text-align: center;
+        color: #835541;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        @include single-box-shadow(#a3a3a3, 0,0, 2px);
+        @include border-radius(0 5px 5px 0);
+        behavior: url(/css-ie/PIE.htc);
+      }
     }
   }
 
@@ -36,16 +56,18 @@ body.application {
       @include clearfix;
     }
 
-    ul.submenu {
+    .submenu ul {
       position: relative;
       top: 1px;
       margin: 0 0 8px 30px;
       padding: 0;
 
       li.title {
-        margin-right: 15px;
+        margin-right: 5px;
+        margin-left: 15px;
+        color: #bfaba2;
       }
-      li.active {
+      li.selected {
         a {
           background: #fff;
         }
@@ -55,6 +77,7 @@ body.application {
         list-style: none;
         font-size: 14px;
         color: #835541;
+        margin-right: 3px;
 
         a {
           font-size: 12px;

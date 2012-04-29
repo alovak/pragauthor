@@ -6,12 +6,7 @@
   #book
     #head
       %h1= @book.title
-      %ul.submenu
-        %li.title Royalties
-        - @currencies.each do |currency|
-          %li{class: (@current_currency == currency) && 'active'}= link_to currency, book_path(@book, {currency: currency}.merge(@date_range.to_hash))
-        %li.title &nbsp;
-        -# %li= link_to "Units", "http://www.com"
+      .submenu= render_navigation(:level => 2, context: 'app')
     = render :partial => 'shared/date_range'
     .charts
       %h2 Royalties

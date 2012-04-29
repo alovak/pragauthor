@@ -8,4 +8,14 @@
     .list
       - @books.each do |book|
         .book{ title: %Q{#{book.title}}, id: "book_#{book.id}" }
-          .title= link_to book.title, book
+          .title= link_to(truncate(book.title, length: 65, separator: ' '), units_book_path(book))
+          .bookmark
+:javascript
+  $(document).ready(function() {
+    $(".book").mouseenter(function() {
+      $(this).find(".bookmark").show();
+    });
+    $(".book").mouseleave(function() {
+      $(this).find(".bookmark").hide();
+    });
+  });

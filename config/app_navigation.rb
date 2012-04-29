@@ -51,7 +51,23 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :dashboard, 'Dashboard', user_root_path
     primary.item :vendors,   'Vendors',   vendors_path
-    primary.item :your_books,'Books',     books_path, { :highlights_on => :subpath }
+    primary.item :your_books,'Books',     books_path, :highlights_on => :subpath do |book_nav|
+      if @date_range
+        book_nav.item :units, 'Units',
+          units_book_path(@date_range.to_hash),
+          :highlights_on => /book.*units/
+      end
+
+      book_nav.item :royalties, 'Royalties:', class: 'title'
+
+      if @currencies && @date_range
+        @currencies.each do |currency|
+          book_nav.item currency.to_sym, currency,
+            book_path({currency: currency}.merge(@date_range.to_hash)),
+            :highlights_on => /book.*currency=#{currency}/
+        end
+      end
+    end
     primary.item :uploads,   'Uploads',   uploads_path
 
     # Add an item which has a sub navigation (same params, but with block)
