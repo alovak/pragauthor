@@ -1,5 +1,5 @@
 body.application {
-  #books {
+o #books {
     .list {
       margin: 20px 30px;
     }
@@ -113,8 +113,7 @@ body.application {
       }
     }
 
-    table.royalties {
-      /* font-size: 12px; */
+    table.units, table.royalties {
 
       th, td {
         padding: 3px 10px;

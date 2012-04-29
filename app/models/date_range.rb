@@ -18,8 +18,16 @@ class DateRange
     false
   end
 
+  def to_datetime
+    @to_date.to_datetime.end_of_month
+  end
+
   def to_date
     @to_date.to_date.end_of_month
+  end
+
+  def from_datetime
+    @from_date.to_datetime.beginning_of_month
   end
 
   def from_date

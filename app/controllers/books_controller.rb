@@ -9,20 +9,21 @@ class BooksController < ApplicationController
   def units
     @book = current_user.books.find(params[:id])
     @date_range = DateRange.new(params[:date_range] || {})
+
     @currencies = @book.sales.select("distinct currency").collect(&:currency)
-    @money_report = Indie::Report::Book::Royalties.new(@book.sales, :period => @date_range, :currency => 'USD')
-    @chart_data = Indie::Formatter.to_data_table(@money_report.data, {
+
+    @units_report = Indie::Report::Book::Units.new(@book.sales, :period => @date_range)
+    @chart_data = Indie::Formatter.to_data_table(@units_report.data, {
       date:  { label: 'Date', type: 'string', f: lambda { |v| v.to_s(:month_and_year) } },
-      money: { label: 'Money', v: lambda { |m| m.dollars }, f: lambda {|v| v.format} } 
+      units: { label: 'Sold Units' } 
     })
 
-    @share_report = Indie::Report::Book::RoyaltiesShare.new(@book.sales, :period => @date_range, :currency => 'USD')
+    @share_report = Indie::Report::Book::UnitsShare.new(@book.sales, :period => @date_range)
     @pie_chart_data = Indie::Formatter.to_data_table(@share_report.data, { 
       vendor: { label: 'Vendor', type: 'string', v: lambda {|v| Vendor.find(v).name }},
-      money:  { label: 'Slices', v: lambda {|m| m.dollars}, f: lambda {|v| v.format}}
+      units:  { label: 'Slices' }
     })
 
-    render :show
   end
 
   def show
@@ -31,7 +32,6 @@ class BooksController < ApplicationController
     @date_range = DateRange.new(params[:date_range] || {})
 
     @currencies = @book.sales.select("distinct currency").collect(&:currency)
-
     @current_currency = params[:currency] || @currencies.first
 
     @money_report = Indie::Report::Book::Royalties.new(@book.sales, :period => @date_range, :currency => params[:currency] )

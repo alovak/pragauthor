@@ -1,0 +1,38 @@
+= render :partial => 'uploads/form'
+
+- if @book.nil?
+  = render :partial => 'shared/blank'
+- else
+  #book
+    #head
+      %h1= @book.title
+      .submenu= render_navigation(:level => 2, context: 'app')
+    = render :partial => 'shared/date_range'
+    .charts
+      %h2 Sold Units
+      #units_chart{ style: "width:710px; height:240px" }
+    .charts
+      .table
+        %table.units
+          %thead
+            %tr
+              %th{colspan: 3} Sold Units
+          %tbody
+            %tr
+              %th Month
+              %th Units
+            - @units_report.data.each do |row|
+              %tr
+                %td= row[:date].to_s(:month_and_year)
+                %td= row[:units]
+      .chart
+        #vendor_share_chart{ style: "width:330px;height:280px;" }
+        :javascript
+          $(document).ready(function() {
+            google.setOnLoadCallback(drawVisualization);
+
+            function drawVisualization() {
+              #{linear_chart(@chart_data, { render_to: 'units_chart', chartArea: {left: 0, top: 0, width: 710, height: 170}, :legend => 'none'})}
+              #{pie_chart(@pie_chart_data, :render_to => 'vendor_share_chart')}
+            };
+          });
