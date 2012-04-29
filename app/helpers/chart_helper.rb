@@ -78,10 +78,8 @@ module ChartHelper
       var ac = new google.visualization.ComboChart(document.getElementById('#{container_id}'));
 
       ac.draw(dt, {
-        width: 710,
-        height: 200,
         seriesType: "bars",
-        chartArea: {left: 30, top: 4, width: 500, height: 180},
+        chartArea: {left: 30, top: 4, width: 580, height: 170},
         fontSize: 11,
         fontName: 'PT Sans',
         pointSize: 3,

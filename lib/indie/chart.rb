@@ -118,33 +118,6 @@ module Indie
       end
     end
 
-    class Money < Base::Money
-      private
-
-      def items
-        @books ||= Book.order(:title).find(top_book_ids)
-      end
-
-      def raw_data
-        @sales
-          .where("date_of_sale >= ? and date_of_sale <=? and book_id in (?) and currency = ?", @date_range.from_date, @date_range.to_date, top_book_ids, @currency)
-          .group("year(date_of_sale)")
-          .group("month(date_of_sale)")
-          .group(:book_id)
-          .sum(:amount)
-      end
-
-      def top_book_ids
-        @sales
-          .where("date_of_sale >= ? and date_of_sale <= ? and currency = ?", @date_range.from_date, @date_range.to_date, @currency)
-          .group(:book_id)
-          .order('sum_amount DESC')
-          .limit(@top_books)
-          .sum(:amount).keys
-      end
-    end
-
-
     class Sales < Base::Units
       private
       def items

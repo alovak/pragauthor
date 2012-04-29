@@ -85,38 +85,6 @@ describe Indie::Chart do
       end
     end
   end
-  describe "Money" do
-    describe "#data" do
-      it "should contain valid representation of sales for provided parameters" do
-        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::Money.new(Sale, :top => 2, :period => DateRange.new(:from => 'June 2010'))
-
-          chart.data.should == {
-            cols: [{label: 'Month',       type: 'string'},
-                   {label: 'First Book',  type: 'number'},
-                   {label: 'Second Book', type: 'number'}
-                  ],
-            rows: [ {c: [{v: "Jun"}, {v: 10.0, f: "$10.00"}, {v: 15.0, f: "$15.00"}]},
-                    {c: [{v: "Jul"}, {v: 20.0, f: "$20.00"}, {v: 25.0, f: "$25.00"}]},
-                    {c: [{v: "Aug"}, {v: 30.0, f: "$30.00"}, {v: 35.0, f: "$35.00"}]}
-                  ]
-          }
-        end
-      end
-
-      it "should contain average and total if trend option set" do
-        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::Money.new(Sale, :show_trend => true, :top => 2, :period => DateRange.new(:from => 'June 2010'))
-
-          chart.data[:cols].should include({ label: 'Average', type: 'number' })
-          chart.data[:cols].should include({ label: 'Totals', type: 'number' })
-
-          chart.data[:rows].first[:c][-1][:v].should == 25.0
-          chart.data[:rows].first[:c][-2][:v].should == 12.5
-        end
-      end
-    end
-  end
   describe "Sales" do
     describe "#data" do
       it "should contain valid representation of sales for provided parameters" do
