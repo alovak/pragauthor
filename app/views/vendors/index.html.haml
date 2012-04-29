@@ -9,13 +9,9 @@
     = render 'shared/totals_with_date_range'
 
     %h2 Monthly Book Sales in Units by Vendor
-    #vendor_units{ style: "width:710px;height:220px" }
-
-    %h2 Monthly Book Sales in $$$ by Vendor
-    #vendor_money{ style: "width:710px;height:220px" }
+    #vendor_units{ style: "width:740px;height:240px" }
 
     :javascript
       $(function drawVisualization() {
         #{sales_chart(Indie::Chart::VendorSales.new(@sales, :show_trend => false, :period => @date_range), :render_to => 'vendor_units')}
-        #{sales_chart(Indie::Chart::VendorMoney.new(@sales, :show_trend => false, :period => @date_range), :render_to => 'vendor_money')}
       });

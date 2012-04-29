@@ -42,49 +42,6 @@ describe Indie::Chart do
     end
   end
 
-  describe "VendorUnitsShare" do
-    describe "#data" do
-      it "should contain valid representation of vendor sales for provided parameters" do
-        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::VendorUnitsShare.new(Sale, :period => DateRange.new(:from => 'June 2010'))
-
-          chart.data.should == {
-            cols: [{label: 'Vendor',       type: 'string'},
-                   {label: 'Amazon',       type: 'number'},
-                   {label: 'Barnes&Noble', type: 'number'},
-                   {label: 'Smashwords',   type: 'number'},
-                  ],
-            rows: [ {c: [{v: "Amazon"}, {v: 26.0}]},
-                    {c: [{v: "Barnes&Noble"}, {v: 47.0}]},
-                    {c: [{v: "Smashwords"}, {v: 68}]}
-                  ]
-          }
-        end
-      end
-    end
-  end
-
-  describe "VendorMoneyShare" do
-    describe "#data" do
-      it "should contain valid representation of vendor sales for provided parameters" do
-        Timecop.freeze(DateTime.parse("Fri, 20 Aug 2010")) do
-          chart = Indie::Chart::VendorMoneyShare.new(Sale, :period => DateRange.new(:from => 'June 2010'))
-
-          chart.data.should == {
-            cols: [{label: 'Vendor',       type: 'string'},
-                   {label: 'Amazon',       type: 'number'},
-                   {label: 'Barnes&Noble', type: 'number'},
-                   {label: 'Smashwords',   type: 'number'},
-                  ],
-            rows: [ {c: [{v: "Amazon"}, {v: 35.0, f: "$35.00"}]},
-                    {c: [{v: "Barnes&Noble"}, {v: 65.0, f: "$65.00"}]},
-                    {c: [{v: "Smashwords"}, {v: 95.0, f: "$95.00"}]}
-                  ]
-          }
-        end
-      end
-    end
-  end
   describe "Sales" do
     describe "#data" do
       it "should contain valid representation of sales for provided parameters" do
