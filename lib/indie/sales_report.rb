@@ -26,7 +26,7 @@ module Indie
     private
 
     def period_conditons
-      ["date_of_sale >= ? AND date_of_sale <= ?", @date_range.from_date, @date_range.to_date]
+      ["date_of_sale >= ? AND date_of_sale <= ?", @date_range.from_datetime, @date_range.to_datetime]
     end
   end
 end
