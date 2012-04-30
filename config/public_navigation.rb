@@ -52,6 +52,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :home, 'Home', root_path
     primary.item :home, 'About Us', about_path
     primary.item :home, 'Contact', contact_path
+    primary.item :home, 'Blog', "http://blog.pragauthor.com"
 
     # Add an item which has a sub navigation (same params, but with block)
     # primary.item :key_2, 'name', url, options do |sub_nav|
