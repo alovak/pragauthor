@@ -236,8 +236,8 @@ body.application {
   }
 
   #footer {
-    @include prepend(8);
-    @include column(24, true);
+    @include prepend(7);
+    @include column(25, true);
     margin: {
       top: 20px;
       bottom: 20px;
