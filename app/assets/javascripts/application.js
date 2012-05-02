@@ -38,7 +38,7 @@ this.init_upload = function(scope) {
 
   $(scope + ' input.file').change(function() {
     file_name = $(this).val();
-    pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)$/i;
+    pattern = /(bnsales.*xls)|(salesreport.*xls)|(kdp-report.*xls)|(sales_details.*xls)$/i;
 
     if (pattern.test(file_name)) {
       $(scope + ' input[type=submit]').attr('disabled', false);

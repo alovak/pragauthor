@@ -9,7 +9,8 @@ describe Indie::Parser do
         './path/BNsales_May2011.xls' => Indie::Parser::BarnesNoble,
         './path/SmashWords_salesReport-2011-06-08.xls' => Indie::Parser::Smashwords,
         './path/salesReport-2011-06-08.xls' => Indie::Parser::Smashwords,
-        './path/kdp-report-04-2011.xls' => Indie::Parser::Amazon
+        './path/kdp-report-04-2011.xls' => Indie::Parser::Amazon,
+        './path/sales_details_384487_2012-04-30_u22ml-0.xls' => Indie::Parser::CreateSpace
       }.each_pair do |file_name, parser_class|
         parser = Indie::Parser.factory(file_name, user)
         parser.should be_an_instance_of parser_class

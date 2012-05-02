@@ -5,4 +5,10 @@ class Vendor < ActiveRecord::Base
   default_scope order('name')
 
   alias_attribute :title, :name
+
+  def self.import
+    ['Barnes&Noble', 'Amazon', 'Smashwords', 'CreateSpace'].each do |name|
+      Vendor.find_or_create_by_name(name)
+    end
+  end
 end

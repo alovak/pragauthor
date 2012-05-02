@@ -13,6 +13,7 @@ module Indie
         when /bnsales.*xls$/i then Indie::Parser::BarnesNoble
         when /salesreport.*xls$/i then Indie::Parser::Smashwords
         when /kdp-report.*xls$/i then Indie::Parser::Amazon
+        when /sales_details.*xls$/i then Indie::Parser::CreateSpace
         end
       end
     end

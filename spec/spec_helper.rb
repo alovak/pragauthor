@@ -52,4 +52,5 @@ Spork.each_run do
   # Reload FactoryGirl’s Factories
   FactoryGirl.factories.clear
   Dir[Rails.root.join("spec/factories/**/*.rb")].each{|f| load f}
+  Vendor.import
 end

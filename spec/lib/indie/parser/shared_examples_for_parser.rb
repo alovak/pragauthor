@@ -49,12 +49,10 @@ shared_examples "a parser" do |expectations|
 
     it "should not duplicate sales for the same file" do
       parser.process
-      parser.process
 
-      expectations[:book_units].each do |title, units|
-        book = Book.find_by_title(title)
-        book.sales.sum(:units).should == units
-      end
+      expect {
+        parser.process
+      }.to_not change{ Sale.count }
     end
   end
 end
@@ -67,8 +65,9 @@ shared_examples "a parser for daily sales" do |sale_dates|
     it "should create sales with dates" do
       parser.process
 
+      sales = Sale.all.collect {|s| s.date_of_sale}
       sale_dates.each do |date|
-        Sale.find_by_date_of_sale(DateTime.parse(date)).should_not be_nil
+        sales.should include(DateTime.parse(date))
       end
     end
   end

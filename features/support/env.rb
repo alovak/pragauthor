@@ -51,6 +51,8 @@ Spork.each_run do
   require 'factory_girl_rails'
   require 'factory_girl/step_definitions'
 
+  Vendor.import
+
   
   # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
   # See the DatabaseCleaner documentation for details. Example:

@@ -2,7 +2,7 @@ module Indie
   module Parser
     class BarnesNoble < Base
 
-      VENDOR_NAME       = 'Barnes&Noble'
+      VENDOR_NAME     = 'Barnes&Noble'
       SKIP_ROWS       = 1
 
       CURRENCY_CODE   = "USD"
