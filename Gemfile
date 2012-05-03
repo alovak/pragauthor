@@ -14,6 +14,7 @@ gem 'exception_notification'
 gem 'chronic'
 gem 'money', :path => 'vendor/gems/money-3.7.1'
 gem 'simple-navigation'
+gem 'mechanize'
 
 group :assets do
   gem 'compass', "~> 0.12.alpha"

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502152003) do
+ActiveRecord::Schema.define(:version => 20120503204416) do
+
+  create_table "account_books", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "book_id"
+    t.string   "lean_pub_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "accounts", :force => true do |t|
+    t.string   "login"
+    t.string   "password"
+    t.string   "type"
+    t.integer  "user_id_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "admins", :force => true do |t|
     t.string   "email",                              :default => "", :null => false

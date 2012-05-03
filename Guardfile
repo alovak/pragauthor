@@ -32,7 +32,8 @@ guard('rspec',
 end
 
 guard 'cucumber',
-  :cli => '--color --drb --no-profile --format pretty --strict',
+  # :cli => '--color --drb --no-profile --format pretty --strict',
+  :cli => '--color --drb --no-profile --format pretty --strict --tag @wip',
   :all_after_pass => false,
   :keep_failed    => false,
   :all_on_start   => false do
