@@ -15,6 +15,9 @@ gem 'chronic'
 gem 'money', :path => 'vendor/gems/money-3.7.1'
 gem 'simple-navigation'
 gem 'mechanize'
+gem 'inherited_resources'
+gem 'attr_encrypted', :git => 'https://github.com/atwam/attr_encrypted.git'
+gem 'whenever', :require => false
 
 group :assets do
   gem 'compass', "~> 0.12.alpha"
