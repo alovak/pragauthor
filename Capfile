@@ -15,4 +15,5 @@ end
 
 after 'deploy:update_code' do
   run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+  run "cd #{release_path}; RAILS_ENV=production bundle exec rake vendors:import"
 end
