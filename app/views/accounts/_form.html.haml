@@ -1,0 +1,11 @@
+= simple_form_for(@account, :as => :account, :url => @account.new_record? ? collection_path : resource_path) do |f|
+  .inputs
+    = f.error_notification
+    - if @account.new_record?
+      = f.input :name, :as => :hidden
+    = f.input :login
+    = f.input :password, :as => :string
+  .actions
+    = f.button :submit
+    or
+    = link_to 'Cancel', collection_path

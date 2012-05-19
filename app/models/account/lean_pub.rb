@@ -1,7 +1,8 @@
 class Account::LeanPub < Account
-  SALE_ID, PAID, ROYALTY, DATE = *(0..3)
+  SALE_ID, PAID, ROYALTY, _, DATE = *(0..4)
 
-  def synch
+
+  def sync
     start_web_session
     import_books
     import_sales
@@ -18,14 +19,10 @@ class Account::LeanPub < Account
 
   private
 
-  def agent
-    @agent ||= Mechanize.new
-  end
-
   def import_books
     page = agent.get('http://leanpub.com/dashboard')
     page.search(".row .well strong a").each do |link|
-      book = Book.create!(title: link.text)
+      book = user.books.find_or_create_by_title(title: link.text)
       account_books.create(book: book, lean_pub_link: link.attr('href'))
     end
   end
@@ -36,13 +33,27 @@ class Account::LeanPub < Account
       page.search("//table/thead/tr/th[contains(., 'Purchase ID')]/../../../tbody/tr").each do |row|
         royalties = row.element_children[ROYALTY].content.to_money
         sale_date = row.element_children[DATE].content
-        date = Date.parse(row.element_children[DATE].content)
+        date = Chronic.parse(row.element_children[DATE].content)
 
-        leanpub_book
-          .book
-          .sales
-          .create!(units: 1, amount: royalties.cents, currency: royalties.currency.iso_code, date_of_sale: date)
+        unless leanpub_book.sales.where(:purchase_id => row.element_children[SALE_ID].content).any?
+          leanpub_book.book.sales.create!(
+            units: 1,
+            amount: royalties.cents,
+            purchase_id: row.element_children[SALE_ID].content,
+            currency: royalties.currency.iso_code,
+            date_of_sale: date,
+            vendor: vendor
+          )
+        end
       end
     end
+  end
+
+  def vendor
+    @vendor ||= Vendor.find_by_name('LeanPub')
+  end
+
+  def agent
+    @agent ||= Mechanize.new
   end
 end

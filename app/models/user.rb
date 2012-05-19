@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   has_many :uploads
+  has_many :accounts
   has_many :books
   has_many :sales, :through => :books
 

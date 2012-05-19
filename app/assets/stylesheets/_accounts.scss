@@ -1,0 +1,16 @@
+body.application {
+  #accounts {
+    table.list {
+      margin: 20px 30px;
+
+      td:first-child {
+        padding-left: 0;
+      }
+    }
+
+    .panel {
+      margin: 20px 30px;
+    }
+  }
+}
+

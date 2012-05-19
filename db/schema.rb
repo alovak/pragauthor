@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503204416) do
+ActiveRecord::Schema.define(:version => 20120519180717) do
 
   create_table "account_books", :force => true do |t|
     t.integer  "account_id"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(:version => 20120503204416) do
   end
 
   create_table "accounts", :force => true do |t|
-    t.string   "login"
-    t.string   "password"
+    t.string   "encrypted_login"
+    t.string   "encrypted_password"
     t.string   "type"
     t.integer  "user_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "admins", :force => true do |t|
@@ -52,6 +53,14 @@ ActiveRecord::Schema.define(:version => 20120503204416) do
     t.datetime "updated_at"
   end
 
+  create_table "leanpub_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "login"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sales", :force => true do |t|
     t.integer  "book_id"
     t.integer  "units"
@@ -61,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20120503204416) do
     t.datetime "date_of_sale"
     t.integer  "amount"
     t.string   "currency",     :limit => 3
+    t.string   "purchase_id"
   end
 
   create_table "uploads", :force => true do |t|

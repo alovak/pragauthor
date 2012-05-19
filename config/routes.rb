@@ -21,6 +21,7 @@ Indie::Application.routes.draw do
   match 'exception_2211' => 'welcome#exception_2211'
 
   resources :uploads, :only => [:index, :new, :create]
+  resources :accounts
 
   scope "accounts", :module => :accounts do
     resource :leanpub_account

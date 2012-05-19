@@ -1,0 +1,15 @@
+#accounts
+  %h1 Accounts
+  - if @accounts.any?
+    - @accounts.each do |account|
+      %table.list
+        %tr
+          %td= account.name
+          %td= account.login
+          %td= link_to "Edit", edit_resource_path(account)
+          %td= link_to "Remove", resource_path(account), :method => :delete, :confirm => 'Are you sure?'
+  - else
+    .panel 
+      = form_tag(new_resource_path, :method => 'get') do
+        = hidden_field_tag 'account[name]', 'LeanPub'
+        = submit_tag "Configure LeanPub Account"

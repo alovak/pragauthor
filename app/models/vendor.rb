@@ -7,7 +7,7 @@ class Vendor < ActiveRecord::Base
   alias_attribute :title, :name
 
   def self.import
-    ['Barnes&Noble', 'Amazon', 'Smashwords', 'CreateSpace'].each do |name|
+    ['Barnes&Noble', 'Amazon', 'Smashwords', 'CreateSpace', 'LeanPub'].each do |name|
       Vendor.find_or_create_by_name(name)
     end
   end
