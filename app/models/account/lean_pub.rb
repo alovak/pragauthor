@@ -1,11 +1,15 @@
 class Account::LeanPub < Account
   SALE_ID, PAID, ROYALTY, _, DATE = *(0..4)
 
-
   def sync
-    start_web_session
-    import_books
-    import_sales
+    begin
+      start_web_session
+      import_books
+      import_sales
+    rescue => e
+      ExceptionNotifier::Notifier
+        .background_exception_notification(e, :data => { account: self, user: user })
+    end
   end
 
   def start_web_session

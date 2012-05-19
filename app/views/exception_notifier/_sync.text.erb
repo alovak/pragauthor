@@ -1,0 +1,6 @@
+Account: <%= @account.type  %> / id: <%= @account.id  %>
+<%- if @user %>
+User: <%= @user.name %> / <%= @user.email %>
+<%- else %>
+Unknown user (nil)
+<%- end %>
