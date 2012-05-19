@@ -1,6 +1,9 @@
 class Account::LeanPub < Account
   SALE_ID, PAID, ROYALTY, _, DATE = *(0..4)
 
+  after_create :sync
+  after_update :sync
+
   def sync
     begin
       start_web_session
