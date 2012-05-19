@@ -17,7 +17,7 @@
         %th Created at
         %th Last sign in at
         %th Books
-      - User.order("created_at DESC").limit(10).each do |user|
+      - User.order("created_at DESC").each do |user|
         %tr
           %td= user.name
           %td= user.email
