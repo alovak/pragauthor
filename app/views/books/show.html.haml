@@ -13,6 +13,8 @@
       #royalties_chart{ style: "width:710px; height:240px" }
     .charts
       .table
+        - total_money = @money_report.data.collect {|row| row[:money]}.sum.format
+        - total_units = @money_report.data.collect {|row| row[:units]}.sum
         %table.royalties
           %thead
             %tr
@@ -22,11 +24,20 @@
               %th Month
               %th Money
               %th Units
+            %tr.total
+              %td Total
+              %td.money= total_money
+              %td.units= total_units
             - @money_report.data.each do |row|
               %tr
                 %td= row[:date].to_s(:month_and_year)
                 %td= row[:money].format
                 %td= row[:units]
+            %tr.total
+              %td Total
+              %td.money= total_money
+              %td.units= total_units
+
       .chart
         #vendor_share_chart{ style: "width:330px;height:280px;" }
         :javascript

@@ -41,6 +41,8 @@ Then /^I should see royalties for the last year with units grouped by month$/ do
 
     page.should have_css('td', :text => "$50.00")
     page.should have_css('td', :text => "$10.00", :count => 4)
+    page.should have_css('tr.total td.money', :text => "$90.00")
+    page.should have_css('tr.total td.units', :text => "9")
   end
 
   page.should have_css("#royalties_chart")
