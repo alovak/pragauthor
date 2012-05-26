@@ -28,10 +28,24 @@ class Account::LeanPub < Account
 
   def import_books
     page = agent.get('http://leanpub.com/dashboard')
-    page.search(".row .well strong a").each do |link|
-      book = user.books.find_or_create_by_title(title: link.text)
-      account_books.create(book: book, lean_pub_link: link.attr('href'))
+    page.search(".row .well strong a.book-link").each do |link|
+      create_book(link.text, link.attr('href'))
     end
+  end
+
+  def create_book(title, link)
+    if can_be_imported?(title)
+      book = user.books.find_or_create_by_title(title: title)
+
+      unless account_books.find_by_book_id(book.id)
+        account_books.create(book: book, lean_pub_link: link)
+      end
+    end
+  end
+
+  def can_be_imported?(link)
+    # book in stelth mode
+    link !~ /\/edit$/
   end
 
   def import_sales
