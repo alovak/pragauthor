@@ -1,4 +1,8 @@
-== Screenshots ==
+# Pragmatic Author
+
+View your sales for Amazon KDP, Barnes&Noble, CreateSpace, Smashwords.
+
+## Screenshots
 
 [![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/home-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/home.png)
 [![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/dashboard-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/dashboard.png)
