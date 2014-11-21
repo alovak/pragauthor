@@ -1,19 +1,6 @@
-=== Server setup
+== Screenshots ==
 
-0. apt-get update
-0. apt-get upgrade
-1. bash -c "`wget -O - babushka.me/up`"
-2. babushka alovak:'user setup'
-3. babushka alovak:'rvm installed'
-4. babushka alovak:'rails project'
-4. babushka alovak:'set.locale' #to set utf8 locale
-
-on local machine
-5. cap deploy:setup
-6. cap deploy:check
-7. cap deploy:update_code
-7. cap deploy:migrate
-8. cap db:seed
-7. cap deploy
-
-/* domain + mailer_configuration */
+[![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/home-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/home.png)
+[![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/dashboard-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/dashboard.png)
+[![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/books-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/books.png)
+[![home](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/book-th.png)](https://raw.githubusercontent.com/alovak/pragauthor/master/screenshots/book.png)
